@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
-import 'package:coral_bootstrap/src/bloc_observer.dart';
+import 'package:coral_bootstrap/src/coral_bloc_observer.dart';
 import 'package:coral_logger/coral_logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
