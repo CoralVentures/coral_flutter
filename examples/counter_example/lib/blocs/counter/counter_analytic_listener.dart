@@ -3,7 +3,7 @@ import 'package:coral_analytics_repository/coral_analytics_repository.dart';
 // ignore: always_use_package_imports
 import 'counter_bloc.dart';
 
-class CounterEventAnalyticListener
+class CounterEvent_AnalyticListener
     extends CoralBlocObserverAnalyticListener<CounterEvent> {
   @override
   void handleEvent({

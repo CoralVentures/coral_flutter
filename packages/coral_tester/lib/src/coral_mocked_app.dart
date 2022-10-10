@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:lumberdash/lumberdash.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockedCoralApp {
-  MockedCoralApp({
+class CoralMockedApp {
+  CoralMockedApp({
     required this.appBuilder,
   });
 

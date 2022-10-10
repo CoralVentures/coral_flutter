@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 
+import 'package:coral_tester/coral_tester.dart';
+import 'package:coral_tester/src/coral_mocked_app.dart';
 import 'package:coral_tester/src/coral_test_bloc_observer.dart';
-import 'package:coral_tester/src/flutter_test_config.dart';
-import 'package:coral_tester/src/mocked_coral_app.dart';
 import 'package:coral_tester/src/models.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,7 +16,7 @@ class CoralTester {
     required this.basePath,
   });
 
-  final MockedCoralApp mockedApp;
+  final CoralMockedApp mockedApp;
   final CoralTestBlocObserver blocObserver;
   final WidgetTester tester;
   final String basePath;
@@ -138,7 +138,7 @@ class CoralTester {
     await multiScreenGolden(
       tester,
       screenshotPath,
-      devices: defaultGoldenDevices,
+      devices: goldenDevices,
     );
 
     /// Check events and analytics, then clean up all tracked items

@@ -1,16 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
 import 'package:coral_bootstrap/coral_bootstrap.dart';
-import 'package:coral_tester/src/mocked_coral_app.dart';
+import 'package:coral_tester/src/coral_mocked_app.dart';
 import 'package:mocktail/mocktail.dart';
 
 class CoralTestBlocObserver extends CoralBlocObserver {
   CoralTestBlocObserver({
-    required this.mockedApp,
+    required this.mockAnalyticsRepository,
     required this.analyticListeners,
   });
 
-  final MockedCoralApp mockedApp;
+  final MockAnalyticsRepository mockAnalyticsRepository;
 
   final List<CoralBlocObserverAnalyticListener<dynamic>> analyticListeners;
 
@@ -22,7 +22,7 @@ class CoralTestBlocObserver extends CoralBlocObserver {
   void mockAnalytics() {
     /// Track
     when(
-      () => mockedApp.mockAnalyticsRepository.track(
+      () => mockAnalyticsRepository.track(
         eventName: any(named: 'eventName'),
         properties: any(named: 'properties'),
         options: any(named: 'options'),
@@ -34,7 +34,7 @@ class CoralTestBlocObserver extends CoralBlocObserver {
 
     /// Screen
     when(
-      () => mockedApp.mockAnalyticsRepository.screen(
+      () => mockAnalyticsRepository.screen(
         screenName: any(named: 'screenName'),
         properties: any(named: 'properties'),
       ),
@@ -45,7 +45,7 @@ class CoralTestBlocObserver extends CoralBlocObserver {
 
     /// Identify
     when(
-      () => mockedApp.mockAnalyticsRepository.identify(
+      () => mockAnalyticsRepository.identify(
         userId: any(named: 'userId'),
         traits: any(named: 'traits'),
         options: any(named: 'options'),
@@ -71,7 +71,7 @@ class CoralTestBlocObserver extends CoralBlocObserver {
 
     createAnalyticsOnEventCallback(
       analyticListeners: analyticListeners,
-      analyticsRepository: mockedApp.mockAnalyticsRepository,
+      analyticsRepository: mockAnalyticsRepository,
     ).call(event);
 
     events.add(event.runtimeType);

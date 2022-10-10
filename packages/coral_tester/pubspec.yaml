@@ -8,6 +8,8 @@ environment:
 
 dependencies:
   bloc: ^8.1.0
+  coral_analytics_repository:
+    path: ../coral_analytics_repository
   coral_bootstrap:
     path: ../coral_bootstrap
   flutter_test:

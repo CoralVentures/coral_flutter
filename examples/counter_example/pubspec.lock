@@ -169,6 +169,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  coral_tester:
+    dependency: "direct dev"
+    description:
+      path: "../../packages/coral_tester"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   coverage:
     dependency: transitive
     description:
@@ -268,6 +275,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  golden_toolkit:
+    dependency: transitive
+    description:
+      name: golden_toolkit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.0"
   graphs:
     dependency: transitive
     description:
