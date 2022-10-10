@@ -1,0 +1,12 @@
+environment_config:
+  path: environment_config.dart
+  dotenv_path: .env
+  class: EnvironmentConfig
+
+  fields:
+    segment_api_write_key:
+      type: String?
+      env_var: 'segment_api_write_key'
+    sentry_dsn:
+      type: String?
+      env_var: 'sentry_dsn'
