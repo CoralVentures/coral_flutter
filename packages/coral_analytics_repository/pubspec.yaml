@@ -1,0 +1,15 @@
+name: coral_analytics_repository
+description: A Very Good Project created by Very Good CLI.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_segment: ^3.7.0
+
+dev_dependencies:
+  very_good_analysis: ^3.0.1
