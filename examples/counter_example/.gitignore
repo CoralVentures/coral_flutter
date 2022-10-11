@@ -46,3 +46,8 @@ app.*.map.json
 # Coral Additions
 .envrc
 lib/environment_config.dart
+
+coverage/
+coverage_badge.svg
+.test_coverage.dart
+lcov_filtered.info
