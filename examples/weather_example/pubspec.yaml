@@ -1,0 +1,40 @@
+name: weather_example
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies:
+  bloc: ^8.1.0
+  coral_analytics_repository:
+    path: ../../packages/coral_analytics_repository
+  coral_bloc:
+    path: ../../packages/coral_bloc
+  coral_bootstrap:
+    path: ../../packages/coral_bootstrap
+  coral_logger:
+    path: ../../packages/coral_logger
+  environment_config: ^3.1.0
+  equatable: ^2.0.3
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.1
+  http: ^0.13.0
+  json_annotation: ^4.5.0
+  redux_remote_devtools: ^3.0.0
+
+dev_dependencies:
+  build_runner: ^2.1.11
+  coral_tester:
+    path: ../../packages/coral_tester
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^6.2.0
+  mocktail: ^0.3.0
+  very_good_analysis: ^3.1.0
+
+flutter:
+  uses-material-design: true
+  generate: false

@@ -1,0 +1,2 @@
+SEGMENT_API_WRITE_KEY=your-api-write-key
+SENTRY_DSN=your-sentry-dsn

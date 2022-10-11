@@ -6,6 +6,6 @@ extension BlocTypeEx on String {
 }
 
 enum BlocType {
-  counter,
+  weather,
   // CORAL_CLI_BLOC_TYPE
 }

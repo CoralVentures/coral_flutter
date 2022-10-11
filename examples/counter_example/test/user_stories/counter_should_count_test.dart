@@ -35,7 +35,6 @@ void main() {
                 reason: 'Should not see a count of 1',
               );
           },
-          // expectedAnalytics: ['Screen: CounterPage'],
           expectedAnalytics: [],
         );
 

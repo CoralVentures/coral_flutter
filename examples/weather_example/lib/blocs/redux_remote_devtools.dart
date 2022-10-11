@@ -6,8 +6,8 @@ import 'package:redux/redux.dart';
 import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
-import 'bloc_type.dart_change_name';
-import './counter/counter_bloc.dart';
+import './bloc_type.dart';
+import './weather/weather_bloc.dart';
 // CORAL_CLI_IMPORT
 
 part 'redux_remote_devtools.g.dart';
@@ -49,7 +49,7 @@ Future<DevToolsStore<DevtoolsDb>?> createReduxRemoteDevtoolsStore() async {
 @JsonSerializable()
 class DevtoolsDb {
   const DevtoolsDb({
-    this.counterState,
+    this.weatherState,
     // CORAL_CLI_DB_THIS
   });
 
@@ -60,23 +60,22 @@ class DevtoolsDb {
   Map<String, dynamic> toJson() => _$DevtoolsDbToJson(this);
   // coverage:ignore-end
 
-  final CounterState? counterState;
+  final WeatherState? weatherState;
   // CORAL_CLI_DB_ATTR
 
   DevtoolsDb copyWith({
-    CounterState? counterState,
-    bool clearCounterState = false,
+    WeatherState? weatherState,
+    bool clearWeatherState = false,
     // CORAL_CLI_COPY_WITH_PARAMETER
   }) {
-    var _counterState = counterState ?? this.counterState;
-    if (clearCounterState) {
-      _counterState = null;
+    var _weatherState = weatherState ?? this.weatherState;
+    if (clearWeatherState) {
+      _weatherState = null;
     }
-
     // CORAL_CLI_COPY_WITH_CLEAR
 
     return DevtoolsDb(
-      counterState: _counterState,
+      weatherState: _weatherState,
       // CORAL_CLI_COPY_WITH_ARG
     );
   }
@@ -91,9 +90,9 @@ void remoteReduxDevtoolsOnEvent({
     final blocTypeEnum = blocType.toEnum();
 
     switch (blocTypeEnum) {
-      case BlocType.counter:
+      case BlocType.weather:
         devtoolsDB = devtoolsDB.copyWith(
-          counterState: state as CounterState,
+          weatherState: state as WeatherState,
         );
         break;
       // CORAL_CLI_ON_EVENT
@@ -110,8 +109,8 @@ void remoteReduxDevtoolsOnClose({
     final blocTypeEnum = blocType.toEnum();
 
     switch (blocTypeEnum) {
-      case BlocType.counter:
-        devtoolsDB = devtoolsDB.copyWith(clearCounterState: true);
+      case BlocType.weather:
+        devtoolsDB = devtoolsDB.copyWith(clearWeatherState: true);
         break;
       // CORAL_CLI_ON_CLOSE
     }
