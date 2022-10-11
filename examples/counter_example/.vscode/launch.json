@@ -2,6 +2,26 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "Launch development",
+			"request": "launch",
+			"type": "dart",
+			"program": "lib/main/main_development.dart",
+			"args": [
+				"--target",
+				"lib/main/main_development.dart"
+			]
+		},
+		{
+			"name": "Launch production",
+			"request": "launch",
+			"type": "dart",
+			"program": "lib/main/main_production.dart",
+			"args": [
+				"--target",
+				"lib/main/main_production.dart"
+			]
+		},
+		{
 			"name": "Golden",
 			"request": "launch",
 			"type": "dart",

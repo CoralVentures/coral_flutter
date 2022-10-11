@@ -1,6 +1,7 @@
 // ignore_for_file: always_use_package_imports
 import 'package:coral_bloc/coral_bloc.dart';
 import 'package:counter_example/blocs/bloc_type.dart';
+import 'package:counter_example/blocs/redux_remote_devtools.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -12,7 +13,9 @@ class CounterBloc extends CoralBloc<CounterEvent, CounterState> {
   CounterBloc()
       : super(
           const CounterState.initialState(),
-          blocType: BlocType.counter.toString(),
+          blocType: BlocType.counter.name,
+          beforeOnClose: remoteReduxDevtoolsOnClose,
+          beforeOnEvent: remoteReduxDevtoolsOnEvent,
         );
 
   @override
