@@ -1,0 +1,32 @@
+import 'package:coral_bloc/coral_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
+// ignore: always_use_package_imports
+import '../blocs.dart';
+
+part 'EXAMPLESC.g.dart';
+
+class EXAMPLEPCCubit extends CoralCubit<EXAMPLEPCState> {
+  EXAMPLEPCCubit():
+        super(
+          EXAMPLEPCState(),
+          blocType: BlocType.EXAMPLECC.name,
+        );
+
+    // Reminder: methods should return `void` or `Future<void>`
+}
+
+@JsonSerializable()
+class EXAMPLEPCState extends Equatable {
+  EXAMPLEPCState();
+
+  // coverage:ignore-start
+  factory EXAMPLEPCState.fromJson(Map<String, dynamic> json) =>
+      _$EXAMPLEPCStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EXAMPLEPCStateToJson(this);
+  // coverage:ignore-end
+
+  @override
+  List<Object?> get props => [];
+}

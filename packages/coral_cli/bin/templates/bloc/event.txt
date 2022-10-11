@@ -1,0 +1,18 @@
+part of 'EXAMPLESC_bloc.dart';
+
+enum EXAMPLEPCEvents {
+  initialize,
+}
+
+abstract class EXAMPLEPCEvent extends Equatable {
+  const EXAMPLEPCEvent(this.eventType);
+
+  final EXAMPLEPCEvents eventType;
+
+  @override
+  List<Object> get props => [eventType];
+}
+
+class EXAMPLEPCEvent_Initialize extends EXAMPLEPCEvent {
+  const EXAMPLEPCEvent_Initialize() : super(EXAMPLEPCEvents.initialize);
+}

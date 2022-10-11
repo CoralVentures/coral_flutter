@@ -2,5 +2,5 @@
 
 set -e
 
-./bin/check_coverage.sh
+./tools/check_coverage.sh
 open coverage/index.html

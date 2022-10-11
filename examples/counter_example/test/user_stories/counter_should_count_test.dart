@@ -48,7 +48,6 @@ void main() {
               reason: 'Should see count decremented by one',
             );
           },
-          actionsDescription: 'Tap decrement button',
           takeActions: () async {
             await tester.tap(find.text('Decrement'));
           },
@@ -69,7 +68,6 @@ void main() {
               reason: 'Should see count incremented by two',
             );
           },
-          actionsDescription: 'Double tap increment button',
           takeActions: () async {
             await tester.tap(find.text('Increment'));
             await tester.tap(find.text('Increment'));

@@ -1,0 +1,20 @@
+// ignore_for_file: sort_constructors_first
+
+part of 'EXAMPLESC_bloc.dart';
+
+@JsonSerializable()
+class EXAMPLEPCState extends Equatable {
+  const EXAMPLEPCState();
+
+  const EXAMPLEPCState.initialState();
+
+  // coverage:ignore-start
+  factory EXAMPLEPCState.fromJson(Map<String, dynamic> json) =>
+      _$EXAMPLEPCStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EXAMPLEPCStateToJson(this);
+  // coverage:ignore-end
+
+  @override
+  List<Object?> get props => [];
+}

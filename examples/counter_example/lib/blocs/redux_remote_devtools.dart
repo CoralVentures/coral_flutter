@@ -1,4 +1,4 @@
-// ignore_for_file: always_use_package_imports, depend_on_referenced_packages
+// ignore_for_file: always_use_package_imports, depend_on_referenced_packages, no_leading_underscores_for_local_identifiers, lines_longer_than_80_chars
 import 'dart:async';
 
 import 'package:json_annotation/json_annotation.dart';
@@ -66,18 +66,17 @@ class DevtoolsDb {
   DevtoolsDb copyWith({
     CounterState? counterState,
     bool clearCounterState = false,
-
     // CORAL_CLI_COPY_WITH_PARAMETER
   }) {
-    var counter = counterState ?? this.counterState;
+    var _counterState = counterState ?? this.counterState;
     if (clearCounterState) {
-      counter = null;
+      _counterState = null;
     }
 
     // CORAL_CLI_COPY_WITH_CLEAR
 
     return DevtoolsDb(
-      counterState: counter,
+      counterState: _counterState,
       // CORAL_CLI_COPY_WITH_ARG
     );
   }
@@ -97,7 +96,6 @@ void remoteReduxDevtoolsOnEvent({
           counterState: state as CounterState,
         );
         break;
-
       // CORAL_CLI_ON_EVENT
     }
 
@@ -115,7 +113,6 @@ void remoteReduxDevtoolsOnClose({
       case BlocType.counter:
         devtoolsDB = devtoolsDB.copyWith(clearCounterState: true);
         break;
-
       // CORAL_CLI_ON_CLOSE
     }
   }

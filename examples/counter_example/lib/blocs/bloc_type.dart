@@ -7,4 +7,5 @@ extension BlocTypeEx on String {
 
 enum BlocType {
   counter,
+  // CORAL_CLI_BLOC_TYPE
 }

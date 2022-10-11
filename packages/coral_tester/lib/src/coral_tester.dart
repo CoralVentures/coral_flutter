@@ -25,6 +25,10 @@ class CoralTester {
   final List<CoralTesterAction> testerActions = [];
   final List<String> expectationReasons = [];
 
+  //
+  // Expectations
+  //
+
   void expectEventsInOrder(List<Type> events, {String? reason}) {
     expect(blocObserver.events, events, reason: reason);
     _clearTrackedEvents();
@@ -48,10 +52,6 @@ class CoralTester {
     blocObserver.analytics.clear();
   }
 
-  Future<void> pumpApp() async {
-    await tester.pumpWidget(await mockedApp.createApp());
-  }
-
   void expectWithReason(
     dynamic actual,
     dynamic matcher, {
@@ -67,29 +67,14 @@ class CoralTester {
     );
   }
 
-  Future<void> tap(
-    Finder finder, {
-    bool? pumpAndSettle,
-  }) async {
-    testerActions.add(
-      CoralTesterAction(
-        action: CoralTesterActions.tap,
-        finderDescription: finder.description,
-      ),
-    );
-    await tester.tap(finder);
-    if (pumpAndSettle != null && pumpAndSettle) {
-      await tester.pumpAndSettle();
-    } else {
-      await tester.pump();
-    }
-  }
+  //
+  // Screenshot
+  //
 
   int screenshotCounter = 0;
 
   Future<void> screenshot({
     String? comment,
-    String? actionsDescription,
     AsyncCallback? takeActions,
     VoidCallback? runExpectations,
     List<Type> expectedEvents = const [],
@@ -146,5 +131,31 @@ class CoralTester {
     expectAnalyticsInOrder(expectedAnalytics);
     testerActions.clear();
     expectationReasons.clear();
+  }
+
+  //
+  // Tester Actions
+  //
+
+  Future<void> pumpApp() async {
+    await tester.pumpWidget(await mockedApp.createApp());
+  }
+
+  Future<void> tap(
+    Finder finder, {
+    bool? pumpAndSettle,
+  }) async {
+    testerActions.add(
+      CoralTesterAction(
+        action: CoralTesterActions.tap,
+        finderDescription: finder.description,
+      ),
+    );
+    await tester.tap(finder);
+    if (pumpAndSettle != null && pumpAndSettle) {
+      await tester.pumpAndSettle();
+    } else {
+      await tester.pump();
+    }
   }
 }
