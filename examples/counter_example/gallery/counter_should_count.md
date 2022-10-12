@@ -34,6 +34,9 @@
 <ul>
   <li>CounterEvent_Decrement</li>
 </ul>
+<br>
+<img src="./counter_should_count/1.png", width=100>
+<br>
 <b>Analytics:</b>
 <ul>
   <li>Track: Counter: Decrement</li>
@@ -65,6 +68,9 @@
   <li>CounterEvent_Increment</li>
   <li>CounterEvent_Increment</li>
 </ul>
+<br>
+<img src="./counter_should_count/2.png", width=100>
+<br>
 <b>Analytics:</b>
 <ul>
   <li>Track: Counter: Increment</li>

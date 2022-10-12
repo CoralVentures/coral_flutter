@@ -188,7 +188,15 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
       for (final element in events) {
         buffer.writeln('  <li>$element</li>');
       }
-      buffer.writeln('</ul>');
+      final screenshotPathParts = screenshotPath.split('/');
+
+      buffer
+        ..writeln('</ul>')
+        ..writeln('<br>')
+        ..writeln(
+          '<img src="./${screenshotPathParts.first}/${screenshotPathParts.last}.png", width=100>',
+        )
+        ..writeln('<br>');
     }
 
     if (analytics.isNotEmpty) {
@@ -212,6 +220,50 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
 </table>
 ''',
     );
+    return buffer.toString();
+  }
+
+  String toGraphviz() {
+    final buffer = StringBuffer()..writeln('digraph {');
+
+    final subgraphs = <String, List<String>>{};
+
+    final graphvizEvents = [
+      'Event_Start',
+      ...events.map((e) => e.toString()),
+      'Event_End',
+    ];
+
+    for (var i = 0; i < graphvizEvents.length; i++) {
+      final eventParts = graphvizEvents[i].split('_');
+
+      final eventBlocName = eventParts.first.replaceAll('Event', '');
+      final eventName = eventParts.last;
+
+      subgraphs[eventBlocName] = (subgraphs[eventBlocName] ?? [])
+        ..add('$i [label="$eventName";];');
+
+      if (i + 1 < graphvizEvents.length) {
+        buffer.writeln('  $i -> ${i + 1};');
+      }
+    }
+
+    var subgraphCounter = 0;
+    subgraphs.forEach((blocName, eventNames) {
+      buffer
+        ..writeln('  subgraph cluster_$subgraphCounter {')
+        ..writeln('    label="$blocName";');
+
+      for (final eventName in eventNames) {
+        buffer.writeln('    $eventName');
+      }
+
+      buffer.writeln('  }');
+
+      subgraphCounter++;
+    });
+
+    buffer.writeln('}');
 
     return buffer.toString();
   }

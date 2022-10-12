@@ -72,14 +72,44 @@ void coralTestMockedApp(
       await test(coralTester);
 
       await tester.runAsync(() async {
-        final file = await File('gallery/$basePath.md').create(recursive: true);
-        final sink = file.openWrite();
+        // Create markdown file
+        //
+        final markdownFile =
+            await File('gallery/$basePath.md').create(recursive: true);
+        final markdownSink = markdownFile.openWrite();
 
         for (final element in coralTester.testerRecords) {
-          sink.write(element.toMarkdown());
+          markdownSink.write(element.toMarkdown());
         }
+        await markdownSink.close();
 
-        await sink.close();
+        // Create graphviz files
+        //
+        final checkpoints =
+            coralTester.testerRecords.whereType<CoralTesterCheckpoint>();
+
+        for (final checkpoint in checkpoints) {
+          final graphvizFilePath = 'gallery/${checkpoint.screenshotPath}.dot';
+          final graphvizFile =
+              await File(graphvizFilePath).create(recursive: true);
+          final graphvizSink = graphvizFile.openWrite();
+
+          // ignore: cascade_invocations
+          graphvizSink.write(checkpoint.toGraphviz());
+
+          await graphvizSink.close();
+
+          await Process.run(
+            'dot',
+            [
+              graphvizFilePath,
+              '-Tpng',
+              '-Gdpi=400',
+              '-o',
+              'gallery/${checkpoint.screenshotPath}.png',
+            ],
+          );
+        }
       });
     },
   );
