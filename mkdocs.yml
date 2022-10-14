@@ -1,0 +1,19 @@
+site_name: Coral Flutter
+
+theme:
+  name: readthedocs
+
+extra_css:
+  - css/extra.css
+
+site_dir: docs_site
+
+use_directory_urls: false
+
+nav:
+  - 'index.md'
+  - 'architecture_overview.md'
+  - 'data_layer.md'
+  - 'application_layer.md'
+  - 'why_flutter_bloc.md'
+  - 'environment_variables.md'

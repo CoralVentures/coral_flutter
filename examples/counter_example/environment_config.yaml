@@ -1,6 +1,5 @@
 environment_config:
   path: environment_config.dart
-  dotenv_path: .env
   class: EnvironmentConfig
 
   fields:
