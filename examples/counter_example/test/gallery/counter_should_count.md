@@ -11,7 +11,7 @@
 </ul>
       </td>
       <td>
-      <img src="../test/user_stories/goldens/counter_should_count/0.iphone11.png">
+      <img src="../user_stories/goldens/counter_should_count/0.iphone11.png">
       </td>
    </tr>
   </tbody>
@@ -43,7 +43,7 @@
 </ul>
       </td>
       <td>
-      <img src="../test/user_stories/goldens/counter_should_count/1.iphone11.png">
+      <img src="../user_stories/goldens/counter_should_count/1.iphone11.png">
       </td>
    </tr>
   </tbody>
@@ -78,7 +78,7 @@
 </ul>
       </td>
       <td>
-      <img src="../test/user_stories/goldens/counter_should_count/2.iphone11.png">
+      <img src="../user_stories/goldens/counter_should_count/2.iphone11.png">
       </td>
    </tr>
   </tbody>

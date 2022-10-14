@@ -213,7 +213,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
       '''
       </td>
       <td>
-      <img src="../test/user_stories/goldens/$screenshotPath.iphone11.png">
+      <img src="../user_stories/goldens/$screenshotPath.iphone11.png">
       </td>
    </tr>
   </tbody>

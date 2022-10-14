@@ -75,7 +75,7 @@ void coralTestMockedApp(
         // Create markdown file
         //
         final markdownFile =
-            await File('gallery/$basePath.md').create(recursive: true);
+            await File('test/gallery/$basePath.md').create(recursive: true);
         final markdownSink = markdownFile.openWrite();
 
         for (final element in coralTester.testerRecords) {
@@ -89,7 +89,8 @@ void coralTestMockedApp(
             coralTester.testerRecords.whereType<CoralTesterCheckpoint>();
 
         for (final checkpoint in checkpoints) {
-          final graphvizFilePath = 'gallery/${checkpoint.screenshotPath}.dot';
+          final graphvizFilePath =
+              'test/gallery/${checkpoint.screenshotPath}.dot';
           final graphvizFile =
               await File(graphvizFilePath).create(recursive: true);
           final graphvizSink = graphvizFile.openWrite();
@@ -106,7 +107,7 @@ void coralTestMockedApp(
               '-Tpng',
               '-Gdpi=400',
               '-o',
-              'gallery/${checkpoint.screenshotPath}.png',
+              'test/gallery/${checkpoint.screenshotPath}.png',
             ],
           );
         }
