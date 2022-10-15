@@ -22,6 +22,10 @@ void main(List<String> args) {
   /// Generate Cubit file
   ///
 
+  if (!dcli.exists(cubitsPath)) {
+    dcli.createDir(cubitsPath, recursive: true);
+  }
+
   final file = dcli.read(templateFilePath);
   final fileWithCubitName = addCubitNameToFile(file, cubitName);
   '$cubitsPath/${cubitName.snakeCase}.dart'.write(fileWithCubitName);
@@ -51,7 +55,7 @@ void main(List<String> args) {
       .toParagraph()
       .replaceFirst(
         '// CORAL_CLI_IMPORT',
-        "import './${cubitName.snakeCase}/${cubitName.snakeCase}_bloc.dart';\n// CORAL_CLI_IMPORT",
+        "import './cubits/${cubitName.snakeCase}.dart';\n// CORAL_CLI_IMPORT",
       )
       .replaceFirst(
         '// CORAL_CLI_DB_THIS',

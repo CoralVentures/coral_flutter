@@ -8,6 +8,7 @@ import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
 import './bloc_type.dart';
 import './counter/counter_bloc.dart';
+
 // CORAL_CLI_IMPORT
 
 part 'redux_remote_devtools.g.dart';
@@ -72,7 +73,6 @@ class DevtoolsDb {
     if (clearCounterState) {
       _counterState = null;
     }
-
     // CORAL_CLI_COPY_WITH_CLEAR
 
     return DevtoolsDb(
