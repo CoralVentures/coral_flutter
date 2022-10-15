@@ -1,3 +1,22 @@
 .wy-nav-content {
   max-width: 1200px;
 }
+
+h1 {
+  color: firebrick;
+}
+
+h2 {
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+  display: block;
+  margin-top: 40px;
+}
+
+h3 {
+  color: firebrick;
+}
+
+h4 {
+  color:dimgray;
+}

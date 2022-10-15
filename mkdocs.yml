@@ -13,8 +13,6 @@ use_directory_urls: false
 nav:
   - 'index.md'
   - 'architecture_overview.md'
-  - 'data_layer.md'
-  - 'application_layer.md'
   - 'why_flutter_bloc.md'
   - 'environment_variables.md'
   - 'developer_set_up.md'
