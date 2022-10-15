@@ -75,47 +75,50 @@ void coralTestMockedApp<T extends CoralMockedApp>(
 
       await test(coralTester);
 
-      await tester.runAsync(() async {
-        // Create markdown file
-        //
-        final markdownFile =
-            await File('test/gallery/$basePath.md').create(recursive: true);
-        final markdownSink = markdownFile.openWrite();
+      /// If running Golden tests, then also generate markdown and graphvz files
+      if (autoUpdateGoldenFiles) {
+        await tester.runAsync(() async {
+          // Create markdown file
+          //
+          final markdownFile =
+              await File('test/gallery/$basePath.md').create(recursive: true);
+          final markdownSink = markdownFile.openWrite();
 
-        for (final element in coralTester.testerRecords) {
-          markdownSink.write(element.toMarkdown());
-        }
-        await markdownSink.close();
+          for (final element in coralTester.testerRecords) {
+            markdownSink.write(element.toMarkdown());
+          }
+          await markdownSink.close();
 
-        // Create graphviz files
-        //
-        final checkpoints =
-            coralTester.testerRecords.whereType<CoralTesterCheckpoint>();
+          // Create graphviz files
+          //
+          final checkpoints =
+              coralTester.testerRecords.whereType<CoralTesterCheckpoint>();
 
-        for (final checkpoint in checkpoints) {
-          final graphvizFilePath =
-              'test/gallery/${checkpoint.screenshotPath}.dot';
-          final graphvizFile =
-              await File(graphvizFilePath).create(recursive: true);
-          final graphvizSink = graphvizFile.openWrite();
+          for (final checkpoint in checkpoints) {
+            final graphvizFilePath =
+                'test/gallery/${checkpoint.screenshotPath}.dot';
+            final graphvizFile =
+                await File(graphvizFilePath).create(recursive: true);
+            final graphvizSink = graphvizFile.openWrite();
 
-          // ignore: cascade_invocations
-          graphvizSink.write(checkpoint.toGraphviz());
+            // ignore: cascade_invocations
+            graphvizSink.write(checkpoint.toGraphviz());
 
-          await graphvizSink.close();
+            await graphvizSink.close();
 
-          await Process.run(
-            'dot',
-            [
-              graphvizFilePath,
-              '-Tpng',
-              '-Gdpi=400',
-              '-o',
-              'test/gallery/${checkpoint.screenshotPath}.png',
-            ],
-          );
-        }
-      });
+            await Process.run(
+              'dot',
+              [
+                graphvizFilePath,
+                '-Tpng',
+                '-Gdpi=400',
+                '-o',
+                'test/gallery/${checkpoint.screenshotPath}.png',
+              ],
+            );
+          }
+        });
+      }
     },
   );
 }
