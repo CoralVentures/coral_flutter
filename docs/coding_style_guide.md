@@ -183,3 +183,17 @@ cd coral_cli
 # Then when it asks you, enter the name of your cubit in PascalCase, but don't include the suffix `Cubit`
 # E.g. User, FooBar
 ```
+
+### Naming Conventions
+
+**Class**: UserCubit, FooBarCubit
+
+**Folder**
+
+Cubits will be placed inside of `lib/blocs/cubits/` directory and all cubits will be siblings. Reminder, use the `coral_cli` to generate your cubits.
+
+### Methods should return Void
+
+As a design choice, we are using Cubits to be the single source of truth for an entity's state.
+
+For example, we may have a UserCubit that gets passed around between multiple Blocs.  To prevent each Bloc from accidentally keeping track of some of the UserCubit's state, we simply make all of the UserCubit method calls return `void`, and the Cubit will update its internal state instead.
