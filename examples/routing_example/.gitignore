@@ -51,3 +51,5 @@ coverage/
 coverage_badge.svg
 .test_coverage.dart
 lcov_filtered.info
+
+test/gallery/
