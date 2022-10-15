@@ -7,7 +7,7 @@ class IncrementBtn_Connector extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        context.read<CounterBloc>().add(const CounterEvent_Increment());
+        context.read<CounterBloc>().add(CounterEvent_Increment());
       },
       child: const Text('Increment'),
     );

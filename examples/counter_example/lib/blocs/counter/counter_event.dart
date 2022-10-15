@@ -6,7 +6,8 @@ enum CounterEvents {
 }
 
 abstract class CounterEvent extends Equatable {
-  const CounterEvent(this.eventType);
+  // ignore: prefer_const_constructors_in_immutables
+  CounterEvent(this.eventType);
 
   final CounterEvents eventType;
 
@@ -15,9 +16,9 @@ abstract class CounterEvent extends Equatable {
 }
 
 class CounterEvent_Increment extends CounterEvent {
-  const CounterEvent_Increment() : super(CounterEvents.increment);
+  CounterEvent_Increment() : super(CounterEvents.increment);
 }
 
 class CounterEvent_Decrement extends CounterEvent {
-  const CounterEvent_Decrement() : super(CounterEvents.decrement);
+  CounterEvent_Decrement() : super(CounterEvents.decrement);
 }

@@ -4,6 +4,7 @@
 
 h1 {
   color: firebrick;
+  font-size: 40px;
 }
 
 h2 {
@@ -11,12 +12,15 @@ h2 {
   width: 100%;
   display: block;
   margin-top: 40px;
+  font-size: 32px;
 }
 
 h3 {
   color: firebrick;
+  font-size: 24px;
 }
 
 h4 {
   color:dimgray;
+  font-size: 24px;
 }
