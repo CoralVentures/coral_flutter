@@ -31,7 +31,7 @@ class Login_Scaffold extends StatelessWidget {
                       LoginC_LoginFailButton(),
                       LoginC_LoginSuccessButton(),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

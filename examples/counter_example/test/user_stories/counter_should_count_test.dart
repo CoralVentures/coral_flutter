@@ -10,7 +10,7 @@ void main() {
 
     coralTestMockedApp(
       '''As a user, I should be able to change the count, so that I can keep count of things.''',
-      appBuilder: appBuilder,
+      mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
       basePath: groupPath,
       test: (tester) async {

@@ -5,6 +5,7 @@ enum EXAMPLEPCEvents {
 }
 
 abstract class EXAMPLEPCEvent extends Equatable {
+  // ignore: prefer_const_constructors_in_immutables
   const EXAMPLEPCEvent(this.eventType);
 
   final EXAMPLEPCEvents eventType;

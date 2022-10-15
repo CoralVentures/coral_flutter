@@ -14,7 +14,7 @@ class LoginC_LoginSuccessButton extends StatelessWidget {
         final authenticationBloc = context.read<AuthenticationBloc>();
 
         authenticationBloc.add(
-          const AuthenticationEvent_Login(isAuthenticated: true),
+          AuthenticationEvent_Login(isAuthenticated: true),
         );
       },
       label: 'Login (Success)',

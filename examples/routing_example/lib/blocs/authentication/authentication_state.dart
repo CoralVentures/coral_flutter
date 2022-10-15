@@ -2,15 +2,26 @@
 
 part of 'authentication_bloc.dart';
 
+enum AuthenticationStatus {
+  none,
+  inProgress,
+  authenticated,
+  failed,
+}
+
 @JsonSerializable()
 class AuthenticationState extends Equatable {
   const AuthenticationState({
-    required this.isAuthenticated,
+    required this.status,
   });
 
-  const AuthenticationState.initialState() : isAuthenticated = false;
+  const AuthenticationState.initialState() : status = AuthenticationStatus.none;
 
-  final bool isAuthenticated;
+  final AuthenticationStatus status;
+
+  bool get isAuthenticated {
+    return status == AuthenticationStatus.authenticated;
+  }
 
   // coverage:ignore-start
   factory AuthenticationState.fromJson(Map<String, dynamic> json) =>
@@ -20,5 +31,5 @@ class AuthenticationState extends Equatable {
   // coverage:ignore-end
 
   @override
-  List<Object?> get props => [isAuthenticated];
+  List<Object?> get props => [status];
 }

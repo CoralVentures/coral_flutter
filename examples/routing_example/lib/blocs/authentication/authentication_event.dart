@@ -1,6 +1,8 @@
 part of 'authentication_bloc.dart';
 
 enum AuthenticationEvents {
+  initialize,
+
   login,
   loginSucceeded,
   loginFailed,
@@ -9,7 +11,8 @@ enum AuthenticationEvents {
 }
 
 abstract class AuthenticationEvent extends Equatable {
-  const AuthenticationEvent(this.eventType);
+  // ignore: prefer_const_constructors_in_immutables
+  AuthenticationEvent(this.eventType);
 
   final AuthenticationEvents eventType;
 
@@ -17,8 +20,12 @@ abstract class AuthenticationEvent extends Equatable {
   List<Object> get props => [eventType];
 }
 
+class AuthenticationEvent_Initialize extends AuthenticationEvent {
+  AuthenticationEvent_Initialize() : super(AuthenticationEvents.initialize);
+}
+
 class AuthenticationEvent_Login extends AuthenticationEvent {
-  const AuthenticationEvent_Login({
+  AuthenticationEvent_Login({
     required this.isAuthenticated,
   }) : super(AuthenticationEvents.login);
 
@@ -31,15 +38,14 @@ class AuthenticationEvent_Login extends AuthenticationEvent {
 }
 
 class AuthenticationEvent_LoginSucceeded extends AuthenticationEvent {
-  const AuthenticationEvent_LoginSucceeded()
+  AuthenticationEvent_LoginSucceeded()
       : super(AuthenticationEvents.loginSucceeded);
 }
 
 class AuthenticationEvent_LoginFailed extends AuthenticationEvent {
-  const AuthenticationEvent_LoginFailed()
-      : super(AuthenticationEvents.loginFailed);
+  AuthenticationEvent_LoginFailed() : super(AuthenticationEvents.loginFailed);
 }
 
 class AuthenticationEvent_Logout extends AuthenticationEvent {
-  const AuthenticationEvent_Logout() : super(AuthenticationEvents.logout);
+  AuthenticationEvent_Logout() : super(AuthenticationEvents.logout);
 }

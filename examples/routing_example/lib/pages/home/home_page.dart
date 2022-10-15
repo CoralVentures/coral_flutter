@@ -16,7 +16,7 @@ class Home_Scaffold extends StatelessWidget {
   const Home_Scaffold({super.key});
   @override
   Widget build(BuildContext context) {
-    return LoginC_LogoutListener(
+    return HomeC_LogoutListener(
       child: SafeArea(
         child: Scaffold(
           body: SizedBox.expand(
@@ -24,7 +24,7 @@ class Home_Scaffold extends StatelessWidget {
               child: Column(
                 children: const [
                   HomeC_Title(),
-                  LoginC_LogoutButton(),
+                  HomeC_LogoutButton(),
                 ],
               ),
             ),

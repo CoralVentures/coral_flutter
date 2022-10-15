@@ -31,32 +31,87 @@ class AuthenticationBloc
     AuthenticationEvent event,
   ) async* {
     switch (event.eventType) {
-      case AuthenticationEvents.login:
-        final _event = event as AuthenticationEvent_Login;
+      case AuthenticationEvents.initialize:
+        {
+          /// In a real application we might have an authentication token saved
+          /// somewhere and we could check if it is still valid when the
+          /// application loads. However, we are going to fake it and assume we
+          /// always have a stale token.
+          ///
+          /// Note: if the authenticate method fails, we are going to silently
+          /// ignore it, beacuse this wasn't an action taken by the user. It
+          /// would be confusing to them to see a failure.
+          yield* coralTryCatchStream<AuthenticationState>(
+            tryFunc: () async* {
+              final _isAuthenticated = _authenticationRepository.authenticate(
+                isAuthenticated: false,
+              );
 
-        final _isAuthenticated = _authenticationRepository.authenticate(
-          isAuthenticated: _event.isAuthenticated,
-        );
-
-        yield AuthenticationState(isAuthenticated: _isAuthenticated);
-
-        /// Note: we are firing off events instead of setting the state
-        /// directly. This is to give our analytics better visibility in to what
-        /// is happening.
-        if (_isAuthenticated) {
-          add(const AuthenticationEvent_LoginSucceeded());
-        } else {
-          add(const AuthenticationEvent_LoginFailed());
+              if (_isAuthenticated) {
+                yield const AuthenticationState(
+                  status: AuthenticationStatus.authenticated,
+                );
+              } else {
+                yield const AuthenticationState(
+                  status: AuthenticationStatus.none,
+                );
+              }
+            },
+          );
         }
         break;
 
-      case AuthenticationEvents.loginSucceeded:
-        yield const AuthenticationState(isAuthenticated: true);
+      case AuthenticationEvents.login:
+        yield* coralTryCatchStream<AuthenticationState>(
+          tryFunc: () async* {
+            yield const AuthenticationState(
+              status: AuthenticationStatus.inProgress,
+            );
+
+            final _event = event as AuthenticationEvent_Login;
+
+            final _isAuthenticated = _authenticationRepository.authenticate(
+              isAuthenticated: _event.isAuthenticated,
+            );
+
+            /// Note: we are firing off events instead of setting the state
+            /// directly. This is to give our analytics better visibility in to
+            /// what is happening.
+            if (_isAuthenticated) {
+              add(AuthenticationEvent_LoginSucceeded());
+            } else {
+              add(AuthenticationEvent_LoginFailed());
+            }
+          },
+          catchFunc: (e, stacktrace) async* {
+            add(AuthenticationEvent_LoginFailed());
+          },
+        );
         break;
 
+      case AuthenticationEvents.loginSucceeded:
+        yield const AuthenticationState(
+          status: AuthenticationStatus.authenticated,
+        );
+        break;
+
+      /// Note: we are sending a status of `failed` followed by `none` because
+      /// we want to hook off of the failed status, show a snack bar, and then
+      /// have the status reset.
       case AuthenticationEvents.loginFailed:
+        yield const AuthenticationState(
+          status: AuthenticationStatus.failed,
+        );
+
+        yield const AuthenticationState(
+          status: AuthenticationStatus.none,
+        );
+        break;
+
       case AuthenticationEvents.logout:
-        yield const AuthenticationState(isAuthenticated: false);
+        yield const AuthenticationState(
+          status: AuthenticationStatus.none,
+        );
         break;
     }
   }

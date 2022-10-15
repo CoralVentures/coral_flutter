@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:routing_example/app/app_router.dart';
 import 'package:routing_example/blocs/authentication/authentication_bloc.dart';
 
-class LoginC_LogoutListener extends StatelessWidget {
-  const LoginC_LogoutListener({
+class HomeC_LogoutListener extends StatelessWidget {
+  const HomeC_LogoutListener({
     super.key,
     required this.child,
   });
@@ -15,10 +15,18 @@ class LoginC_LogoutListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
-      listenWhen: (previous, current) =>
-          previous.isAuthenticated != current.isAuthenticated,
+      listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
-        GoRouter.of(context).goNamed(AppRoutes.login.name);
+        switch (state.status) {
+          case AuthenticationStatus.inProgress:
+          case AuthenticationStatus.authenticated:
+          case AuthenticationStatus.failed:
+            break; // no-op
+
+          case AuthenticationStatus.none:
+            GoRouter.of(context).goNamed(AppRoutes.login.name);
+            break;
+        }
       },
       child: child,
     );

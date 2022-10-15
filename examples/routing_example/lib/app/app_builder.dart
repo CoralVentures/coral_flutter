@@ -35,13 +35,22 @@ class App extends StatelessWidget {
         RepositoryProvider.value(value: authenticationRepository),
       ],
       child: BlocProvider<AuthenticationBloc>(
+        lazy: false,
         create: (_) {
           return AuthenticationBloc(
             authenticationRepository: authenticationRepository,
-          );
+          )..add(AuthenticationEvent_Initialize());
         },
-        child: MaterialApp.router(
-          routerConfig: appRouter,
+        child: Builder(
+          builder: (contextB) {
+            // Note: this is necessary to ensure GoRouter's redirect doesn't
+            // have a stale reference to the authentication state.
+            final authenticationBloc = contextB.watch<AuthenticationBloc>();
+
+            return MaterialApp.router(
+              routerConfig: appRouter(authenticationBloc.state),
+            );
+          },
         ),
       ),
     );

@@ -11,6 +11,9 @@ class AuthenticationEvent_AnalyticListener
     required CoralAnalyticsRepository analyticsRepository,
   }) {
     switch (event.eventType) {
+      case AuthenticationEvents.initialize:
+        break; // No-op
+
       case AuthenticationEvents.login:
         analyticsRepository.track(eventName: 'Login Attempted');
         break;

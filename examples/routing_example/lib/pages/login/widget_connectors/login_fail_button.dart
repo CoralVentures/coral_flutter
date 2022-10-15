@@ -14,7 +14,7 @@ class LoginC_LoginFailButton extends StatelessWidget {
         final authenticationBloc = context.read<AuthenticationBloc>();
 
         authenticationBloc.add(
-          const AuthenticationEvent_Login(isAuthenticated: false),
+          AuthenticationEvent_Login(isAuthenticated: false),
         );
       },
       label: 'Login (Fail)',

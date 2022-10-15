@@ -1,14 +1,13 @@
 // ignore_for_file: avoid_print
 
 import 'package:coral_tester/coral_tester.dart';
-import 'package:coral_tester/src/coral_mocked_app.dart';
 import 'package:coral_tester/src/coral_test_bloc_observer.dart';
 import 'package:coral_tester/src/models.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
-class CoralTester {
+class CoralTester<T extends CoralMockedApp> {
   CoralTester({
     required this.mockedApp,
     required this.blocObserver,
@@ -16,7 +15,7 @@ class CoralTester {
     required this.basePath,
   });
 
-  final CoralMockedApp mockedApp;
+  final T mockedApp;
   final CoralTestBlocObserver blocObserver;
   final WidgetTester tester;
   final String basePath;
@@ -139,6 +138,7 @@ class CoralTester {
 
   Future<void> pumpApp() async {
     await tester.pumpWidget(await mockedApp.createApp());
+    await tester.pumpAndSettle();
   }
 
   Future<void> tap(

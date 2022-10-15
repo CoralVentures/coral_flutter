@@ -4,9 +4,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
-import 'package:coral_bootstrap/coral_bootstrap.dart';
 import 'package:coral_tester/coral_tester.dart';
-import 'package:coral_tester/src/coral_mocked_app.dart';
 import 'package:coral_tester/src/coral_test_bloc_observer.dart';
 import 'package:coral_tester/src/models.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,21 +18,17 @@ import 'package:meta/meta.dart';
 /// - [description] is a test description
 /// - [basePath] is used to namespace the golden images in a specific folder
 /// - [skip] to skip the test
-/// - [test] test body
+/// - [test] is the test body
 ///
 @isTestGroup
-void coralTestMockedApp(
+void coralTestMockedApp<T extends CoralMockedApp>(
   String description, {
   required String basePath,
-  required CoralAppBuilder appBuilder,
+  required T mockedApp,
   required List<CoralBlocObserverAnalyticListener<dynamic>> analyticListeners,
   bool skip = false,
-  required Future<void> Function(CoralTester tester) test,
+  required Future<void> Function(CoralTester<T> tester) test,
 }) {
-  final mockedApp = CoralMockedApp(
-    appBuilder: appBuilder,
-  );
-
   testGoldens(
     description,
     (tester) async {
@@ -51,13 +45,11 @@ void coralTestMockedApp(
       putLumberdashToWork(
         withClients: [
           mockedApp.mockLumberdashClient,
-
-          /// Note: can uncomment the following to print logs
           // PrintLumberdash(),
         ],
       );
 
-      final coralTester = CoralTester(
+      final coralTester = CoralTester<T>(
         mockedApp: mockedApp,
         blocObserver: blocObserver,
         tester: tester,
