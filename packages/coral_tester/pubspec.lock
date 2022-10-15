@@ -86,7 +86,7 @@ packages:
     source: path
     version: "1.0.0+1"
   coral_logger:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../coral_logger"
       relative: true

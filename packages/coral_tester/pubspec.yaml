@@ -12,6 +12,8 @@ dependencies:
     path: ../coral_analytics_repository
   coral_bootstrap:
     path: ../coral_bootstrap
+  coral_logger:
+    path: ../coral_logger
   flutter_test:
     sdk: flutter
   golden_toolkit: ^0.13.0

@@ -13,12 +13,14 @@ class CoralTester<T extends CoralMockedApp> {
     required this.blocObserver,
     required this.tester,
     required this.basePath,
+    required this.printTesterLogs,
   });
 
   final T mockedApp;
   final CoralTestBlocObserver blocObserver;
   final WidgetTester tester;
   final String basePath;
+  final bool printTesterLogs;
 
   final List<CoralTesterRecord> testerRecords = [];
   final List<CoralTesterAction> testerActions = [];
@@ -96,7 +98,9 @@ class CoralTester<T extends CoralMockedApp> {
 
     if (screenName != null) {
       final screenRecord = CoralTesterScreen(screenName: screenName);
-      print(screenRecord);
+      if (printTesterLogs) {
+        print(screenRecord);
+      }
       testerRecords.add(screenRecord);
     }
 
@@ -115,7 +119,9 @@ class CoralTester<T extends CoralMockedApp> {
       comment: comment,
     );
 
-    print(checkpoint);
+    if (printTesterLogs) {
+      print(checkpoint);
+    }
     testerRecords.add(checkpoint);
 
     /// Take Screenshot

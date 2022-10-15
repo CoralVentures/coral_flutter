@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
+import 'package:coral_logger/coral_logger.dart';
 import 'package:coral_tester/coral_tester.dart';
 import 'package:coral_tester/src/coral_test_bloc_observer.dart';
 import 'package:coral_tester/src/models.dart';
@@ -19,6 +20,8 @@ import 'package:meta/meta.dart';
 /// - [basePath] is used to namespace the golden images in a specific folder
 /// - [skip] to skip the test
 /// - [test] is the test body
+/// - [printTesterLogs] will print tester logs, defaults to true
+/// - [printApplicationLogs] will print application logs, defaults to false
 ///
 @isTestGroup
 void coralTestMockedApp<T extends CoralMockedApp>(
@@ -27,6 +30,8 @@ void coralTestMockedApp<T extends CoralMockedApp>(
   required T mockedApp,
   required List<CoralBlocObserverAnalyticListener<dynamic>> analyticListeners,
   bool skip = false,
+  bool printTesterLogs = true,
+  bool printApplicationLogs = false,
   required Future<void> Function(CoralTester<T> tester) test,
 }) {
   testGoldens(
@@ -42,11 +47,13 @@ void coralTestMockedApp<T extends CoralMockedApp>(
       Bloc.observer = blocObserver;
 
       blocObserver.mockAnalytics();
+
+      if (printApplicationLogs) {
+        CoralLogger.addPrintClient();
+      }
+
       putLumberdashToWork(
-        withClients: [
-          mockedApp.mockLumberdashClient,
-          // PrintLumberdash(),
-        ],
+        withClients: [mockedApp.mockLumberdashClient],
       );
 
       final coralTester = CoralTester<T>(
@@ -54,11 +61,16 @@ void coralTestMockedApp<T extends CoralMockedApp>(
         blocObserver: blocObserver,
         tester: tester,
         basePath: basePath,
+        printTesterLogs: printTesterLogs,
       );
 
       final descriptionRecord =
           CoralTesterTestDescription(description: description);
-      print(descriptionRecord);
+
+      if (printTesterLogs) {
+        print(descriptionRecord);
+      }
+
       coralTester.testerRecords.add(descriptionRecord);
 
       await test(coralTester);
