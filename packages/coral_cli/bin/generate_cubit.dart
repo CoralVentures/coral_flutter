@@ -6,12 +6,17 @@ import 'package:dcli/dcli.dart' as dcli;
 import 'package:recase/recase.dart' as r;
 
 const templateFilePath = 'bin/templates/cubit/cubit.txt';
-const cubitPath = '../../lib/blocs/cubits';
 
 void main(List<String> args) {
-  final cubitName = dcli.ask(
-    '${dcli.green('Cubit name')} (e.g. FooCubit):',
+  final applicationPath = args.first;
+  final blocsPath = '$applicationPath/lib/blocs'..replaceAll('//', '/');
+  final cubitsPath = '$applicationPath/lib/blocs/cubits'..replaceAll('//', '/');
+
+  final cubitPrefix = dcli.ask(
+    '${dcli.green('Cubit name')} (e.g. Foo):',
   );
+
+  final cubitName = '${cubitPrefix}Cubit';
 
   ///
   /// Generate Cubit file
@@ -19,34 +24,34 @@ void main(List<String> args) {
 
   final file = dcli.read(templateFilePath);
   final fileWithCubitName = addCubitNameToFile(file, cubitName);
-  '$cubitPath/${cubitName.snakeCase}.dart'.write(fileWithCubitName);
+  '$cubitsPath/${cubitName.snakeCase}.dart'.write(fileWithCubitName);
 
   print(
-    '${dcli.grey('\nGenerated cubit file here:')} $cubitPath/${cubitName.snakeCase}.dart\n',
+    '${dcli.grey('\nGenerated cubit file here:')} $cubitsPath/${cubitName.snakeCase}.dart\n',
   );
 
   ///
   /// Update BlocType
   ///
-  const coralBlocPath = '../../lib/blocs/blocs.dart';
-  final coralBlocFileCurrent = dcli.read(coralBlocPath);
+  final coralBlocTypePath = '$blocsPath/bloc_type.dart';
+  final coralBlocFileCurrent = dcli.read(coralBlocTypePath);
   final coralBlocFileNew = coralBlocFileCurrent.toParagraph().replaceFirst(
         '// CORAL_CLI_BLOC_TYPE',
         '${cubitName.camelCase},\n  // CORAL_CLI_BLOC_TYPE',
       );
-  coralBlocPath.write(coralBlocFileNew);
-  print('${dcli.grey('BlocType updated:')} $coralBlocPath\n');
+  coralBlocTypePath.write(coralBlocFileNew);
+  print('${dcli.grey('BlocType updated:')} $coralBlocTypePath\n');
 
   ///
   /// Update DevtoolsDb
   ///
-  const remoteDevtoolsPath = '../../lib/blocs/redux_remote_devtools.dart';
+  final remoteDevtoolsPath = '$blocsPath/redux_remote_devtools.dart';
   final remoteDevtoolsFileCurrent = dcli.read(remoteDevtoolsPath);
   final remoteDevtoolsFileNew = remoteDevtoolsFileCurrent
       .toParagraph()
       .replaceFirst(
         '// CORAL_CLI_IMPORT',
-        "import './cubits/${cubitName.snakeCase}.dart';\n// CORAL_CLI_IMPORT",
+        "import './${cubitName.snakeCase}/${cubitName.snakeCase}_bloc.dart';\n// CORAL_CLI_IMPORT",
       )
       .replaceFirst(
         '// CORAL_CLI_DB_THIS',
@@ -84,15 +89,15 @@ void main(List<String> args) {
   ///
 
   print('Please wait while build_runner is running...');
-  Process.run('bin/build_runner.sh', []).then((value) {
+  Process.run('bin/build_runner.sh', [applicationPath]).then((value) {
     print(
       dcli.orange('Note: you will likely need to restart your analysis server'),
     );
   });
 }
 
-String addCubitNameToFile(dcli.Progress file, String blocName) => file
+String addCubitNameToFile(dcli.Progress file, String cubitName) => file
     .toParagraph()
-    .replaceAll('EXAMPLESC', blocName.snakeCase)
-    .replaceAll('EXAMPLEPC', blocName.pascalCase)
-    .replaceAll('EXAMPLECC', blocName.camelCase);
+    .replaceAll('EXAMPLESC', cubitName.snakeCase)
+    .replaceAll('EXAMPLEPC', cubitName.pascalCase)
+    .replaceAll('EXAMPLECC', cubitName.camelCase);

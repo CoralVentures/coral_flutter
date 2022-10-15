@@ -64,7 +64,7 @@ void main(List<String> args) {
   print('${dcli.grey('AppBlocObserver updated:')} $appBlocObserverPath\n');
 
   ///
-  /// Update CoralBlocType
+  /// Update BlocType
   ///
   final coralBlocTypePath = '$blocsPath/bloc_type.dart';
   final coralBlocFileCurrent = dcli.read(coralBlocTypePath);
