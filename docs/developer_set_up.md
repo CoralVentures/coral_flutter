@@ -1,5 +1,13 @@
 # Developer Set Up
 
+## Mkdocs
+
+To install [mkdocs](https://www.mkdocs.org/) run:
+
+```sh
+brew install mkdocs
+```
+
 ## Flutter
 
 Follow the [official instructions](https://docs.flutter.dev/get-started/install/macos) to download flutter.
