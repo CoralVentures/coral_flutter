@@ -1,5 +1,7 @@
 import 'package:counter_example/blocs/counter/counter_bloc.dart';
-import 'package:counter_example/pages/home/widgets.dart';
+import 'package:counter_example/pages/home/widget_connectors/counter_text.dart';
+import 'package:counter_example/pages/home/widget_connectors/decrement_button.dart';
+import 'package:counter_example/pages/home/widget_connectors/increment_button.dart';
 import 'package:counter_example/styles/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,13 +28,13 @@ class Home_Scaffold extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const CounterText_Connector(),
+                const HomeC_CounterText(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    DecrementBtn_Connector(),
+                    HomeC_DecrementButton(),
                     SizedBox(width: Spacing.small),
-                    IncrementBtn_Connector(),
+                    HomeC_IncrementButton(),
                   ],
                 ),
               ],

@@ -1,6 +1,6 @@
-# Coding Style Guide
+# Naming conventions
 
-Rather than describing the naming convention, we will just show several examples.
+Rather than describing every detail of the naming convention, we will favor showing examples.
 
 ## Repository
 
@@ -197,3 +197,46 @@ Cubits will be placed inside of `lib/blocs/cubits/` directory and all cubits wil
 As a design choice, we are using Cubits to be the single source of truth for an entity's state.
 
 For example, we may have a UserCubit that gets passed around between multiple Blocs.  To prevent each Bloc from accidentally keeping track of some of the UserCubit's state, we simply make all of the UserCubit method calls return `void`, and the Cubit will update its internal state instead.
+
+## Widgets
+
+Let's assume we have the following files.
+
+```md
+lib/
+  pages/
+    home/
+      widgets_dumb/
+        button.dart
+        title.dart
+      widgets_connector/
+        logout_button.dart
+        login_button.dart
+        title.dart
+      home_page.dart
+```
+
+### Naming Convention
+
+#### Connector Widgets
+
+The connector widgets would be named:
+
+- HomeC_LogoutButton
+- HomeC_LoginButton
+- HomeC_Title
+
+#### Dumb Widgets
+
+The dumb widgets would be named:
+
+- HomeC_Button
+- HomeC_Title
+
+#### Page Widgets
+
+The Page widgets would be named:
+
+- Home_Page
+- Home_Scaffold
+- Home_Body
