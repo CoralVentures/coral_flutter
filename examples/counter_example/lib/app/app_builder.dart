@@ -23,8 +23,13 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
       value: analyticsRepository,
-      child: const MaterialApp(
-        home: Home_Page(),
+      child: MaterialApp(
+        navigatorObservers: [
+          CoralAnalyticRouteObserver(
+            analyticsRepository: analyticsRepository,
+          )
+        ],
+        home: const Home_Page(),
       ),
     );
   }

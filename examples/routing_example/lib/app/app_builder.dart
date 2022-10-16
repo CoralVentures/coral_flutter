@@ -48,7 +48,10 @@ class App extends StatelessWidget {
             final authenticationBloc = contextB.watch<AuthenticationBloc>();
 
             return MaterialApp.router(
-              routerConfig: appRouter(authenticationBloc.state),
+              routerConfig: appRouter(
+                authenticationState: authenticationBloc.state,
+                analyticsRepository: analyticsRepository,
+              ),
             );
           },
         ),

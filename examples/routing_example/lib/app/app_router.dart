@@ -1,3 +1,4 @@
+import 'package:coral_analytics_repository/coral_analytics_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:routing_example/blocs/authentication/authentication_bloc.dart';
@@ -6,7 +7,14 @@ import 'package:routing_example/pages/login/login_page.dart';
 
 enum AppRoutes { login, home }
 
-GoRouter appRouter(AuthenticationState authenticationState) => GoRouter(
+GoRouter appRouter({
+  required AuthenticationState authenticationState,
+  required CoralAnalyticsRepository? analyticsRepository,
+}) =>
+    GoRouter(
+      observers: [
+        CoralAnalyticRouteObserver(analyticsRepository: analyticsRepository),
+      ],
       routes: <GoRoute>[
         GoRoute(
           name: AppRoutes.home.name,

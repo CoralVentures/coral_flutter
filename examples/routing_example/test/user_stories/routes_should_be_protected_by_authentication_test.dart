@@ -50,7 +50,7 @@ void main() {
                 );
             },
             expectedEvents: [AuthenticationEvent_Initialize],
-            expectedAnalytics: [],
+            expectedAnalytics: ['Screen: login'],
           );
 
           await tester.screenshot(
@@ -89,6 +89,7 @@ void main() {
             expectedAnalytics: [
               'Track: Login Attempted',
               'Track: Login Succeeded',
+              'Screen: home'
             ],
           );
         },
@@ -126,7 +127,7 @@ void main() {
                 );
             },
             expectedEvents: [AuthenticationEvent_Initialize],
-            expectedAnalytics: [],
+            expectedAnalytics: ['Screen: home'],
           );
 
           await tester.screenshot(
@@ -156,6 +157,7 @@ void main() {
             ],
             expectedAnalytics: [
               'Track: Logout',
+              'Screen: login',
             ],
           );
         },
@@ -193,7 +195,7 @@ void main() {
                 );
             },
             expectedEvents: [AuthenticationEvent_Initialize],
-            expectedAnalytics: [],
+            expectedAnalytics: ['Screen: login'],
           );
 
           await tester.screenshot(
@@ -225,7 +227,8 @@ void main() {
             ],
             expectedAnalytics: [
               'Track: Login Attempted',
-              'Track: Login Failed'
+              'Track: Login Failed',
+              'Screen: login',
             ],
           );
         },
@@ -263,7 +266,7 @@ void main() {
                 );
             },
             expectedEvents: [AuthenticationEvent_Initialize],
-            expectedAnalytics: [],
+            expectedAnalytics: ['Screen: login'],
           );
 
           await tester.screenshot(
@@ -302,7 +305,8 @@ void main() {
             ],
             expectedAnalytics: [
               'Track: Login Attempted',
-              'Track: Login Failed'
+              'Track: Login Failed',
+              'Screen: login'
             ],
           );
         },
