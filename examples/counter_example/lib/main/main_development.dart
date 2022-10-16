@@ -1,5 +1,5 @@
 import 'package:coral_bootstrap/coral_bootstrap.dart';
-import 'package:counter_example/app_builder.dart';
+import 'package:counter_example/app/app_builder.dart';
 import 'package:counter_example/blocs/redux_remote_devtools.dart';
 
 void main() async {

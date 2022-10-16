@@ -312,3 +312,70 @@ class LoginC_LoginListener extends StatelessWidget {
 }
 
 ```
+
+## Where do I put my bloc?
+
+Blocs usually fall in to one of two categories:
+
+1. The bloc is specific to one page or one flow.
+2. The bloc is used by multiple pages or multiple flows.
+
+_Note: we are describing a flow as a set of connected pages that a user might flow through._
+
+### Page-wrap-scaffold: Placing your bloc on a single page
+
+We use the "page-wrap-scaffold" method to add a bloc to our page.
+
+In this example, we create an outer widget called `Home_Page` and a child widget called `Home_Scaffold`.
+
+The important part here is that the **only** thing we are doing in the `Home_Page` is providing the bloc. This is because we do not want this widget to be subject to re-renders.  The `Home_Scaffold` will then have access to this bloc because it is above it in the widget tree.
+
+When we navigate, we will navigate to the `Home_Page`.
+
+```dart
+class Home_Page extends StatelessWidget {
+  const Home_Page({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CounterBloc(),
+      child: const Home_Scaffold(),
+    );
+  }
+}
+```
+
+### Bloc-on-top: Placing your widget high in the widget tree if multiple dependencies
+
+For the most part, we want our blocs to be tied to a single page or a single flow, but there are exceptions.  When this happens, we want our bloc to be higher in the widget tree than any of the dependencies. A good place to put it then is at the top of our applicaton.
+
+Let's assume `FooBloc` is used by multiple flows.
+
+```dart
+class App extends StatelessWidget {
+  const App({
+    super.key,
+    required this.analyticsRepository,
+  });
+
+  final CoralAnalyticsRepository? analyticsRepository;
+
+  @override
+  Widget build(BuildContext context) {
+    return RepositoryProvider.value(
+      value: analyticsRepository,
+      child: Builder(
+        builder: (contextB) {
+          return const BlocProvider(
+            create: (contextP) => FooBloc(),
+            child: MaterialApp(
+              home: Home_Page(),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+```
