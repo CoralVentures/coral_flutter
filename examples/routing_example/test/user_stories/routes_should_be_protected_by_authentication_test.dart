@@ -206,7 +206,8 @@ void main() {
                 find.byType(LoginC_LoginFailButton),
                 pumpAndSettle: true,
               );
-              await tester.tester.pump();
+              // Note: we need an extra pump to let the snackbar render
+              await tester.widgetTester.pump();
             },
             runExpectations: () {
               tester
@@ -284,7 +285,8 @@ void main() {
                 find.byType(LoginC_LoginSuccessButton),
                 pumpAndSettle: true,
               );
-              await tester.tester.pump();
+              // Note: we need an extra pump to let the snackbar render
+              await tester.widgetTester.pump();
             },
             runExpectations: () {
               tester

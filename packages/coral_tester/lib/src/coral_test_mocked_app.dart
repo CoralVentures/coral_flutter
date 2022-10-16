@@ -59,7 +59,7 @@ void coralTestMockedApp<T extends CoralMockedApp>(
       final coralTester = CoralTester<T>(
         mockedApp: mockedApp,
         blocObserver: blocObserver,
-        tester: tester,
+        widgetTester: tester,
         basePath: basePath,
         printTesterLogs: printTesterLogs,
       );

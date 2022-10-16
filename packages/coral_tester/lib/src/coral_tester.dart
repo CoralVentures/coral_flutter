@@ -11,14 +11,14 @@ class CoralTester<T extends CoralMockedApp> {
   CoralTester({
     required this.mockedApp,
     required this.blocObserver,
-    required this.tester,
+    required this.widgetTester,
     required this.basePath,
     required this.printTesterLogs,
   });
 
   final T mockedApp;
   final CoralTestBlocObserver blocObserver;
-  final WidgetTester tester;
+  final WidgetTester widgetTester;
   final String basePath;
   final bool printTesterLogs;
 
@@ -126,7 +126,7 @@ class CoralTester<T extends CoralMockedApp> {
 
     /// Take Screenshot
     await multiScreenGolden(
-      tester,
+      widgetTester,
       screenshotPath,
       devices: goldenDevices,
     );
@@ -143,8 +143,8 @@ class CoralTester<T extends CoralMockedApp> {
   //
 
   Future<void> pumpApp() async {
-    await tester.pumpWidget(await mockedApp.createApp());
-    await tester.pumpAndSettle();
+    await widgetTester.pumpWidget(await mockedApp.createApp());
+    await widgetTester.pumpAndSettle();
   }
 
   Future<void> tap(
@@ -157,11 +157,11 @@ class CoralTester<T extends CoralMockedApp> {
         finderDescription: finder.description,
       ),
     );
-    await tester.tap(finder);
+    await widgetTester.tap(finder);
     if (pumpAndSettle != null && pumpAndSettle) {
-      await tester.pumpAndSettle();
+      await widgetTester.pumpAndSettle();
     } else {
-      await tester.pump();
+      await widgetTester.pump();
     }
   }
 }
