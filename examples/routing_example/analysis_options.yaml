@@ -10,6 +10,8 @@ linter:
 
 analyzer:
   # Note: because of a bug with the analyzer that is out of our control whenever
-  # you add an exclude here, also add it to `./bin/check_coverage.sh`
+  # you add an exclude here, also add it to:
+  # - `./tools/check_coverage.sh`
+  # - `./github/workflows/<worflow_name>.yaml`
   exclude:
     - '**/*.g.dart'

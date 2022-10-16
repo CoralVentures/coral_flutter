@@ -1,0 +1,43 @@
+name: counter_example
+
+on:
+  push:
+    paths:
+      - 'examples/counter_example/**'
+      - '.github/workflows/counter_example.yaml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: 3.3.4
+          channel: 'stable'
+
+      - name: Install Dependencies
+        run: flutter packages get
+
+      - name: Format
+        run: flutter format --set-exit-if-changed lib test
+
+      - name: Analyze
+        run: flutter analyze lib test
+
+      - name: Run tests
+        run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
+
+      - name: Check Code Coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
+        with:
+          exclude:
+            - '**/*.g.dart'
+            - '**/bloc_type.dart'
+            - '**/redux_remote_devtools.dart'
+          min_coverage: 100
