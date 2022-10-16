@@ -355,7 +355,7 @@ class Home_Page extends StatelessWidget {
 
 ### Bloc-on-top: Placing your widget high in the widget tree if multiple dependencies
 
-For the most part, we want our blocs to be tied to a single page or a single flow, but there are exceptions.  When this happens, we want our bloc to be higher in the widget tree than any of the dependencies. A good place to put it then is at the top of our applicaton.
+For the most part, we want our blocs to be tied to a single page or a single flow, but there are exceptions.  When this happens, we want our bloc to be higher in the widget tree than any of the dependencies. A good place to put it then is at the top of our application.
 
 Let's assume `FooBloc` is used by multiple flows.
 

@@ -1,7 +1,7 @@
 name: counter_example
 
 on:
-  push:
+  pull_request:
     paths:
       - 'examples/counter_example/**'
       - '.github/workflows/counter_example.yaml'

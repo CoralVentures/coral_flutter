@@ -160,7 +160,7 @@ _Note: Over time, we want to have less and less dumb widgets defined in our appl
 
 ## UI Kit
 
-The UI Kit is a wharehouse of reusable widgets and styling. The UI Kit is intended to be able to service 1 or more applications.
+The UI Kit is a warehouse of reusable widgets and styling. The UI Kit is intended to be able to service 1 or more applications.
 
 ### Reusable Widgets
 
@@ -176,13 +176,13 @@ This pathway is preferred because it gives the dumb widget an opportunity to exp
 
 Company styling should be defined in the UI Kit, from font-sizes to colors to spacings, etc.  The reusable widgets defined in the UI Kit should use these styles.  In addition, the dumb widgets specific to an application should also use these styles as much as possible. It will make promotion of the dumb widgets easier and keep everything consistent across applications.
 
-## Applicatin Testing
+## Application Testing
 
-Flutter_bloc recommends testing the business logic directly and provides a conenience [bloc_test](https://pub.dev/packages/bloc_test) tool.  However, we deviate from this recommendation and **never** test the business logic directly.
+Flutter_bloc recommends testing the business logic directly and provides a convenience [bloc_test](https://pub.dev/packages/bloc_test) tool.  However, we deviate from this recommendation and **never** test the business logic directly.
 
-In our experience, too many bugs live in the space between the business logic and the presentation layer. So we treat the entire application layer as a black box, and limit ourselves to iteract with the application the same way a user would. By doing this kind of testing, we will ensure that a user can actually 'wiggle' every line of our business logic. If they can't, then that business logic is either not wired up properly to the presentation layer or it shouldn't exist.
+In our experience, too many bugs live in the space between the business logic and the presentation layer. So we treat the entire application layer as a black box, and limit ourselves to interact with the application the same way a user would. By doing this kind of testing, we will ensure that a user can actually 'wiggle' every line of our business logic. If they can't, then that business logic is either not wired up properly to the presentation layer or it shouldn't exist.
 
-In short, we are favoring integration tests with mocks. We are comfortable with this approach becasue the tests are headless and run pretty fast.
+In short, we are favoring integration tests with mocks. We are comfortable with this approach because the tests are headless and run pretty fast.
 
 ## Gallery
 
@@ -192,7 +192,7 @@ _*Flutter can take screenshots of our UI when we execute our headless tests.  Af
 
 ## Analytics
 
-Since we have an event-driven state management architechture, we benefit from being able to observe those events. We have chosen to forward those events to [Segment](https://segment.com/), and [Amplitude](https://amplitude.com/), but we could forward them anywhere.
+Since we have an event-driven state management architecture, we benefit from being able to observe those events. We have chosen to forward those events to [Segment](https://segment.com/), and [Amplitude](https://amplitude.com/), but we could forward them anywhere.
 
 ## Monitoring
 
