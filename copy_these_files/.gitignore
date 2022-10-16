@@ -53,4 +53,4 @@ coverage_badge.svg
 lcov_filtered.info
 
 test/gallery/
-test/gallery_site/
+gallery_site/
