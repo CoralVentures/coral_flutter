@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
-import 'package:counter_example/pages/home/home_page.dart';
+import 'package:counter_example/app/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,13 +23,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
       value: analyticsRepository,
-      child: MaterialApp(
-        navigatorObservers: [
-          CoralAnalyticRouteObserver(
-            analyticsRepository: analyticsRepository,
-          )
-        ],
-        home: const Home_Page(),
+      child: MaterialApp.router(
+        routerConfig: appRouter(
+          analyticsRepository: analyticsRepository,
+        ),
       ),
     );
   }

@@ -35,7 +35,7 @@ void main() {
                 reason: 'Should not see a count of 1',
               );
           },
-          expectedAnalytics: ['Screen: /'],
+          expectedAnalytics: ['Screen: home'],
         );
 
         await tester.screenshot(

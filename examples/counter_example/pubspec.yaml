@@ -21,6 +21,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
+  go_router: ^5.1.0
   json_annotation: ^4.5.0
   redux_remote_devtools: ^3.0.0
 

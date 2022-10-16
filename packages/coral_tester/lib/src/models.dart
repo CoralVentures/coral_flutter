@@ -52,7 +52,7 @@ class CoralTesterScreen extends CoralTesterRecord {
 
   @override
   String toMarkdown() {
-    return '\n## $screenName\n';
+    return '\n### $screenName page\n';
   }
 }
 
@@ -149,7 +149,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
     final buffer = StringBuffer();
 
     if (comment != null) {
-      buffer.write('\n### $comment\n');
+      buffer.write('\n## $comment\n');
     }
 
     buffer.write(
