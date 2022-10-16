@@ -17,23 +17,25 @@ abstract class CoralTesterRecord {
 class CoralTesterTestDescription extends CoralTesterRecord {
   CoralTesterTestDescription({
     super.recordType = CoralTesterRecords.testDescription,
+    required this.userStoryId,
     required this.description,
   });
 
+  final String userStoryId;
   final String description;
 
   @override
   String toString() {
     return '''
 ====================
-$description
+$userStoryId: $description
 ====================
 ''';
   }
 
   @override
   String toMarkdown() {
-    return '# $description\n';
+    return '# $userStoryId: $description\n';
   }
 }
 

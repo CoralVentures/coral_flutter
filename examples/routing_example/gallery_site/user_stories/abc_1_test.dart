@@ -14,12 +14,13 @@ import 'package:routing_example/pages/login/widget_connectors/login_success_butt
 import '../mocked_app.dart';
 
 void main() {
-  group(
-    'routes should be protected by authentication:',
-    () {
-      const groupPath = 'routes_should_be_protected_by_authentication';
+  coralTestGroup(
+    'ABC-1',
+    (userStoryId) {
+      const groupPath = 'abc_1';
       coralTestMockedApp<MockedApp>(
         '''As a user, if I am not logged in, I would like to be able to login''',
+        userStoryId: userStoryId,
         mockedApp: MockedApp(MocksContainer()),
         analyticListeners: analyticListeners,
         basePath: '${groupPath}__logged_out',
@@ -97,6 +98,7 @@ void main() {
 
       coralTestMockedApp<MockedApp>(
         '''As a user, if I am already logged in, I would like to be able to log out''',
+        userStoryId: userStoryId,
         mockedApp: MockedApp(MocksContainer()),
         analyticListeners: analyticListeners,
         basePath: '${groupPath}__logged_in',
@@ -165,6 +167,7 @@ void main() {
 
       coralTestMockedApp<MockedApp>(
         '''As a user, if I attempt to login and I cannot authenticate, I would like to be made aware''',
+        userStoryId: userStoryId,
         mockedApp: MockedApp(MocksContainer()),
         analyticListeners: analyticListeners,
         basePath: '${groupPath}__login_failed',
@@ -237,6 +240,7 @@ void main() {
 
       coralTestMockedApp<MockedApp>(
         '''As a user, if I attempt to login and authentication throws an error, I would like to be made aware''',
+        userStoryId: userStoryId,
         mockedApp: MockedApp(MocksContainer()),
         analyticListeners: analyticListeners,
         basePath: '${groupPath}__login_error',

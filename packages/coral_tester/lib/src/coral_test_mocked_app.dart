@@ -23,9 +23,10 @@ import 'package:meta/meta.dart';
 /// - [printTesterLogs] will print tester logs, defaults to true
 /// - [printApplicationLogs] will print application logs, defaults to false
 ///
-@isTestGroup
+@isTest
 void coralTestMockedApp<T extends CoralMockedApp>(
   String description, {
+  required String userStoryId,
   required String basePath,
   required T mockedApp,
   required List<CoralBlocObserverAnalyticListener<dynamic>> analyticListeners,
@@ -64,8 +65,10 @@ void coralTestMockedApp<T extends CoralMockedApp>(
         printTesterLogs: printTesterLogs,
       );
 
-      final descriptionRecord =
-          CoralTesterTestDescription(description: description);
+      final descriptionRecord = CoralTesterTestDescription(
+        userStoryId: userStoryId,
+        description: description,
+      );
 
       if (printTesterLogs) {
         print(descriptionRecord);
@@ -120,5 +123,18 @@ void coralTestMockedApp<T extends CoralMockedApp>(
         });
       }
     },
+  );
+}
+
+@isTestGroup
+void coralTestGroup(
+  String userStoryId,
+  void Function(String userStoryId) body, {
+  bool skip = false,
+}) {
+  group(
+    userStoryId,
+    () => body(userStoryId),
+    skip: skip,
   );
 }

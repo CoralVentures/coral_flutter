@@ -5,11 +5,12 @@ import 'package:counter_example/blocs/counter/counter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('counter should count:', () {
-    const groupPath = 'counter_should_count';
+  coralTestGroup('ABC-1', (userStoryId) {
+    const groupPath = 'abc_1';
 
     coralTestMockedApp(
       '''As a user, I should be able to change the count, so that I can keep count of things.''',
+      userStoryId: userStoryId,
       mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
       basePath: groupPath,
