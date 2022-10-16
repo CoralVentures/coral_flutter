@@ -44,9 +44,6 @@ app.*.map.json
 /android/app/release
 
 # Coral Additions
-.envrc
-lib/environment_config.dart
-
 coverage/
 coverage_badge.svg
 .test_coverage.dart

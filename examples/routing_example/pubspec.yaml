@@ -16,7 +16,6 @@ dependencies:
     path: ../../packages/coral_bootstrap
   coral_logger:
     path: ../../packages/coral_logger
-  environment_config: ^3.1.0
   equatable: ^2.0.3
   flutter:
     sdk: flutter

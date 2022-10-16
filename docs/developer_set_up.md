@@ -12,34 +12,6 @@ brew install mkdocs
 
 Follow the [official instructions](https://docs.flutter.dev/get-started/install/macos) to download flutter.
 
-## Environment Variables
-
-In the application repo, copy the `.envrc.sample` to `.envrc` and replace placeholders with the Segment and Sentry secrets.
-
-If you do not have [direnv](https://direnv.net/), then you can install it by running:
-
-```sh
-brew install direnv
-```
-
-Then run:
-
-```sh
-direnv allow
-```
-
-Next activate [environment_config](https://pub.dev/packages/environment_config) by running:
-
-```sh
-dart pub global activate environment_config
-```
-
-Finally, generate the environment config file that will not be checked in to your version control system (i.e. make sure to add it to your .gitignore):
-
-```sh
-flutter pub run environment_config:generate 
-```
-
 ## redux_remote_devtools
 
 To run [redux_remote_devtools](https://pub.dev/packages/redux_remote_devtools), you will need to install `remotedev-server`. However, to install remotedev-server, you will need python 2 and that no longer comes stock on mac computers.

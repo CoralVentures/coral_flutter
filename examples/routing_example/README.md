@@ -1,23 +1,5 @@
 # Routing Example
 
-## Set up
-
-## Prerequisites
-
-At the top-level of coral_flutter, go to `docs/developer_set_up.md` and make sure you everything.
-
-### Environment Variables
-
-Copy the `.envrc.sample` to `.envrc` and replace placeholders with your Segment and Sentry secretes.
-
-```sh
-direnv allow
-```
-
-```sh
-flutter pub run environment_config:generate
-```
-
 ## Development
 
 ### Without redux remote devtools

@@ -10,5 +10,4 @@ analyzer:
   # Note: because of a bug with the analyzer that is out of our control whenever
   # you add an exclude here, also add it to `./bin/check_coverage.sh`
   exclude:
-    - 'lib/environment_config.dart'
     - '**/*.g.dart'
