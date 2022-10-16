@@ -1,0 +1,13 @@
+{
+  "@@locale": "en",
+  "counter_count": "Count: {count}",
+  "@counter_count": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "counter_increment": "Increment",
+  "counter_decrement": "Decrement"
+}

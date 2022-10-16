@@ -1,0 +1,9 @@
+{
+  "@@locale": "en",
+  "home_pageTitle": "Home Page",
+  "home_logout": "Logout",
+  "login_pageTitle": "Login Page",
+  "login_loginFail": "Login (Fail)",
+  "login_loginFailed": "Login Failed",
+  "login_loginSuccess": "Login (Success)"
+}

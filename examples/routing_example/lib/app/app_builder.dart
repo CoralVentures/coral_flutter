@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:routing_example/app/app_router.dart';
 import 'package:routing_example/blocs/authentication/authentication_bloc.dart';
+import 'package:routing_example/l10n/l10n.dart';
 import 'package:routing_example/repositories/authentication/authentication_repository.dart';
 
 FutureOr<Widget> appBuilder({
@@ -48,6 +50,11 @@ class App extends StatelessWidget {
             final authenticationBloc = contextB.watch<AuthenticationBloc>();
 
             return MaterialApp.router(
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
               routerConfig: appRouter(
                 authenticationState: authenticationBloc.state,
                 analyticsRepository: analyticsRepository,

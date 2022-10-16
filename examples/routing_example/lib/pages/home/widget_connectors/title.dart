@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routing_example/l10n/l10n.dart';
 import 'package:routing_example/pages/shared/widgets_dumb/title.dart';
 
 class HomeC_Title extends StatelessWidget {
@@ -6,8 +7,10 @@ class HomeC_Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SharedD_Title(
-      label: 'Home Page',
+    final label = AppLocalizations.of(context).home_pageTitle;
+
+    return SharedD_Title(
+      label: label,
     );
   }
 }

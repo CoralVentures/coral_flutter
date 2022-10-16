@@ -271,7 +271,7 @@ lib
       login_page.dart
 ```
 
-The `LoginC_LoginButton` will fire the `AuthenticationEvent_Login`, which will fail, and then the `AuthenticationBloc` will fire the `AuthenticationEvent_LoginFailed` event. The `AuthenticationEvent_LoginFailed` event will perform a "double yield" of `AuthenticationState`s where the first state will be what our `LoginC_LoginListener` can trigger a `LoginC_LoginFailedSnackbar` off of.
+The `LoginC_LoginButton` will fire the `AuthenticationEvent_Login`, which will fail, and then the `AuthenticationBloc` will fire the `AuthenticationEvent_LoginFailed` event. The `AuthenticationEvent_LoginFailed` event will perform a "double yield" of `AuthenticationState`s where the first state will be what our `LoginC_LoginListener` can trigger a `Snackbar` off of.
 
 ```dart
 class LoginC_LoginListener extends StatelessWidget {
@@ -291,7 +291,6 @@ class LoginC_LoginListener extends StatelessWidget {
           case AuthenticationStatus.none:
           case AuthenticationStatus.inProgress:
             break; // no-op
-
           case AuthenticationStatus.authenticated:
             GoRouter.of(context).goNamed(AppRoutes.home.name);
             break;
@@ -300,9 +299,16 @@ class LoginC_LoginListener extends StatelessWidget {
           /// can use that to trigger this snackbar. The next yield will reset the 
           /// authentication status back to none.
           case AuthenticationStatus.failed:
-            ScaffoldMessenger.of(context).showSnackBar(
-              LoginC_LoginFailedSnackbar(),
-            );
+            {
+              final label = AppLocalizations.of(context).login_loginFailed;
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(label),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
             break;
         }
       },
@@ -310,6 +316,7 @@ class LoginC_LoginListener extends StatelessWidget {
     );
   }
 }
+
 
 ```
 

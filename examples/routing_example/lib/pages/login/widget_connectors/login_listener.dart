@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:routing_example/app/app_router.dart';
 import 'package:routing_example/blocs/authentication/authentication_bloc.dart';
-import 'package:routing_example/pages/login/widget_connectors/login_failed_snackbar.dart';
+import 'package:routing_example/l10n/l10n.dart';
 
 class LoginC_LoginListener extends StatelessWidget {
   const LoginC_LoginListener({
@@ -26,9 +26,16 @@ class LoginC_LoginListener extends StatelessWidget {
             GoRouter.of(context).goNamed(AppRoutes.home.name);
             break;
           case AuthenticationStatus.failed:
-            ScaffoldMessenger.of(context).showSnackBar(
-              LoginC_LoginFailedSnackbar(),
-            );
+            {
+              final label = AppLocalizations.of(context).login_loginFailed;
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(label),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
             break;
         }
       },
