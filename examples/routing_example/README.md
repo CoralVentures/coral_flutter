@@ -29,3 +29,17 @@ remotedev --port 8001
 Then go to a browser and open localhost:8001
 
 Next, Click on the `Run and Debug` icon in VSCode and select `Launch Development` from the dropdown menu.
+
+## Gallery
+
+Update the gallery:
+
+```sh
+./tools/gallery_update.sh
+```
+
+Then serve the gallery:
+
+```sh
+mkdocs serve
+```
