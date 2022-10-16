@@ -8,36 +8,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./examples/counter_example
-
     timeout-minutes: 25
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.3.4
-          channel: 'stable'
-
-      - name: Install Dependencies
-        run: flutter pub get
-
-      - name: Format
-        run: flutter format --set-exit-if-changed lib test
-
-      - name: Analyze
-        run: flutter analyze lib test
-
-      - name: Run tests
-        run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
-
-      - name: Check Code Coverage
-        uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
-        with:
-          exclude: '**/*.g.dart **/bloc_type.dart **/redux_remote_devtools.dart'
-          min_coverage: 100
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
+    with:
+      flutter_channel: stable
+      flutter_version: 3.3.4
+      working_directory: './examples/counter_example'
+      test_recursion: true
+      coverage_excludes: '**/*.g.dart **/bloc_type.dart **/redux_remote_devtools.dart'
+      min_coverage: 100
