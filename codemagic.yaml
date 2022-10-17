@@ -1,6 +1,6 @@
 workflows:
   counter-workflow:
-    name: Counter Example
+    name: Counter Example (Debug)
     max_build_duration: 60
     environment:
       flutter: 3.3.4
@@ -24,20 +24,17 @@ workflows:
           -validity 10000
       - |
         # set up local properties
-        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
-      - flutter packages pub get
-      - flutter build apk --debug -t lib/main/main_production.dart
+        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/examples/counter_example/android/local.properties"
+      - cd examples/counter_example && flutter packages pub get
+      - cd examples/counter_example && flutter build apk --debug -t lib/main/main_production.dart
     artifacts:
-      - build/**/outputs/apk/**/*.apk
-      - build/**/outputs/bundle/**/*.aab
-      - build/**/outputs/**/mapping.txt
-      - '*.snap'
-      - build/windows/**/*.msix
-      - flutter_drive.log
+      - examples/counter_example/build/**/outputs/apk/**/*.apk
+      - examples/counter_example/build/**/outputs/bundle/**/*.aab
+      - examples/counter_example/build/**/outputs/**/mapping.txt
+      - examples/counter_example/*.snap
+      - examples/counter_example/build/windows/**/*.msix
+      - examples/counter_example/flutter_drive.log
     publishing:
       email:
         recipients:
           - gadfly361@gmail.com
-        notify:
-          success: true
-          failure: false
