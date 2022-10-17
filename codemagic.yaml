@@ -13,31 +13,40 @@ workflows:
         - $HOME/.gradle/caches
         - $HOME/Library/Caches/CocoaPods
     scripts:
-      - |
-        # set up debug keystore
-        rm -f ~/.android/debug.keystore
-        keytool -genkeypair \
-          -alias androiddebugkey \
-          -keypass android \
-          -keystore ~/.android/debug.keystore \
-          -storepass android \
-          -dname 'CN=Android Debug,O=Android,C=US' \
-          -keyalg 'RSA' \
-          -keysize 2048 \
-          -validity 10000
-      - |
-        # set up local properties
-        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
-      - flutter packages pub get
-      - flutter build apk --release -t lib/main/main_production.dart
-    artifacts:
-      - build/**/outputs/apk/**/*.apk
-      - build/**/outputs/bundle/**/*.aab
-      - build/**/outputs/**/mapping.txt
-      - '*.snap'
-      - build/windows/**/*.msix
-      - flutter_drive.log
-    publishing:
-      email:
-        recipients:
-          - gadfly361@gmail.com
+      - name: Set up debug keystore
+        working_directory: examples/counter_example
+        script: |
+          rm -f ~/.android/debug.keystore
+          keytool -genkeypair \
+            -alias androiddebugkey \
+            -keypass android \
+            -keystore ~/.android/debug.keystore \
+            -storepass android \
+            -dname 'CN=Android Debug,O=Android,C=US' \
+            -keyalg 'RSA' \
+            -keysize 2048 \
+            -validity 10000
+      - name: Set up local.properties
+        working_directory: examples/counter_example
+        script: | 
+          echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        working_directory: examples/counter_example
+        script: | 
+          flutter packages pub get
+      - name: Build APK with Flutter
+        working_directory: examples/counter_example
+        script: | 
+          flutter build apk --release -t lib/main/main_production.dart
+      artifacts:
+        - build/**/outputs/apk/**/*.apk
+        - build/**/outputs/bundle/**/*.aab
+        - build/**/outputs/**/mapping.txt
+        - '*.snap'
+        - build/windows/**/*.msix
+        - flutter_drive.log
+      publishing:
+        email:
+          recipients:
+            - gadfly361@gmail.com
+  
