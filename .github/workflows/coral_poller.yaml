@@ -1,7 +1,7 @@
 name: coral_poller
 
 on:
-  push:
+  pull_request:
     paths:
       - 'packages/coral_poller/**'
       - '.github/workflows/coral_poller.yaml'

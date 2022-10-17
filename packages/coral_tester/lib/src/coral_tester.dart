@@ -4,7 +4,7 @@ import 'package:coral_tester/coral_tester.dart';
 import 'package:coral_tester/src/coral_test_bloc_observer.dart';
 import 'package:coral_tester/src/models.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart' as ft;
 import 'package:golden_toolkit/golden_toolkit.dart';
 
 class CoralTester<T extends CoralMockedApp> {
@@ -18,7 +18,7 @@ class CoralTester<T extends CoralMockedApp> {
 
   final T mockedApp;
   final CoralTestBlocObserver blocObserver;
-  final WidgetTester widgetTester;
+  final ft.WidgetTester widgetTester;
   final String basePath;
   final bool printTesterLogs;
 
@@ -31,12 +31,12 @@ class CoralTester<T extends CoralMockedApp> {
   //
 
   void expectEventsInOrder(List<Type> events, {String? reason}) {
-    expect(blocObserver.events, events, reason: reason);
+    ft.expect(blocObserver.events, events, reason: reason);
     _clearTrackedEvents();
   }
 
   void expectAnalyticsInOrder(List<String> analytics, {String? reason}) {
-    expect(blocObserver.analytics, analytics, reason: reason);
+    ft.expect(blocObserver.analytics, analytics, reason: reason);
     _clearTrackedAnalytics();
   }
 
@@ -53,14 +53,14 @@ class CoralTester<T extends CoralMockedApp> {
     blocObserver.analytics.clear();
   }
 
-  void expectWithReason(
+  void expect(
     dynamic actual,
     dynamic matcher, {
     required String reason,
     dynamic skip,
   }) {
     expectationReasons.add(reason);
-    expect(
+    ft.expect(
       actual,
       matcher,
       reason: reason,
@@ -148,7 +148,7 @@ class CoralTester<T extends CoralMockedApp> {
   }
 
   Future<void> tap(
-    Finder finder, {
+    ft.Finder finder, {
     bool? pumpAndSettle,
   }) async {
     testerActions.add(

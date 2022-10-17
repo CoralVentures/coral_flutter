@@ -25,12 +25,12 @@ void main() {
             takeActions: () async {},
             runExpectations: () async {
               tester
-                ..expectWithReason(
+                ..expect(
                   find.byType(Home_Page),
                   findsOneWidget,
                   reason: 'Should be on the home page',
                 )
-                ..expectWithReason(
+                ..expect(
                   find.text('Count: 0'),
                   findsOneWidget,
                   reason: 'Count should be at 0',
@@ -47,7 +47,7 @@ void main() {
               await tester.tap(find.text('Increment'), pumpAndSettle: true);
             },
             runExpectations: () async {
-              tester.expectWithReason(
+              tester.expect(
                 find.text('Count: 2'),
                 findsOneWidget,
                 reason: 'Count should be at 2',
@@ -74,12 +74,12 @@ void main() {
             },
             runExpectations: () async {
               tester
-                ..expectWithReason(
+                ..expect(
                   find.byType(About_Page),
                   findsOneWidget,
                   reason: 'Should be on the about page',
                 )
-                ..expectWithReason(
+                ..expect(
                   find.text('Count: 0'),
                   findsOneWidget,
                   reason: 'Count should be at 0',
@@ -100,12 +100,12 @@ void main() {
             },
             runExpectations: () async {
               tester
-                ..expectWithReason(
+                ..expect(
                   find.byType(Home_Page),
                   findsOneWidget,
                   reason: 'Should be on the home page',
                 )
-                ..expectWithReason(
+                ..expect(
                   find.text('Count: 2'),
                   findsOneWidget,
                   reason: 'Count should still be at 2',
@@ -131,12 +131,12 @@ void main() {
             takeActions: () async {},
             runExpectations: () async {
               tester
-                ..expectWithReason(
+                ..expect(
                   find.byType(Home_Page),
                   findsOneWidget,
                   reason: 'Should be on the home page',
                 )
-                ..expectWithReason(
+                ..expect(
                   find.text('Count: 0'),
                   findsOneWidget,
                   reason: 'Count should be at 0',
@@ -153,7 +153,7 @@ void main() {
               await tester.tap(find.text('Decrement'), pumpAndSettle: true);
             },
             runExpectations: () async {
-              tester.expectWithReason(
+              tester.expect(
                 find.text('Count: -2'),
                 findsOneWidget,
                 reason: 'Count should be at -2',
@@ -180,12 +180,12 @@ void main() {
             },
             runExpectations: () async {
               tester
-                ..expectWithReason(
+                ..expect(
                   find.byType(About_Page),
                   findsOneWidget,
                   reason: 'Should be on the about page',
                 )
-                ..expectWithReason(
+                ..expect(
                   find.text('Count: 0'),
                   findsOneWidget,
                   reason: 'Count should be at 0',
@@ -206,18 +206,18 @@ void main() {
             },
             runExpectations: () async {
               tester
-                ..expectWithReason(
+                ..expect(
                   find.byType(Home_Page),
                   findsOneWidget,
                   reason: 'Should be on the home page',
                 )
-                ..expectWithReason(
+                ..expect(
                   find.byType(BackButton),
                   findsNothing,
                   reason:
                       '''The back button should not exist, because there isn't a stack of routes.''',
                 )
-                ..expectWithReason(
+                ..expect(
                   find.text('Count: 0'),
                   findsOneWidget,
                   reason: 'Count should not be -2, and should be reset to 0',

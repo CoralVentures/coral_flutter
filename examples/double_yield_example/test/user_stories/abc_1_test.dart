@@ -21,7 +21,7 @@ void main() {
           comment: 'Should see a single button to trigger a snack bar',
           takeActions: () async {},
           runExpectations: () {
-            tester.expectWithReason(
+            tester.expect(
               find.byType(HomeC_SayHelloButton),
               findsOneWidget,
               reason: 'Should see say hello button',
@@ -39,7 +39,7 @@ void main() {
             );
           },
           runExpectations: () {
-            tester.expectWithReason(
+            tester.expect(
               find.byType(SnackBar),
               findsOneWidget,
               reason: 'Should see a snack bar',

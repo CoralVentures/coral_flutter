@@ -18,17 +18,17 @@ void main() {
         await tester.screenshot(
           runExpectations: () {
             tester
-              ..expectWithReason(
+              ..expect(
                 find.text('Count: 0'),
                 findsOneWidget,
                 reason: 'Should see initial count of zero',
               )
-              ..expectWithReason(
+              ..expect(
                 find.text('Count: -1'),
                 findsNothing,
                 reason: 'Should not see a count of -1',
               )
-              ..expectWithReason(
+              ..expect(
                 find.text('Count: 1'),
                 findsNothing,
                 reason: 'Should not see a count of 1',
@@ -40,7 +40,7 @@ void main() {
         await tester.screenshot(
           comment: 'As a user, I want to be able to decrement the count',
           runExpectations: () {
-            tester.expectWithReason(
+            tester.expect(
               find.text('Count: -1'),
               findsOneWidget,
               reason: 'Should see count decremented by one',
@@ -60,7 +60,7 @@ void main() {
         await tester.screenshot(
           comment: 'As a user, I want to be able to increment the count',
           runExpectations: () {
-            tester.expectWithReason(
+            tester.expect(
               find.text('Count: 1'),
               findsOneWidget,
               reason: 'Should see count incremented by two',
