@@ -222,3 +222,165 @@ class App extends StatelessWidget {
   }
 }
 ```
+
+## "Double yield": triggering something like a snack bar
+
+To trigger a snack bar, we need `context` and that lives in our presentation layer. However, we want to record all actions that our application is taking as events. Events are handled in the business logic layer, and we do not pass context into our business logic layer. In short, we cannot fire a snack bar from our blocs directly.
+
+Instead, we do a "double yield" of state and set up a BlocListener in the presentation layer.  The first yield will be something that lets the UI know to trigger a snack bar, and the second yield is to reset the state.
+
+### Set Up Business Logic Layer
+
+Let's assume we have a button, and when tapped, the user will see a snack bar with a greeting that says hello. Since this is a user action, we need to create an event for it.
+
+```dart
+part of 'greetings_bloc.dart';
+
+enum GreetingsEvents { sayHello }
+
+abstract class GreetingsEvent extends Equatable {
+  // ignore: prefer_const_constructors_in_immutables
+  const GreetingsEvent(this.eventType);
+
+  final GreetingsEvents eventType;
+
+  @override
+  List<Object> get props => [eventType];
+}
+
+class GreetingsEvent_SayHello extends GreetingsEvent {
+  const GreetingsEvent_SayHello() : super(GreetingsEvents.sayHello);
+}
+```
+
+Our bloc state looks like this:
+
+```dart
+part of 'greetings_bloc.dart';
+
+enum GreetingsHelloStatus { idle, sayHello }
+
+@JsonSerializable()
+class GreetingsState extends Equatable {
+  const GreetingsState({
+    required this.helloStatus,
+  });
+
+  final GreetingsHelloStatus helloStatus;
+
+  const GreetingsState.initialState() : helloStatus = GreetingsHelloStatus.idle;
+
+  // coverage:ignore-start
+  factory GreetingsState.fromJson(Map<String, dynamic> json) =>
+      _$GreetingsStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GreetingsStateToJson(this);
+  // coverage:ignore-end
+
+  @override
+  List<Object?> get props => [helloStatus];
+}
+```
+
+We have a `helloStatus` with two states: `idle` and `sayHello`. We can use the `sayHello` status to trigger our snack bar, but after it is triggered, we want to reset the status to `idle` so we could potentially trigger a second snack bar sometime in the future.
+
+This leads us to the "double-yield" pattern. Our bloc will fire two states back-to-back, the first with the `sayHello` status, and then one immediately following with the `idle` status.
+
+This is what our bloc looks like:
+
+```dart
+class GreetingsBloc extends CoralBloc<GreetingsEvent, GreetingsState> {
+  GreetingsBloc()
+      : super(
+          const GreetingsState.initialState(),
+          blocType: BlocType.greetings.name,
+          beforeOnEvent: remoteReduxDevtoolsOnEvent,
+          beforeOnClose: remoteReduxDevtoolsOnClose,
+        );
+
+  @override
+  Stream<GreetingsState> mapEventToState(
+    GreetingsEvent event,
+  ) async* {
+    switch (event.eventType) {
+      case GreetingsEvents.sayHello:
+        {
+          // "Double yield"
+          yield const GreetingsState(
+              helloStatus: GreetingsHelloStatus.sayHello);
+          yield const GreetingsState(helloStatus: GreetingsHelloStatus.idle);
+        }
+        break;
+    }
+  }
+}
+```
+
+### Set Up Presentation Layer
+
+```md
+lib
+  pages/
+    home/
+      widgets_connector/
+        say_hello_button.dart
+        say_hello_status_listener.dart
+      home_page.dart
+```
+
+The `HomeC_SayHelloButton` will fire the `GreetingsEvent_SayHello`. Our GreetingsBloc will handles the event and perform a "double yield" of `GreetingsState`s. The first state will be what our `HomeC_SayHelloStatusListener` will trigger a `snack bar` off of. The second state will reset the status back to idle, so we could potentially fire another snack bar in the future.
+
+Here is the say hello button:
+
+```dart
+class HomeC_SayHelloButton extends StatelessWidget {
+  const HomeC_SayHelloButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final label = AppLocalizations.of(context).home_triggerSnackBar;
+    final greetingsBloc = context.watch<GreetingsBloc>();
+
+    return ElevatedButton(
+      onPressed: () => greetingsBloc.add(const GreetingsEvent_SayHello()),
+      child: Text(label),
+    );
+  }
+}
+```
+
+And here is the listener:
+
+```dart
+class HomeC_SayHelloStatusListener extends StatelessWidget {
+  const HomeC_SayHelloStatusListener({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<GreetingsBloc, GreetingsState>(
+      listenWhen: (previous, current) =>
+          previous.helloStatus != current.helloStatus,
+      listener: (context, state) {
+        if (state.helloStatus == GreetingsHelloStatus.sayHello) {
+          final label = AppLocalizations.of(context).home_helloWorld;
+
+          ScaffoldMessenger.maybeOf(context)?.hideCurrentSnackBar();
+          ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+            SnackBar(
+              content: Text(label),
+            ),
+          );
+        }
+      },
+      child: child,
+    );
+  }
+}
+```
+
+_Note: we are called `.hideCurrentSnackBar` in case the user tried to fire multiple snack bars really quickly before they have a chance to disappear on their own._

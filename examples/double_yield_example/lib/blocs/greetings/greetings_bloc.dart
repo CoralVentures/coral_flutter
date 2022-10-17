@@ -26,12 +26,15 @@ class GreetingsBloc extends CoralBloc<GreetingsEvent, GreetingsState> {
   ) async* {
     switch (event.eventType) {
       case GreetingsEvents.sayHello:
-        // This is the "double-yield" pattern. We send two states back-to-back
-        // to the presentation layer. We want to give the UI something to
-        // respond to and display a snackbar. We can use a BlocListener
-        // listening to the `helloStatus`.
-        yield const GreetingsState(helloStatus: GreetingsHelloStatus.sayHello);
-        yield const GreetingsState(helloStatus: GreetingsHelloStatus.idle);
+        {
+          // This is the "double-yield" pattern. We send two states back-to-back
+          // to the presentation layer. We want to give the UI something to
+          // respond to and display a snackbar. We can use a BlocListener
+          // listening to the `helloStatus`.
+          yield const GreetingsState(
+              helloStatus: GreetingsHelloStatus.sayHello);
+          yield const GreetingsState(helloStatus: GreetingsHelloStatus.idle);
+        }
         break;
     }
   }
