@@ -225,6 +225,8 @@ class App extends StatelessWidget {
 
 ## "Double yield": triggering something like a snack bar
 
+ATTENTION: See the **double_yield_example** for the source code.
+
 To trigger a snack bar, we need `context` and that lives in our presentation layer. However, we want to record all actions that our application is taking as events. Events are handled in the business logic layer, and we do not pass context into our business logic layer. In short, we cannot fire a snack bar from our blocs directly.
 
 Instead, we do a "double yield" of state and set up a BlocListener in the presentation layer.  The first yield will be something that lets the UI know to trigger a snack bar, and the second yield is to reset the state.
