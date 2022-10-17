@@ -10,7 +10,7 @@ class HomeC_CounterText extends StatelessWidget {
   Widget build(BuildContext context) {
     final counterBloc = context.watch<CounterBloc>();
     final label = AppLocalizations.of(context)
-        .counter_count(counterBloc.state.count.toString());
+        .home_count(counterBloc.state.count.toString());
     final theme = Theme.of(context);
 
     return Text(

@@ -8,7 +8,7 @@ class HomeC_DecrementButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final label = AppLocalizations.of(context).counter_decrement;
+    final label = AppLocalizations.of(context).home_decrement;
 
     return ElevatedButton(
       onPressed: () {

@@ -13,7 +13,7 @@ void main(List<String> args) {
   final blocsPath = '$applicationPath/lib/blocs/'..replaceAll('//', '/');
 
   final blocName = dcli.ask(
-    '${dcli.green('New bloc name')} (e.g. counter):',
+    '${dcli.green('New bloc name')} (e.g. counter or foo_bar):',
     validator: dcli.Ask.all(
       [
         dcli.Ask.required,
