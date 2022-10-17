@@ -6,9 +6,6 @@ workflows:
       flutter: 3.3.4
       xcode: latest
       cocoapods: default
-    cache:
-      cache_paths:
-        - ''
     scripts:
       - |
         # set up debug keystore
