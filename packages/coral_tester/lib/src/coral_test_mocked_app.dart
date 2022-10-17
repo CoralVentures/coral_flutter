@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
 import 'package:coral_logger/coral_logger.dart';
@@ -12,12 +11,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:lumberdash/lumberdash.dart';
 import 'package:meta/meta.dart';
+import 'package:recase/recase.dart';
 
 /// This [coralTestMockedApp] method runs [testGoldens] with a [CoralMockedApp]
 /// and sets the Bloc.observer to a [CoralTestBlocObserver].
 ///
 /// - [description] is a test description
-/// - [basePath] is used to namespace the golden images in a specific folder
+/// - [screenshotDir] is used to namespace the golden images in a specific
+///   directory
 /// - [skip] to skip the test
 /// - [test] is the test body
 /// - [printTesterLogs] will print tester logs, defaults to true
@@ -27,7 +28,7 @@ import 'package:meta/meta.dart';
 void coralTestMockedApp<T extends CoralMockedApp>(
   String description, {
   required String userStoryId,
-  required String basePath,
+  required String screenshotDir,
   required T mockedApp,
   required List<CoralBlocObserverAnalyticListener<dynamic>> analyticListeners,
   bool skip = false,
@@ -35,6 +36,8 @@ void coralTestMockedApp<T extends CoralMockedApp>(
   bool printApplicationLogs = false,
   required Future<void> Function(CoralTester<T> tester) test,
 }) {
+  final basePath = '${userStoryId.snakeCase}/$screenshotDir';
+
   testGoldens(
     description,
     (tester) async {

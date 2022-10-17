@@ -72,7 +72,7 @@ class CoralTester<T extends CoralMockedApp> {
   // Screenshot
   //
 
-  int screenshotCounter = 0;
+  int _screenshotCounter = 0;
 
   Future<void> screenshot({
     String? comment,
@@ -86,8 +86,8 @@ class CoralTester<T extends CoralMockedApp> {
     }
 
     /// Get unique prefix
-    final resolvedCounter = screenshotCounter.toRadixString(36);
-    screenshotCounter++;
+    final resolvedCounter = _screenshotCounter.toRadixString(36);
+    _screenshotCounter++;
 
     String? screenName;
     try {

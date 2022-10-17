@@ -5,8 +5,6 @@ linter:
     public_member_api_docs: false
     constant_identifier_names: false
     camel_case_types: false
-    no_leading_underscores_for_local_identifiers: false
-    cascade_invocations: false
 
 analyzer:
   # Note: because of a bug with the analyzer that is out of our control whenever

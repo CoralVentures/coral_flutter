@@ -84,8 +84,6 @@ class HomeC_IncrementButton extends StatelessWidget {
 
 Now that we have fired the `CounterEvent_Increment` event from the UI, we need to handle it inside of our `CounterBloc`.
 
-_Note: If you are familiar with Flutter Bloc, you will know that they deprecated `mapEventToState` in favor of using `on<EventName>`. We were unhappy with this change because it doesn't play nicely with switching over enums. Since we prefer using enums for our eventType, `CoralBloc` exposes the deprecated api, `mapEventToState`, and maps it correctly to `on` under the hood._
-
 ```dart
 class CounterBloc extends CoralBloc<CounterEvent, CounterState> {
   CounterBloc()
@@ -111,9 +109,11 @@ class CounterBloc extends CoralBloc<CounterEvent, CounterState> {
 
 We use `mapEventToState` to listen for an event, switch over its eventType, and then yield new states.  In this instance, we are adding one to the count.
 
+_Note: If you are familiar with Flutter Bloc, you will know that they deprecated `mapEventToState` in favor of using `on<EventName>`. We were unhappy with this change because it doesn't play nicely with switching over enums. Since we prefer using enums for our eventType, `CoralBloc` exposes the deprecated api, `mapEventToState`, and maps it correctly to `on` under the hood._
+
 ### Reacting to new state in the UI
 
-Now that we have yielded an updated CounterState, we need to listen for updates the the state in our presentation layer. This happens in our connector widgets.
+Now that we have yielded an updated CounterState, we need to listen for the updated state in our presentation layer. This happens in our connector widgets.
 
 ```dart
 class HomeC_CounterText extends StatelessWidget {
@@ -132,7 +132,7 @@ class HomeC_CounterText extends StatelessWidget {
 }
 ```
 
-As you can see, we are using `context.watch<CounterBloc>`. This is a shorthand for using `BlocBuilder`. An alternative way to write this is the following:
+As you can see, we are using `context.watch<CounterBloc>`. This is a shorthand for using `BlocBuilder`, which you could write like this:
 
 ```dart
 class HomeC_CounterText extends StatelessWidget {
@@ -158,7 +158,72 @@ The main difference is `BlocBuilder` has an additional input called `buildWhen` 
 
 _Note: you may see `context.read<T>` and wonder how it differs from `context.watch<T>`. The former does a one-time read and is meant to be used in callbacks or places outside of the widget tree. The latter will watch for state changes and rebuild the widget tree and therefore should only be used inside of your build method._
 
-## Double yield: triggering something like a snackbar
+## Where do I put my bloc?
+
+Blocs usually fall in to one of two categories:
+
+1. The bloc is specific to one page or one flow.
+2. The bloc is used by multiple pages or multiple flows.
+
+_Note: we are describing a flow as a set of connected pages that a user might flow through._
+
+### "Page-wrap-scaffold": Placing your bloc on a single page
+
+We will use the "page-wrap-scaffold" method to add a bloc to our page. In this example, we will create an outer widget called `Home_Page` and a child widget called `Home_Scaffold`.
+
+The important part here is that the **only** thing we are doing in the `Home_Page` is providing the bloc. This is because we do not want this widget to be subject to re-renders.  The `Home_Scaffold` will then have access to this bloc because it is above it in the widget tree.
+
+When we navigate, we will navigate to the `Home_Page`.
+
+```dart
+class Home_Page extends StatelessWidget {
+  const Home_Page({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CounterBloc(),
+      child: const Home_Scaffold(),
+    );
+  }
+}
+```
+
+### "Bloc-on-top": If multiple dependencies, place your widget high in the widget tree
+
+For the most part, we want our blocs to be tied to a single page or a single flow, but there are exceptions.  When this happens, we want our bloc to be higher in the widget tree than any of the dependencies. A good place to put it then is at the top of our application, hence "bloc-on-top".
+
+Let's assume `FooBloc` is used by multiple flows.
+
+```dart
+class App extends StatelessWidget {
+  const App({
+    super.key,
+    required this.analyticsRepository,
+  });
+
+  final CoralAnalyticsRepository? analyticsRepository;
+
+  @override
+  Widget build(BuildContext context) {
+    return RepositoryProvider.value(
+      value: analyticsRepository,
+      child: Builder(
+        builder: (contextB) {
+          return const BlocProvider(
+            create: (contextP) => FooBloc(),
+            child: MaterialApp(
+              home: Home_Page(),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+```
+
+## "Double yield": triggering something like a snackbar
 
 To trigger a snackbar, we need `context` and that lives in our presentation layer. However, we want to record all actions that our application is taking as events. Events are handled in the business logic layer, and we do not pass context in to our business logic layer. In short, we cannot fire a snackbar from our blocs directly.
 
@@ -318,71 +383,4 @@ class LoginC_LoginListener extends StatelessWidget {
 }
 
 
-```
-
-## Where do I put my bloc?
-
-Blocs usually fall in to one of two categories:
-
-1. The bloc is specific to one page or one flow.
-2. The bloc is used by multiple pages or multiple flows.
-
-_Note: we are describing a flow as a set of connected pages that a user might flow through._
-
-### Page-wrap-scaffold: Placing your bloc on a single page
-
-We use the "page-wrap-scaffold" method to add a bloc to our page.
-
-In this example, we create an outer widget called `Home_Page` and a child widget called `Home_Scaffold`.
-
-The important part here is that the **only** thing we are doing in the `Home_Page` is providing the bloc. This is because we do not want this widget to be subject to re-renders.  The `Home_Scaffold` will then have access to this bloc because it is above it in the widget tree.
-
-When we navigate, we will navigate to the `Home_Page`.
-
-```dart
-class Home_Page extends StatelessWidget {
-  const Home_Page({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CounterBloc(),
-      child: const Home_Scaffold(),
-    );
-  }
-}
-```
-
-### Bloc-on-top: Placing your widget high in the widget tree if multiple dependencies
-
-For the most part, we want our blocs to be tied to a single page or a single flow, but there are exceptions.  When this happens, we want our bloc to be higher in the widget tree than any of the dependencies. A good place to put it then is at the top of our application.
-
-Let's assume `FooBloc` is used by multiple flows.
-
-```dart
-class App extends StatelessWidget {
-  const App({
-    super.key,
-    required this.analyticsRepository,
-  });
-
-  final CoralAnalyticsRepository? analyticsRepository;
-
-  @override
-  Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: analyticsRepository,
-      child: Builder(
-        builder: (contextB) {
-          return const BlocProvider(
-            create: (contextP) => FooBloc(),
-            child: MaterialApp(
-              home: Home_Page(),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
 ```

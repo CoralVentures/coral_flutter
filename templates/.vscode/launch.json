@@ -12,6 +12,16 @@
 			]
 		},
 		{
+			"name": "Launch development (Redux Devtools)",
+			"request": "launch",
+			"type": "dart",
+			"program": "lib/main/main_development_redux_devtools.dart",
+			"args": [
+				"--target",
+				"lib/main/main_development_redux_devtools.dart"
+			]
+		},
+		{
 			"name": "Launch production",
 			"request": "launch",
 			"type": "dart",

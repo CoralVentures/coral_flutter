@@ -1,319 +1,230 @@
 import 'package:coral_tester/coral_tester.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:routing_example/app/app_builder.dart';
 import 'package:routing_example/blocs/analytic_listeners.dart';
-import 'package:routing_example/blocs/authentication/authentication_bloc.dart';
+import 'package:routing_example/blocs/counter/counter_bloc.dart';
+import 'package:routing_example/pages/about/about_page.dart';
 import 'package:routing_example/pages/home/home_page.dart';
-import 'package:routing_example/pages/home/widget_connectors/logout_button.dart';
-import 'package:routing_example/pages/login/login_page.dart';
-import 'package:routing_example/pages/login/widget_connectors/login_fail_button.dart';
-import 'package:routing_example/pages/login/widget_connectors/login_success_button.dart';
-
-import '../mocked_app.dart';
 
 void main() {
   coralTestGroup(
     'ABC-1',
     (userStoryId) {
-      const groupPath = 'abc_1';
-      coralTestMockedApp<MockedApp>(
-        '''As a user, if I am not logged in, I would like to be able to login''',
+      coralTestMockedApp<CoralMockedApp>(
+        '''As a developer, I want to see an example of 'pushing' a route on the route stack, so that I can understand the different between 'going' to a route''',
         userStoryId: userStoryId,
-        mockedApp: MockedApp(MocksContainer()),
+        screenshotDir: 'push_route',
+        mockedApp: CoralMockedApp(appBuilder: appBuilder),
         analyticListeners: analyticListeners,
-        basePath: '${groupPath}__logged_out',
         test: (tester) async {
-          when(
-            () => tester.mockedApp.mocks.authenticationRepository.authenticate(
-              isAuthenticated: any(named: 'isAuthenticated'),
-            ),
-          ).thenReturn(false);
-
           await tester.pumpApp();
 
           await tester.screenshot(
-            comment:
-                '''If this is my first time opening the app, I should start on the login page''',
+            comment: '''Should start on the home page with a count of zero.''',
             takeActions: () async {},
-            runExpectations: () {
-              tester
-                ..expectWithReason(
-                  find.byType(Login_Page),
-                  findsOneWidget,
-                  reason: 'I should be on the login page',
-                )
-                ..expectWithReason(
-                  find.byType(Home_Page),
-                  findsNothing,
-                  reason: 'I should not be on the home page.',
-                );
-            },
-            expectedEvents: [AuthenticationEvent_Initialize],
-            expectedAnalytics: ['Screen: login'],
-          );
-
-          await tester.screenshot(
-            comment:
-                '''If I attempt to log in, and I am authenticated, I should go to the home page''',
-            takeActions: () async {
-              when(
-                () => tester.mockedApp.mocks.authenticationRepository
-                    .authenticate(
-                  isAuthenticated: any(named: 'isAuthenticated'),
-                ),
-              ).thenReturn(true);
-
-              await tester.tap(
-                find.byType(LoginC_LoginSuccessButton),
-                pumpAndSettle: true,
-              );
-            },
-            runExpectations: () {
+            runExpectations: () async {
               tester
                 ..expectWithReason(
                   find.byType(Home_Page),
                   findsOneWidget,
-                  reason: 'I should now be on the home page.',
+                  reason: 'Should be on the home page',
                 )
                 ..expectWithReason(
-                  find.byType(Login_Page),
-                  findsNothing,
-                  reason: 'I should not be on the login page',
-                );
-            },
-            expectedEvents: [
-              AuthenticationEvent_Login,
-              AuthenticationEvent_LoginSucceeded,
-            ],
-            expectedAnalytics: [
-              'Track: Login Attempted',
-              'Track: Login Succeeded',
-              'Screen: home'
-            ],
-          );
-        },
-      );
-
-      coralTestMockedApp<MockedApp>(
-        '''As a user, if I am already logged in, I would like to be able to log out''',
-        userStoryId: userStoryId,
-        mockedApp: MockedApp(MocksContainer()),
-        analyticListeners: analyticListeners,
-        basePath: '${groupPath}__logged_in',
-        test: (tester) async {
-          when(
-            () => tester.mockedApp.mocks.authenticationRepository.authenticate(
-              isAuthenticated: any(named: 'isAuthenticated'),
-            ),
-          ).thenReturn(true);
-
-          await tester.pumpApp();
-
-          await tester.screenshot(
-            comment:
-                '''If this is my first time opening the app, and I am still authenticated, I should start on the home page''',
-            takeActions: () async {},
-            runExpectations: () {
-              tester
-                ..expectWithReason(
-                  find.byType(Home_Page),
+                  find.text('Count: 0'),
                   findsOneWidget,
-                  reason: 'I should be on the home page',
-                )
-                ..expectWithReason(
-                  find.byType(Login_Page),
-                  findsNothing,
-                  reason: 'I should not be on the login page.',
+                  reason: 'Count should be at 0',
                 );
             },
-            expectedEvents: [AuthenticationEvent_Initialize],
+            expectedEvents: [],
             expectedAnalytics: ['Screen: home'],
           );
 
           await tester.screenshot(
+            comment: '''Should be able to change the Home Page's count''',
+            takeActions: () async {
+              await tester.tap(find.text('Increment'));
+              await tester.tap(find.text('Increment'), pumpAndSettle: true);
+            },
+            runExpectations: () async {
+              tester.expectWithReason(
+                find.text('Count: 2'),
+                findsOneWidget,
+                reason: 'Count should be at 2',
+              );
+            },
+            expectedEvents: [
+              CounterEvent_Increment,
+              CounterEvent_Increment,
+            ],
+            expectedAnalytics: [
+              'Track: Counter: Increment',
+              'Track: Counter: Increment',
+            ],
+          );
+
+          await tester.screenshot(
             comment:
-                '''If I attempt to log out, I should go to the login page''',
+                '''If we 'push' to the about page, the about page's count should be zero''',
             takeActions: () async {
               await tester.tap(
-                find.byType(HomeC_LogoutButton),
+                find.text('Push to About Page'),
                 pumpAndSettle: true,
               );
             },
-            runExpectations: () {
+            runExpectations: () async {
               tester
                 ..expectWithReason(
-                  find.byType(Login_Page),
+                  find.byType(About_Page),
                   findsOneWidget,
-                  reason: 'I should now be on the login page.',
+                  reason: 'Should be on the about page',
                 )
                 ..expectWithReason(
-                  find.byType(Home_Page),
-                  findsNothing,
-                  reason: 'I should not be on the home page',
+                  find.text('Count: 0'),
+                  findsOneWidget,
+                  reason: 'Count should be at 0',
                 );
             },
-            expectedEvents: [
-              AuthenticationEvent_Logout,
-            ],
-            expectedAnalytics: [
-              'Track: Logout',
-              'Screen: login',
-            ],
+            expectedEvents: [],
+            expectedAnalytics: ['Screen: about'],
+          );
+
+          await tester.screenshot(
+            comment:
+                '''Since we pushed to the about page, we have a stack of pages (about page on top of home page). If we pop the about page off, and go back to the home page, the home page's count should be preserved.''',
+            takeActions: () async {
+              await tester.tap(
+                find.byType(BackButton),
+                pumpAndSettle: true,
+              );
+            },
+            runExpectations: () async {
+              tester
+                ..expectWithReason(
+                  find.byType(Home_Page),
+                  findsOneWidget,
+                  reason: 'Should be on the home page',
+                )
+                ..expectWithReason(
+                  find.text('Count: 2'),
+                  findsOneWidget,
+                  reason: 'Count should still be at 2',
+                );
+            },
+            expectedEvents: [],
+            expectedAnalytics: ['Screen: home'],
           );
         },
       );
 
-      coralTestMockedApp<MockedApp>(
-        '''As a user, if I attempt to login and I cannot authenticate, I would like to be made aware''',
+      coralTestMockedApp<CoralMockedApp>(
+        '''As a developer, I want to see an example of 'going' to a route, so that I can understand the different between 'pushing' a route on a route stack''',
         userStoryId: userStoryId,
-        mockedApp: MockedApp(MocksContainer()),
+        screenshotDir: 'go_to_route',
+        mockedApp: CoralMockedApp(appBuilder: appBuilder),
         analyticListeners: analyticListeners,
-        basePath: '${groupPath}__login_failed',
         test: (tester) async {
-          when(
-            () => tester.mockedApp.mocks.authenticationRepository.authenticate(
-              isAuthenticated: any(named: 'isAuthenticated'),
-            ),
-          ).thenReturn(false);
-
           await tester.pumpApp();
 
           await tester.screenshot(
-            comment:
-                '''If this is my first time opening the app, and I am not authenticated, I should be on the login page''',
+            comment: '''Should start on the home page with a count of zero.''',
             takeActions: () async {},
-            runExpectations: () {
+            runExpectations: () async {
               tester
-                ..expectWithReason(
-                  find.byType(Login_Page),
-                  findsOneWidget,
-                  reason: 'I should be on the login page',
-                )
                 ..expectWithReason(
                   find.byType(Home_Page),
-                  findsNothing,
-                  reason: 'I should not be on the home page.',
+                  findsOneWidget,
+                  reason: 'Should be on the home page',
+                )
+                ..expectWithReason(
+                  find.text('Count: 0'),
+                  findsOneWidget,
+                  reason: 'Count should be at 0',
                 );
             },
-            expectedEvents: [AuthenticationEvent_Initialize],
-            expectedAnalytics: ['Screen: login'],
+            expectedEvents: [],
+            expectedAnalytics: ['Screen: home'],
           );
 
           await tester.screenshot(
-            comment:
-                '''If I attempt to log in, and I cannot authenticate, I should see a snackbar''',
+            comment: '''Should be able to change the Home Page's count''',
             takeActions: () async {
-              await tester.tap(
-                find.byType(LoginC_LoginFailButton),
-                pumpAndSettle: true,
-              );
-              // Note: we need an extra pump to let the snackbar render
-              await tester.widgetTester.pump();
+              await tester.tap(find.text('Decrement'));
+              await tester.tap(find.text('Decrement'), pumpAndSettle: true);
             },
-            runExpectations: () {
-              tester
-                ..expectWithReason(
-                  find.byType(Login_Page),
-                  findsOneWidget,
-                  reason: 'I should still be on the login page',
-                )
-                ..expectWithReason(
-                  find.byType(SnackBar),
-                  findsOneWidget,
-                  reason: 'I should see a snackbar',
-                );
+            runExpectations: () async {
+              tester.expectWithReason(
+                find.text('Count: -2'),
+                findsOneWidget,
+                reason: 'Count should be at -2',
+              );
             },
             expectedEvents: [
-              AuthenticationEvent_Login,
-              AuthenticationEvent_LoginFailed,
+              CounterEvent_Decrement,
+              CounterEvent_Decrement,
             ],
             expectedAnalytics: [
-              'Track: Login Attempted',
-              'Track: Login Failed',
-              'Screen: login',
+              'Track: Counter: Decrement',
+              'Track: Counter: Decrement',
             ],
           );
-        },
-      );
-
-      coralTestMockedApp<MockedApp>(
-        '''As a user, if I attempt to login and authentication throws an error, I would like to be made aware''',
-        userStoryId: userStoryId,
-        mockedApp: MockedApp(MocksContainer()),
-        analyticListeners: analyticListeners,
-        basePath: '${groupPath}__login_error',
-        test: (tester) async {
-          when(
-            () => tester.mockedApp.mocks.authenticationRepository.authenticate(
-              isAuthenticated: any(named: 'isAuthenticated'),
-            ),
-          ).thenReturn(false);
-
-          await tester.pumpApp();
 
           await tester.screenshot(
             comment:
-                '''If this is my first time opening the app, and I am not authenticated, I should be on the login page''',
-            takeActions: () async {},
-            runExpectations: () {
+                '''If we 'go' to the about page, the about page's count should be zero''',
+            takeActions: () async {
+              await tester.tap(
+                find.text('Go to About Page'),
+                pumpAndSettle: true,
+              );
+            },
+            runExpectations: () async {
               tester
                 ..expectWithReason(
-                  find.byType(Login_Page),
+                  find.byType(About_Page),
                   findsOneWidget,
-                  reason: 'I should be on the login page',
+                  reason: 'Should be on the about page',
                 )
+                ..expectWithReason(
+                  find.text('Count: 0'),
+                  findsOneWidget,
+                  reason: 'Count should be at 0',
+                );
+            },
+            expectedEvents: [],
+            expectedAnalytics: ['Screen: about'],
+          );
+
+          await tester.screenshot(
+            comment:
+                '''Since we 'go'ed to the about page, we do not have a stack of pages, we only have the about page. The original home page does not exist. So if we go back to the home page, it will get recreated and the counter will be reset to 0.''',
+            takeActions: () async {
+              await tester.tap(
+                find.text('Go to Home Page'),
+                pumpAndSettle: true,
+              );
+            },
+            runExpectations: () async {
+              tester
                 ..expectWithReason(
                   find.byType(Home_Page),
-                  findsNothing,
-                  reason: 'I should not be on the home page.',
-                );
-            },
-            expectedEvents: [AuthenticationEvent_Initialize],
-            expectedAnalytics: ['Screen: login'],
-          );
-
-          await tester.screenshot(
-            comment:
-                '''If I attempt to log in, and the authentication throws an error, I should see a snackbar''',
-            takeActions: () async {
-              when(
-                () => tester.mockedApp.mocks.authenticationRepository
-                    .authenticate(
-                  isAuthenticated: any(named: 'isAuthenticated'),
-                ),
-              ).thenThrow(Exception('BOOM'));
-
-              await tester.tap(
-                find.byType(LoginC_LoginSuccessButton),
-                pumpAndSettle: true,
-              );
-              // Note: we need an extra pump to let the snackbar render
-              await tester.widgetTester.pump();
-            },
-            runExpectations: () {
-              tester
-                ..expectWithReason(
-                  find.byType(Login_Page),
                   findsOneWidget,
-                  reason: 'I should still be on the login page',
+                  reason: 'Should be on the home page',
                 )
                 ..expectWithReason(
-                  find.byType(SnackBar),
+                  find.byType(BackButton),
+                  findsNothing,
+                  reason:
+                      '''The back button should not exist, because there isn't a stack of routes.''',
+                )
+                ..expectWithReason(
+                  find.text('Count: 0'),
                   findsOneWidget,
-                  reason: 'I should see a snackbar',
+                  reason: 'Count should not be -2, and should be reset to 0',
                 );
             },
-            expectedEvents: [
-              AuthenticationEvent_Login,
-              AuthenticationEvent_LoginFailed,
-            ],
-            expectedAnalytics: [
-              'Track: Login Attempted',
-              'Track: Login Failed',
-              'Screen: login'
-            ],
+            expectedEvents: [],
+            expectedAnalytics: ['Screen: home'],
           );
         },
       );

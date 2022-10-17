@@ -6,14 +6,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   coralTestGroup('ABC-1', (userStoryId) {
-    const groupPath = 'abc_1';
-
     coralTestMockedApp(
       '''As a user, I should be able to change the count, so that I can keep count of things.''',
       userStoryId: userStoryId,
       mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
-      basePath: groupPath,
+      screenshotDir: 'change_count',
       test: (tester) async {
         await tester.pumpApp();
 

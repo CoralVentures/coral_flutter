@@ -7,13 +7,12 @@ part of 'redux_remote_devtools.dart';
 // **************************************************************************
 
 DevtoolsDb _$DevtoolsDbFromJson(Map<String, dynamic> json) => DevtoolsDb(
-      authenticationState: json['authenticationState'] == null
+      counterState: json['counterState'] == null
           ? null
-          : AuthenticationState.fromJson(
-              json['authenticationState'] as Map<String, dynamic>),
+          : CounterState.fromJson(json['counterState'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DevtoolsDbToJson(DevtoolsDb instance) =>
     <String, dynamic>{
-      'authenticationState': instance.authenticationState,
+      'counterState': instance.counterState,
     };

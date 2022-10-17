@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:routing_example/styles/app_colors.dart';
 
-enum SharedD_ButtonType {
-  primary,
-  danger,
-}
+enum SharedD_ButtonType { primary, success, danger }
 
 class SharedD_Button extends StatelessWidget {
   const SharedD_Button({
     super.key,
-    required this.buttonType,
+    this.buttonType = SharedD_ButtonType.primary,
     required this.onPressed,
     required this.label,
   });
 
   final SharedD_ButtonType buttonType;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String label;
 
   Color get buttonColor {
     switch (buttonType) {
       case SharedD_ButtonType.primary:
-        return Colors.green;
-
+        return AppColors.primary;
+      case SharedD_ButtonType.success:
+        return AppColors.success;
       case SharedD_ButtonType.danger:
-        return Colors.red;
+        return AppColors.danger;
     }
   }
 

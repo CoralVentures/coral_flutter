@@ -10,10 +10,10 @@ class SharedD_Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
     return Text(
       label,
-      style: textTheme.displaySmall,
+      style: theme.textTheme.displaySmall,
     );
   }
 }

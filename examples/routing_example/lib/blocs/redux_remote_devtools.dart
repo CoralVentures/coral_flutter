@@ -6,8 +6,9 @@ import 'package:redux/redux.dart';
 import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
-import './authentication/authentication_bloc.dart';
 import './bloc_type.dart';
+import './counter/counter_bloc.dart';
+
 // CORAL_CLI_IMPORT
 
 part 'redux_remote_devtools.g.dart';
@@ -49,7 +50,7 @@ Future<DevToolsStore<DevtoolsDb>?> createReduxRemoteDevtoolsStore() async {
 @JsonSerializable()
 class DevtoolsDb {
   const DevtoolsDb({
-    this.authenticationState,
+    this.counterState,
     // CORAL_CLI_DB_THIS
   });
 
@@ -60,22 +61,22 @@ class DevtoolsDb {
   Map<String, dynamic> toJson() => _$DevtoolsDbToJson(this);
   // coverage:ignore-end
 
-  final AuthenticationState? authenticationState;
+  final CounterState? counterState;
   // CORAL_CLI_DB_ATTR
 
   DevtoolsDb copyWith({
-    AuthenticationState? authenticationState,
-    bool clearAuthenticationState = false,
+    CounterState? counterState,
+    bool clearCounterState = false,
     // CORAL_CLI_COPY_WITH_PARAMETER
   }) {
-    var _authenticationState = authenticationState ?? this.authenticationState;
-    if (clearAuthenticationState) {
-      _authenticationState = null;
+    var _counterState = counterState ?? this.counterState;
+    if (clearCounterState) {
+      _counterState = null;
     }
     // CORAL_CLI_COPY_WITH_CLEAR
 
     return DevtoolsDb(
-      authenticationState: _authenticationState,
+      counterState: _counterState,
       // CORAL_CLI_COPY_WITH_ARG
     );
   }
@@ -90,9 +91,9 @@ void remoteReduxDevtoolsOnEvent({
     final blocTypeEnum = blocType.toEnum();
 
     switch (blocTypeEnum) {
-      case BlocType.authentication:
+      case BlocType.counter:
         devtoolsDB = devtoolsDB.copyWith(
-          authenticationState: state as AuthenticationState,
+          counterState: state as CounterState,
         );
         break;
       // CORAL_CLI_ON_EVENT
@@ -109,8 +110,8 @@ void remoteReduxDevtoolsOnClose({
     final blocTypeEnum = blocType.toEnum();
 
     switch (blocTypeEnum) {
-      case BlocType.authentication:
-        devtoolsDB = devtoolsDB.copyWith(clearAuthenticationState: true);
+      case BlocType.counter:
+        devtoolsDB = devtoolsDB.copyWith(clearCounterState: true);
         break;
       // CORAL_CLI_ON_CLOSE
     }

@@ -1,5 +1,15 @@
 # CHANGE NAME
 
+This example was created with the following flutter version:
+
+```sh
+$ flutter --version
+Flutter 3.3.4 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision eb6d86ee27 (12 days ago) • 2022-10-04 22:31:45 -0700
+Engine • revision c08d7d5efc
+Tools • Dart 2.18.2 • DevTools 2.15.0
+```
+
 ## Development
 
 ### Without redux remote devtools
@@ -24,10 +34,10 @@ Click on the `Run and Debug` icon in VSCode and select `Launch Development (Redu
 
 ## Gallery
 
-Update the gallery:
+Update the golden images:
 
 ```sh
-./tools/gallery_update.sh
+./tools/goldens_update.sh
 ```
 
 Then serve the gallery:

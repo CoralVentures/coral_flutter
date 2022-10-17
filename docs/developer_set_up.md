@@ -1,5 +1,9 @@
 # Developer Set Up
 
+## Flutter
+
+Follow the [official instructions](https://docs.flutter.dev/get-started/install/macos) to download flutter.
+
 ## Mkdocs
 
 To install [mkdocs](https://www.mkdocs.org/) run:
@@ -7,10 +11,6 @@ To install [mkdocs](https://www.mkdocs.org/) run:
 ```sh
 brew install mkdocs
 ```
-
-## Flutter
-
-Follow the [official instructions](https://docs.flutter.dev/get-started/install/macos) to download flutter.
 
 ## redux_remote_devtools
 

@@ -1,6 +1,6 @@
 # Naming conventions
 
-Rather than describing every detail of the naming convention, we will favor showing examples.
+Rather than describing every detail of the naming conventions, we will favor showing examples.
 
 ## Repository
 
@@ -26,7 +26,7 @@ lib/
       foo_bar_repository.dart
 ```
 
-For 2), you will need to create a new dart package. I recommend using the [very_good](https://pub.dev/packages/very_good_cli) and running a command like this:
+For 2), you will need to create a new dart package. We recommend using the [very_good](https://pub.dev/packages/very_good_cli) and running a command like this:
 
 ```sh
 very_good create --template=dart_pkg authentication_repository
@@ -40,8 +40,8 @@ Here is an example:
 
 ```sh
 cd coral_cli
-./bin/generate_bloc.dart ../../examples/routing_example
 
+./bin/generate_bloc.dart ../../examples/routing_example
 # Then when it asks you, enter the name of your bloc in PascalCase, but don't include the suffix `Bloc`
 # E.g. Authentication, FooBar
 ```
@@ -178,8 +178,8 @@ Here is an example:
 
 ```sh
 cd coral_cli
-./bin/generate_cubit.dart ../../examples/routing_example
 
+./bin/generate_cubit.dart ../../examples/routing_example
 # Then when it asks you, enter the name of your cubit in PascalCase, but don't include the suffix `Cubit`
 # E.g. User, FooBar
 ```

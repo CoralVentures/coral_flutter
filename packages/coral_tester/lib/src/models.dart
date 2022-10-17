@@ -190,13 +190,15 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
       for (final element in events) {
         buffer.writeln('  <li>$element</li>');
       }
-      final screenshotPathParts = screenshotPath.split('/');
+
+      final screenshotPathListSansUserStoryId = screenshotPath.split('/')
+        ..removeAt(0);
 
       buffer
         ..writeln('</ul>')
         ..writeln('<br>')
         ..writeln(
-          '<img src="./${screenshotPathParts.first}/${screenshotPathParts.last}.png", width=400>',
+          '<img src="./${screenshotPathListSansUserStoryId.join('/')}.png", width=400>',
         )
         ..writeln('<br>');
     }
@@ -215,7 +217,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
       '''
       </td>
       <td>
-      <img src="../user_stories/goldens/$screenshotPath.iphone11.png">
+      <img src="../../user_stories/goldens/$screenshotPath.iphone11.png">
       </td>
    </tr>
   </tbody>

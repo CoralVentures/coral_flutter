@@ -6,6 +6,6 @@ extension BlocTypeEx on String {
 }
 
 enum BlocType {
-  authentication,
+  counter,
   // CORAL_CLI_BLOC_TYPE
 }
