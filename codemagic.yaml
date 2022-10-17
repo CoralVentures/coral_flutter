@@ -28,25 +28,24 @@ workflows:
             -validity 10000
       - name: Set up local.properties
         working_directory: examples/counter_example
-        script: | 
+        script: |
           echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
         working_directory: examples/counter_example
-        script: | 
+        script: |
           flutter packages pub get
       - name: Build APK with Flutter
         working_directory: examples/counter_example
-        script: | 
+        script: |
           flutter build apk --release -t lib/main/main_production.dart
-      artifacts:
-        - build/**/outputs/apk/**/*.apk
-        - build/**/outputs/bundle/**/*.aab
-        - build/**/outputs/**/mapping.txt
-        - '*.snap'
-        - build/windows/**/*.msix
-        - flutter_drive.log
-      publishing:
-        email:
-          recipients:
-            - gadfly361@gmail.com
-  
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/bundle/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - '*.snap'
+      - build/windows/**/*.msix
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - gadfly361@gmail.com
