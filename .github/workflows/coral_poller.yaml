@@ -1,0 +1,17 @@
+name: coral_poller
+
+on:
+  push:
+    paths:
+      - 'packages/coral_poller/**'
+      - '.github/workflows/coral_poller.yaml'
+
+jobs:
+  build:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@v1
+    with:
+      coverage_excludes: '*.g.dart'
+      dart_sdk: 'stable'
+      platform: 'vm'
+      working_directory: './packages/coral_poller'
+      min_coverage: 100
