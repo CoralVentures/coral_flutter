@@ -13,11 +13,26 @@ import 'package:lumberdash/lumberdash.dart';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 
+@isTestGroup
+void coralTestGroup(
+  String userStoryId,
+  void Function(String userStoryId) body, {
+  bool skip = false,
+}) {
+  group(
+    userStoryId,
+    () => body(userStoryId),
+    skip: skip,
+  );
+}
+
 /// This [coralTestMockedApp] method runs [testGoldens] with a [CoralMockedApp]
-/// and sets the Bloc.observer to a [CoralTestBlocObserver].
+/// and sets the Bloc.observer to a [CoralTestBlocObserver]. In addition, if
+/// golden images are being created, then markdown and graphviz files will be
+/// created for the gallery.
 ///
 /// - [description] is a test description
-/// - [screenshotDir] is used to namespace the golden images in a specific
+/// - [screenshotDir] is used to namespace the golden images into a specific
 ///   directory
 /// - [skip] to skip the test
 /// - [test] is the test body
@@ -49,13 +64,11 @@ void coralTestMockedApp<T extends CoralMockedApp>(
       );
 
       Bloc.observer = blocObserver;
-
       blocObserver.mockAnalytics();
 
       if (printApplicationLogs) {
         CoralLogger.addPrintClient();
       }
-
       putLumberdashToWork(
         withClients: [mockedApp.mockLumberdashClient],
       );
@@ -126,18 +139,5 @@ void coralTestMockedApp<T extends CoralMockedApp>(
         });
       }
     },
-  );
-}
-
-@isTestGroup
-void coralTestGroup(
-  String userStoryId,
-  void Function(String userStoryId) body, {
-  bool skip = false,
-}) {
-  group(
-    userStoryId,
-    () => body(userStoryId),
-    skip: skip,
   );
 }

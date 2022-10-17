@@ -32,7 +32,8 @@ class GreetingsBloc extends CoralBloc<GreetingsEvent, GreetingsState> {
           // respond to and display a snackbar. We can use a BlocListener
           // listening to the `helloStatus`.
           yield const GreetingsState(
-              helloStatus: GreetingsHelloStatus.sayHello);
+            helloStatus: GreetingsHelloStatus.sayHello,
+          );
           yield const GreetingsState(helloStatus: GreetingsHelloStatus.idle);
         }
         break;
