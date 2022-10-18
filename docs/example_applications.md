@@ -1,6 +1,6 @@
 # Example Applications
 
-We have server example applications, and we recommend reviewing them in the following order:
+We have several example applications, and we recommend reviewing them in the following order:
 
 - counter_example
 - routing_example

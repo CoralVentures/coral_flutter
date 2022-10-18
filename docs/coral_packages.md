@@ -1,5 +1,9 @@
 # Coral Packages
 
+![Coral Packages](images/coral_packages.png)
+
+_Note: In the image above, the orange boxes are things you will likely use at some point. The grey boxes are things that the packages provide, but that you will likely not need to use directly._
+
 coral_flutter includes the following packages:
 
 - `coral_analytics_repository`
@@ -16,7 +20,7 @@ This is a crucial repository to coral_flutter. This repository is responsible fo
 This exposes three main things:
 
 1. CoralAnalyticsRepository (wired up for you)
-2. `createAnalyticsOnEventCallback (wired up for you)
+2. createAnalyticsOnEventCallback (wired up for you)
 3. CoralAnalyticsRouteObserver (manual)
 
 1) `CoralAnalyticsRepository` is used by `coralBootstrap` (from the `coral_bootstrap` package), and will be wired up automatically.

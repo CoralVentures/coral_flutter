@@ -12,7 +12,6 @@ use_directory_urls: false
 
 nav:
   - 'index.md'
-  - 'developer_set_up.md'
   - 'architecture_overview.md'
   - 'coral_packages.md'
   - 'example_applications.md'
@@ -22,3 +21,4 @@ nav:
   - 'application_testing.md'
   - 'error_monitoring.md'
   - 'why_flutter_bloc.md'
+  - 'developer_set_up.md'
