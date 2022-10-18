@@ -20,11 +20,11 @@ class QuoteState extends Equatable {
 
   QuoteState copyWith({
     QuotableQuote? quote,
-    QuoteStatus? quoteStatus,
+    required QuoteStatus quoteStatus,
   }) =>
       QuoteState(
         quote: quote ?? this.quote,
-        quoteStatus: quoteStatus ?? this.quoteStatus,
+        quoteStatus: quoteStatus,
       );
 
   // coverage:ignore-start

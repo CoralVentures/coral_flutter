@@ -1,5 +1,5 @@
 {
   "@@locale": "en",
   "home_getRandomQuote": "Get Random Quote",
-  "home_getRandomQuoteError": "Uh oh, we ran in to an error"
+  "home_getRandomQuoteError": "Uh oh, something went wrong"
 }

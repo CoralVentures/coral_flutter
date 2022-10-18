@@ -15,10 +15,7 @@ class HomeC_QuoteText extends StatelessWidget {
             return const SizedBox();
 
           case QuoteStatus.inProgress:
-            return Container(
-              padding: EdgeInsets.all(Spacings.medium),
-              child: const CircularProgressIndicator(),
-            );
+            return const CircularProgressIndicator();
 
           case QuoteStatus.idle:
             if (state.quote != null) {
