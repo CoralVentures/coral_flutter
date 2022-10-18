@@ -10,6 +10,7 @@ coral_flutter includes the following packages:
 - `coral_bloc`
 - `coral_bootstrap`
 - `coral_cli`
+- `coral_error_monitoring_repository`
 - `coral_poller`
 - `coral_tester`
 
@@ -22,12 +23,15 @@ This exposes three main things:
 1. CoralAnalyticsRepository (wired up for you)
 2. createAnalyticsOnEventCallback (wired up for you)
 3. CoralAnalyticsRouteObserver (manual)
+4. CoralSegmentConfiguration (manual)
 
 1) `CoralAnalyticsRepository` is used by `coralBootstrap` (from the `coral_bootstrap` package), and will be wired up automatically.
 
 2) `createAnalyticsOnEventCallback` is also used by `coralBootstrap` and will automatically create a `CoralBlocObserver` with this callback added. This is what will process our analytic listeners that we define with our blocs.
 
 3) The `CoralAnalyticsRouteObserver` is **not** wired up automatically, and you will need to add it to your app's router. This will create analytic events for all of your route changes.
+
+4) The `CoralSegmentConfiguration` is used by the `CoralBootstrapConfiguration` and will be how you pass in your Segment api key.
 
 ```dart
 GoRouter appRouter({
@@ -67,11 +71,14 @@ This package exposes the following:
 This package exposes the following:
 
 - coralBootstrap (manual)
+- CoralBootstrapConfiguration (manual)
 - CoralBlocObserver (wired up for you)
 
 1) `coralBootstrap` is how we bootstrap all of our applications. It will set up our logger, our analytics, our error handling, and our bloc observer.
 
-2) `CoralBlocObserver` is how we observe our bloc events and state changes. Under the hood, this will use the `createAnalyticsOnEventCallback` from the `AnalyticsRepository`.
+2) `CoralBootstrapConfiguration` is how bootstrap will pull in your client-side secrets and configuration.
+
+3) `CoralBlocObserver` is how we observe our bloc events and state changes. Under the hood, this will use the `createAnalyticsOnEventCallback` from the `AnalyticsRepository`.
 
 ## Coral Cli
 
@@ -103,6 +110,16 @@ cd packages/coral_cli
 ```
 
 _TODO: need to make the api the same between blocs and cubits_
+
+## Coral Error Monitoring Repository
+
+This package includes:
+
+1. CoralErrorMonitoringRepository (wired up for you)
+2. CoralSentryConfiguration (manual)
+
+1) The `CoralErrorMonitoringRepository` is not something you will ever need to touch. It is wired up for you by `coralBootstrap`.
+2) The `CoralSentryConfiguration` is how we pass in the Sentry `dsn` so `coralBootstrap` knows how to configure the CoralErrorMonitoringRepository.
 
 ## Coral Logger
 
