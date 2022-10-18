@@ -1,5 +1,5 @@
 import 'package:data_layer_example/blocs/quote/quote_bloc.dart';
-import 'package:data_layer_example/styling/spacings.dart';
+import 'package:data_layer_example/styles/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +20,7 @@ class HomeC_QuoteText extends StatelessWidget {
           case QuoteStatus.idle:
             if (state.quote != null) {
               return Container(
-                padding: EdgeInsets.all(Spacings.medium),
+                padding: const EdgeInsets.all(Spacing.small),
                 child: Text(state.quote?.content ?? ''),
               );
             }
