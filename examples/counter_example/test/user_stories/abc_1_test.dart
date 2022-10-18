@@ -39,15 +39,15 @@ void main() {
 
         await tester.screenshot(
           comment: 'As a user, I want to be able to decrement the count',
+          takeActions: () async {
+            await tester.tap(find.text('Decrement'));
+          },
           runExpectations: () {
             tester.expect(
               find.text('Count: -1'),
               findsOneWidget,
               reason: 'Should see count decremented by one',
             );
-          },
-          takeActions: () async {
-            await tester.tap(find.text('Decrement'));
           },
           expectedEvents: [
             CounterEvent_Decrement,
