@@ -12,8 +12,9 @@ use_directory_urls: false
 
 nav:
   - 'index.md'
+  - 'developer_set_up.md'
   - 'architecture_overview.md'
   - 'naming_conventions.md'
   - 'bloc_patterns.md'
-  - 'developer_set_up.md'
+  - 'application_testing.md'
   - 'why_flutter_bloc.md'
