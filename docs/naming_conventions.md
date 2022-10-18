@@ -1,4 +1,4 @@
-# Naming conventions
+# Naming Conventions
 
 Rather than describing every detail of the naming conventions, we will favor showing examples.
 
@@ -15,7 +15,7 @@ While repositories should eventually become an independent library, they may sta
 1. repository lives in specific application repo
 2. repository is promoted and becomes an independent library
 
-For 1), the directory strucutre should look like this:
+For 1), the directory structure should look like this:
 
 ```md
 lib/
