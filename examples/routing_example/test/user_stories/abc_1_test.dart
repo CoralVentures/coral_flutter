@@ -12,7 +12,7 @@ void main() {
     'ABC-1',
     (userStoryId) {
       coralTestMockedApp<CoralMockedApp>(
-        '''As a developer, I want to see an example of 'pushing' a route on the route stack, so that I can understand the different between 'going' to a route''',
+        '''As a developer, I want to see an example of 'pushing' a route on the route stack, so that I can understand the difference between 'going' to a route''',
         userStoryId: userStoryId,
         screenshotDir: 'push_route',
         mockedApp: CoralMockedApp(appBuilder: appBuilder),
@@ -112,7 +112,7 @@ void main() {
       );
 
       coralTestMockedApp<CoralMockedApp>(
-        '''As a developer, I want to see an example of 'going' to a route, so that I can understand the different between 'pushing' a route on a route stack''',
+        '''As a developer, I want to see an example of 'going' to a route, so that I can understand the difference between 'pushing' a route on a route stack''',
         userStoryId: userStoryId,
         screenshotDir: 'go_to_route',
         mockedApp: CoralMockedApp(appBuilder: appBuilder),
