@@ -15,7 +15,7 @@ dependencies:
   coral_bootstrap:
     path: ../../packages/coral_bootstrap
   coral_error_monitoring_repository:
-    path: ../../packages/coral_analytics_repository
+    path: ../../packages/coral_error_monitoring_repository
   coral_logger:
     path: ../../packages/coral_logger
   equatable: ^2.0.3

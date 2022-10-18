@@ -65,7 +65,7 @@ void main() {
 
           await tester.screenshot(
             comment:
-                '''If we 'push' to the about page, the about page's count should be zero''',
+                '''If we 'push' to the about page, we should see the about page''',
             takeActions: () async {
               await tester.tap(
                 find.text('Push to About Page'),
@@ -73,17 +73,11 @@ void main() {
               );
             },
             runExpectations: () async {
-              tester
-                ..expect(
-                  find.byType(About_Page),
-                  findsOneWidget,
-                  reason: 'Should be on the about page',
-                )
-                ..expect(
-                  find.text('Count: 0'),
-                  findsOneWidget,
-                  reason: 'Count should be at 0',
-                );
+              tester.expect(
+                find.byType(About_Page),
+                findsOneWidget,
+                reason: 'Should be on the about page',
+              );
             },
             expectedEvents: [],
             expectedAnalytics: ['Screen: about'],
@@ -171,7 +165,7 @@ void main() {
 
           await tester.screenshot(
             comment:
-                '''If we 'go' to the about page, the about page's count should be zero''',
+                '''If we 'go' to the about page, we should see the about page''',
             takeActions: () async {
               await tester.tap(
                 find.text('Go to About Page'),
@@ -179,17 +173,11 @@ void main() {
               );
             },
             runExpectations: () async {
-              tester
-                ..expect(
-                  find.byType(About_Page),
-                  findsOneWidget,
-                  reason: 'Should be on the about page',
-                )
-                ..expect(
-                  find.text('Count: 0'),
-                  findsOneWidget,
-                  reason: 'Count should be at 0',
-                );
+              tester.expect(
+                find.byType(About_Page),
+                findsOneWidget,
+                reason: 'Should be on the about page',
+              );
             },
             expectedEvents: [],
             expectedAnalytics: ['Screen: about'],

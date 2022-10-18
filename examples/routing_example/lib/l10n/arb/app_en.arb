@@ -1,16 +1,15 @@
 {
   "@@locale": "en",
-  "shared_count": "Count: {count}",
-  "@shared_count": {
+  "home_count": "Count: {count}",
+  "@home_count": {
     "placeholders": {
       "count": {
         "type": "String"
       }
     }
   },
-  "shared_increment": "Increment",
-  "shared_decrement": "Decrement",
-
+  "home_increment": "Increment",
+  "home_decrement": "Decrement",
   "home_pageTitle": "Home Page",
   "home_goToAboutPage": "Go to About Page",
   "home_pushToAboutPage": "Push to About Page",

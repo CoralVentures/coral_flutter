@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routing_example/blocs/counter/counter_bloc.dart';
+import 'package:routing_example/pages/home/widget_connectors/counter_text.dart';
+import 'package:routing_example/pages/home/widget_connectors/decrement_button.dart';
 import 'package:routing_example/pages/home/widget_connectors/go_to_about_button.dart';
+import 'package:routing_example/pages/home/widget_connectors/increment_button.dart';
 import 'package:routing_example/pages/home/widget_connectors/push_to_about_button.dart';
 import 'package:routing_example/pages/home/widget_connectors/title.dart';
-import 'package:routing_example/pages/shared/widgets_connector/counter_text.dart';
-import 'package:routing_example/pages/shared/widgets_connector/decrement_button.dart';
-import 'package:routing_example/pages/shared/widgets_connector/increment_button.dart';
 import 'package:routing_example/styles/app_spacings.dart';
 
 class Home_Page extends StatelessWidget {
@@ -34,13 +34,13 @@ class Home_Scaffold extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SharedC_CounterText(),
+                const HomeC_CounterText(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    SharedC_DecrementButton(),
+                    HomeC_DecrementButton(),
                     SizedBox(width: AppSpacings.small),
-                    SharedC_IncrementButton(),
+                    HomeC_IncrementButton(),
                   ],
                 ),
                 const HomeC_GoToAboutButton(),
