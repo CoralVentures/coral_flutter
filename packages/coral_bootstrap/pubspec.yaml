@@ -9,10 +9,14 @@ dependencies:
   bloc: ^8.1.0
   coral_analytics_repository:
     path: ../coral_analytics_repository
+  coral_error_monitoring_repository:
+    path: ../coral_error_monitoring_repository
   coral_logger:
     path: ../coral_logger
+  device_info_plus: ^7.0.0
   flutter:
     sdk: flutter
+  uuid: ^3.0.6
 
 dev_dependencies:
   very_good_analysis: ^3.0.1

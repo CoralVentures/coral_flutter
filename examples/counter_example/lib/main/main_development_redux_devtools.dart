@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:coral_bootstrap/coral_bootstrap.dart';
 import 'package:counter_example/app/app_builder.dart';
+import 'package:counter_example/blocs/analytic_listeners.dart';
 import 'package:counter_example/blocs/redux_remote_devtools.dart';
 import 'package:counter_example/main/main_configuration.dart';
 
@@ -10,11 +12,11 @@ void main() async {
   /// store will be created
   remoteReduxDevtoolsStore = await createReduxRemoteDevtoolsStore();
 
-  final configuration = MainConfiguration.development();
+  final configuration = MainConfiguration.development(isIOS: Platform.isIOS);
 
   await coralBootstrap(
     builder: appBuilder,
-    segmentWriteApiKey: configuration.segmentConfiguration.apiWriteKey,
-    sentryDSN: configuration.sentryConfiguration.dsn,
+    analyticListeners: analyticListeners,
+    configuration: configuration,
   );
 }

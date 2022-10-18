@@ -36,8 +36,8 @@ class CoralAnalyticsRepository {
   final int timestamp;
   String? _coralSessionId;
 
-  // ignore: avoid_setters_without_getters
-  set setCoralSessionId(String sessionId) {
+  // ignore: use_setters_to_change_properties
+  void setCoralSessionId(String sessionId) {
     _coralSessionId = sessionId;
   }
 

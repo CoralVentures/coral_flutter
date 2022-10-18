@@ -1,37 +1,31 @@
 // ignore_for_file: prefer_constructors_over_static_methods
 
+import 'package:coral_analytics_repository/coral_analytics_repository.dart';
+import 'package:coral_bootstrap/coral_bootstrap.dart';
+import 'package:coral_error_monitoring_repository/coral_error_monitoring_repository.dart';
+
 class MainConfiguration {
-  MainConfiguration({
-    required this.segmentConfiguration,
-    required this.sentryConfiguration,
-  });
-
-  final SegmentConfiguration segmentConfiguration;
-  final SentryConfiguration sentryConfiguration;
-
-  static MainConfiguration development() => MainConfiguration(
-        segmentConfiguration: SegmentConfiguration(apiWriteKey: 'change-me'),
-        sentryConfiguration: SentryConfiguration(dsn: 'change-me'),
+  static CoralBootstrapConfiguration development({required bool isIOS}) =>
+      CoralBootstrapConfiguration(
+        segmentConfiguration: CoralSegmentConfiguration(
+          apiWriteKey: 'change-me',
+        ),
+        sentryConfiguration: CoralSentryConfiguration(
+          dsn: 'change-me',
+          sentryEnvironment: 'development',
+          isIOS: isIOS,
+        ),
       );
 
-  static MainConfiguration production() => MainConfiguration(
-        segmentConfiguration: SegmentConfiguration(apiWriteKey: 'change-me'),
-        sentryConfiguration: SentryConfiguration(dsn: 'change-me'),
+  static CoralBootstrapConfiguration production({required bool isIOS}) =>
+      CoralBootstrapConfiguration(
+        segmentConfiguration: CoralSegmentConfiguration(
+          apiWriteKey: 'change-me',
+        ),
+        sentryConfiguration: CoralSentryConfiguration(
+          dsn: 'change-me',
+          sentryEnvironment: 'production',
+          isIOS: isIOS,
+        ),
       );
-}
-
-class SegmentConfiguration {
-  SegmentConfiguration({
-    required this.apiWriteKey,
-  });
-
-  final String apiWriteKey;
-}
-
-class SentryConfiguration {
-  SentryConfiguration({
-    required this.dsn,
-  });
-
-  final String dsn;
 }

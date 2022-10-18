@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:coral_bootstrap/coral_bootstrap.dart';
 import 'package:data_layer_example/app/app_builder.dart';
 import 'package:data_layer_example/blocs/redux_remote_devtools.dart';
@@ -12,7 +13,7 @@ void main() async {
   /// store will be created
   remoteReduxDevtoolsStore = await createReduxRemoteDevtoolsStore();
 
-  final configuration = MainConfiguration.development();
+  final configuration = MainConfiguration.development(isIOS: Platform.isIOS);
 
   final quotableDataProvider = QuotableDataProvider();
   final quoteRepository =
@@ -23,7 +24,6 @@ void main() async {
       analyticsRepository: analyticsRepository,
       quoteRepository: quoteRepository,
     ),
-    segmentWriteApiKey: configuration.segmentConfiguration.apiWriteKey,
-    sentryDSN: configuration.sentryConfiguration.dsn,
+    configuration: configuration,
   );
 }

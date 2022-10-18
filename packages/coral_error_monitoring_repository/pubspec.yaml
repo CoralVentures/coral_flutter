@@ -1,4 +1,4 @@
-name: coral_analytics_repository
+name: coral_error_monitoring_repository
 version: 1.0.0+1
 publish_to: none
 
@@ -6,9 +6,11 @@ environment:
   sdk: '>=2.17.0 <3.0.0'
 
 dependencies:
+  device_info_plus: ^7.0.0
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
-  flutter_segment: ^3.7.0
+  sentry_flutter: ^6.13.0
 
 dev_dependencies:
   very_good_analysis: ^3.0.1
