@@ -19,5 +19,6 @@ nav:
   - 'naming_conventions.md'
   - 'bloc_patterns.md'
   - 'application_testing.md'
+  - 'error_monitoring.md'
   - 'coral_cli.md'
   - 'why_flutter_bloc.md'
