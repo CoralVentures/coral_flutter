@@ -1,4 +1,4 @@
-# CHANGE NAME
+# CHANGE_ME
 
 This example was created with the following flutter version:
 
