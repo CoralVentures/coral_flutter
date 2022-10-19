@@ -156,7 +156,7 @@ class GoodButton_Connector extends StatelessWidget {
 }
 ```
 
-_Note: Over time, we want to have less and less dumb widgets defined in our application. If that happens, it means are are creating truly reusable widgets in our UI Kit._
+_Note: Over time, we want to have less and less dumb widgets defined in our application. If that happens, it means we are creating truly reusable widgets in our UI Kit._
 
 ## UI Kit
 

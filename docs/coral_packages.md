@@ -31,8 +31,6 @@ This exposes three main things:
 
 3) The `CoralAnalyticsRouteObserver` is **not** wired up automatically, and you will need to add it to your app's router. This will create analytic events for all of your route changes.
 
-4) The `CoralSegmentConfiguration` is used by the `CoralBootstrapConfiguration` and will be how you pass in your Segment api key.
-
 ```dart
 GoRouter appRouter({
   required CoralAnalyticsRepository? analyticsRepository,
@@ -51,6 +49,8 @@ GoRouter appRouter({
       ],
     );
 ```
+
+4) The `CoralSegmentConfiguration` is used by the `CoralBootstrapConfiguration` and will be how you pass in your Segment api key.
 
 ## Coral Bloc
 
@@ -117,6 +117,7 @@ This package includes:
 2. CoralSentryConfiguration (manual)
 
 1) The `CoralErrorMonitoringRepository` is not something you will ever need to touch. It is wired up for you by `coralBootstrap`.
+
 2) The `CoralSentryConfiguration` is how we pass in the Sentry `dsn` so `coralBootstrap` knows how to configure the CoralErrorMonitoringRepository.
 
 ## Coral Logger
@@ -144,11 +145,11 @@ This packages exposes the following:
 4. coralTestGroup and coralTestMockedApp
 5. CoralTester (wired up for you)
 
-1) All of our tests will start from our actually `App` widget. `CoralMockedApp` is a way to mock out the repository layer used by your blocs. See the counter_example for use of `CoralMockedApp` and the data_layer_example for how to extend the CoralMockedApp and add additional repositories.
+1) All of our tests will actually start from our `App` widget. `CoralMockedApp` is simply a way to mock out the repository layer used by your blocs. See the counter_example for use of `CoralMockedApp` and the data_layer_example for how to extend the CoralMockedApp and add additional repositories.
 
 2. The `CoralTestBlocObserver` is wired up for you and will keep track of bloc events as well as the analytic events that would have been sent off to Segment.
 
-3. The `coralTestExecutable is a default test configuration that should be used like this:
+3. The `coralTestExecutable` is a default test configuration that should be used like this:
 
 ```dart
 // test/flutter_test_config.dart

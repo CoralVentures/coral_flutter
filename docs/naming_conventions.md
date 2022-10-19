@@ -42,7 +42,7 @@ Here is an example:
 cd coral_cli
 
 ./bin/generate_bloc.dart ../../examples/routing_example
-# Then when it asks you, enter the name of your bloc in PascalCase, but don't include the suffix `Bloc`
+# Then when it asks you, enter the name of your bloc in PascalCase 
 # E.g. Authentication, FooBar
 ```
 
@@ -79,11 +79,11 @@ lib/
 
 ### Enums
 
-We use enums to so that our editor will yell at us if we forget to wire certain things up.
+We use enums so that our editor will yell at us if we forget to wire certain things up.
 
 #### Bloc
 
-All blocs will extend `CoralBloc` and pass in a `BlocType`.  The `BlocType` is an enum that will enumerate all blocs in the application layer.
+All blocs will extend `CoralBloc` and pass in a `BlocType`.  The `BlocType` is an enum that will enumerate all blocs and cubits in the application layer.
 
 ```dart
 // lib/blocs/bloc_type.dart
@@ -152,10 +152,10 @@ class CounterEvent_Decrement extends CounterEvent {
 }
 ```
 
-This will help us wire up:
+This will help us:
 
-- mapping our bloc events to state in `counter_bloc.dart`
-- mapping our bloc events to analytic events in `counter_analytic_listener.dart`
+- map our bloc events to state in `counter_bloc.dart`
+- map our bloc events to analytic events in `counter_analytic_listener.dart`
 
 ### Gotchas
 
@@ -180,7 +180,7 @@ Here is an example:
 cd coral_cli
 
 ./bin/generate_cubit.dart ../../examples/routing_example
-# Then when it asks you, enter the name of your cubit in PascalCase, but don't include the suffix `Cubit`
+# Then when it asks you, enter the name of your cubit in PascalCase
 # E.g. User, FooBar
 ```
 
@@ -196,7 +196,7 @@ Cubits will be placed inside of `lib/blocs/cubits/` directory and all cubits wil
 
 As a design choice, we are using Cubits to be the single source of truth for an entity's state.
 
-For example, we may have a UserCubit that gets passed around between multiple Blocs.  To prevent each Bloc from accidentally keeping track of some of the UserCubit's state, we simply make all of the UserCubit method calls return `void`, and the Cubit will update its internal state instead.
+For example, we may have a UserCubit that gets passed around between multiple Blocs.  To prevent each Bloc from accidentally keeping track of some of the UserCubit's state, we simply make all of the UserCubit methods return `void`, and the Cubit will update its internal state instead.
 
 ## Widgets
 
@@ -230,8 +230,8 @@ The connector widgets would be named:
 
 The dumb widgets would be named:
 
-- HomeC_Button
-- HomeC_Title
+- HomeD_Button
+- HomeD_Title
 
 #### Page Widgets
 

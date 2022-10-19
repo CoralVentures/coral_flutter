@@ -32,7 +32,7 @@ lib/
 
 The blocs directory contains our `counter` bloc and some other files. Let's first focus on the bloc.
 
-The `counter_analtics_listener.dart` is where we define our analytic events to be send off to Segment (or wherever). We will switch over all of our defined eventTypes.
+The `counter_analtics_listener.dart` is where we define our analytic events to be sent off to Segment (or wherever). We will switch over all of our defined eventTypes.
 
 The `counter_bloc.dart` defines our bloc, the `counter_event.dart` file defines our events, and the `counter_state.dart` file defines our state.
 
@@ -40,7 +40,7 @@ Aside from the counter bloc files, we also have the `analytics_listeners.dart` f
 
 The `bloc_type.dart` file contains an enum that includes the blocType for all of our blocs and cubits.
 
-The `redux_remote_devtools.dart` file is how we wire up redux remote devtools to see our application state in a browser. This is really helpful if you haven't seen it before. Gone are the days where we rely on console logs to recreate our state.
+The `redux_remote_devtools.dart` file is how we wire up redux remote devtools to see our application state in a browser. This is really helpful if you haven't seen it before. Gone are the days where we squint over console logs to piece together our application state.
 
 ### l10n Directory
 
@@ -54,7 +54,7 @@ lib/
 
 The l10n directory contains our localization files.  The `app_en.arb` is our template arb file where we define all of our fields in english. We can then make variations of this arb file to support other languages.
 
-_Note: if you are using an editor, you can select json as the language to edit arb file_
+_Note: if you are using an editor, you can select json as the language to edit an arb file_
 
 _Note: At the root of our directory, we also have a l10n.yaml file that helps set this up._
 
@@ -71,11 +71,9 @@ lib/
 
 The `main_configuration.dart` file is where we will define all of our secrets for each development environment.
 
-_Note: Since client-side secrets are generally never safe, we have traditionally checked them in to improve the developer experience. However, if we wish to use environment variables, we have established patterns using environment_config._
-
 The `main_development.dart`, `main_development_redux_devtools.dart` and `main_production.dart` files are where we bootstrap our application for different environments.
 
-_Note: the `.vscode/launch.json` has different builds for each of these files.
+_Note: `.vscode/launch.json` has different builds for each of these files._
 
 ### pages directory
 
@@ -114,9 +112,9 @@ All of our tests will be defined in the `user_stories` directory.
 
 _Note: each test will be named by the story id that it is supporting._
 
-We also have a `gallery.css` which is used by the root-level `mkdocs.yml` which is how we create our gallery.
+We use mkdocs to create out gallery and the `gallery.css` file is used but our configuration `mkdocs.yml` to style the gallyer.
 
-Run the following to view the gallery:
+To view the gallery, run:
 
 ```sh
 mkdocs serve
@@ -132,7 +130,7 @@ The tools directory has a few helper tools:
 
 ### yaml files
 
-- **analysis_options.yaml**: This file is used by the dart analysis serve.
+- **analysis_options.yaml**: This file is used by the dart analysis server.
 - **dart_test.yaml**: This file is used by our tests to define the golden tag.
 - **l10n.yaml**: This file is used to set up our localization.
 - **mkdocs.yml**: This file is used to create our gallery.

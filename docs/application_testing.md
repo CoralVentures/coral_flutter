@@ -113,17 +113,17 @@ void main() {
 }
 ```
 
-1) Instead of using `group` we use `coralTestGroup`. This will take description of the group and pass it to the anonymous function as `userStoryId`.  
+1) Instead of using `group` we use `coralTestGroup`. This will use the  `description` (which should be the user story id) of the group and pass it to the anonymous function as `userStoryId`.  
 
-*Note: we can't simply create a var of the description because the group's description needs to be a string literal and tests will fail if you try to use a variable.*
+*Note: we can't simply create a var of the description because the group's description needs to be a string literal. The way flutter runs its tests is peculiar and this is simply a limitation of it. If you try to use a var, the tests will fail to run.*
 
 2) Instead of using `test` we use `coralTestMockedApp`. *This is where the magic happens.*
 
-This will take in a mocked version of our app (where we are mocking the repository layer), and give us a `CoralTester` instead of a `WidgetTester`. The `CoralTester` will keep track of various things, like analytics, tap events, our expectations, etc. The `coralTestMockedApp` uses the information that our `CoralTester` is aggregating and turn it in to the gallery.
+This will take in a mocked version of our app (we mock the repository layer), and give us a `CoralTester` instead of a `WidgetTester`. The `CoralTester` will keep track of various things, like analytics, tap events, our expectations, etc. The `coralTestMockedApp` uses this information (that our `CoralTester` is aggregating) and turns it into the gallery.
 
-3) Because we passed in a mocked version of our app earlier, this special `tester.pumpApp()` function will start each test by opening our actually app.
+3) Because we passed in a mocked version of our app earlier, this special `tester.pumpApp()` function will create our App widget that can then be interacted with throughout our tests.
 
-*This means we no longer need to wrap our widgets in MaterialApp or test widgets in isolation. We always test the entire application as a whole and mock our way to the specific pathways we want to test.*
+*This means we no longer need to wrap our widgets in MaterialApp or test our widgets in isolation. We always test the entire application and mock our way to the specific pathways we want to test.*
 
 4) Everything we do in our tests will be inside of `tester.screenshot`. This is because every time we take a user action, we want to take a new screenshot to capture every moment along the user's journey.
 
@@ -133,6 +133,6 @@ _If you haven't seen it before, the `..` is called cascade notation and will ret
 
 6) The `CoralTester` keeps track of all of the analytics we would have been sending off to Segment (or whatever our vendor of choice may be). We can then test that we are sending off the analytics that we expect to send off. Since this will also end up in the gallery, it will help our Product team understand our application and give them an opportunity to self-serve when it comes to making analytic dashboards and funnels.
 
-7) `takeActions` is where we will simulate user actions. For now, the `CoralTester` knows about the `tap` event and will report it to our gallery. In the future, we want to add more actions beyond just tap. For now though, you can find the normal `WidgetTester` with `tester.widgetTester`.
+7) `takeActions` is where we will simulate user actions. For now, the `CoralTester` knows about the `tap` event and will report it to our gallery. In the future, we want to add more actions beyond just tap. For now though, you can find the normal `WidgetTester` under `tester.widgetTester`.
 
-8) The `CoralTester` keeps track of all of our bloc events. We can then test to make sure the bloc events are coming in as expected and in the order that we expect. This is helpful to prevent us from accidentally introducing logic that affects other flows we may not be working on.  These events will also be shown in the gallery, along with a graphviz image representation.
+8) The `CoralTester` keeps track of all of our bloc events. We can then test to make sure the bloc events are coming in as expected and in the proper order. This is especially helpful to prevent us from accidentally introducing logic that affects flows we aren't working on.  These events will also be shown in the gallery (along with a graphviz image representation).

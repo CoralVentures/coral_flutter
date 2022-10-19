@@ -8,7 +8,7 @@ Let's assume we have a bloc called `counter` and a page called `home`. We want t
 
 ### Firing an event
 
-To fire an increment event when a user taps, we first need to define the event. Blocs have a predictable file structure and live in the `lib/blocs` directory.  We can find the `counter_event.dart` file there.
+To fire an "increment event" when a user taps the button, we first need to define the event. Blocs have a predictable file structure and live in the `lib/blocs` directory.  We can find the `counter_event.dart` file there.
 
 ```md
 lib/
@@ -44,7 +44,7 @@ class CounterEvent_Increment extends CounterEvent {
 }
 ```
 
-We will subclass `CounterEvent` and create a new event called `CounterEvent_Increment`.  We will also define a `CounterEvents` enum and add `incremenet` which we will use to define which type of event this is.
+We will subclass `CounterEvent` and create a new event called `CounterEvent_Increment`.  We will also define a `CounterEvents` enum and add `incremenet` to it. We use this enum to define which type of event it is.
 
 _Note: While we could switch off of the class type itself, we prefer using closed sets like an enum. By doing this, we can have our editor help us update other bits of code that depend on these events, such our analytic listeners or our blocs._
 
@@ -156,11 +156,11 @@ class HomeC_CounterText extends StatelessWidget {
 
 The main difference is `BlocBuilder` has an additional input called `buildWhen` so it will only rebuild the UI on a subset of state changes, whereas `context.watch<T>` will rebuild for any state change within the bloc.
 
-_Note: you may see `context.read<T>` and wonder how it differs from `context.watch<T>`. The former does a one-time read and is meant to be used in callbacks or places outside of the widget tree. The latter will watch for state changes and rebuild the widget tree and therefore should only be used inside of your build method._
+_Note: you may see `context.read<T>` and wonder how it differs from `context.watch<T>`. The former does a one-time read and is meant to be used in callbacks or places outside of the widget tree. The latter will watch for state changes and rebuild the widget tree and therefore should only be used inside of your widget's build method._
 
 ## Where do I put my bloc?
 
-Blocs usually fall in to one of two categories:
+Blocs usually fall into one of two categories:
 
 1. The bloc is specific to one page or one flow.
 2. The bloc is used by multiple pages or multiple flows.
@@ -191,7 +191,7 @@ class Home_Page extends StatelessWidget {
 
 ### "Bloc-on-top": If multiple dependencies, place your widget high in the widget tree
 
-For the most part, we want our blocs to be tied to a single page or a single flow, but there are exceptions.  When this happens, we want our bloc to be higher in the widget tree than any of the dependencies. A good place to put it then is at the top of our application, hence "bloc-on-top".
+For the most part, we want our blocs to be tied to a single page or a single flow, but there are exceptions.  When this happens, we want our bloc to be higher in the widget tree than any of its dependencies. A good place to put it then is at the top of our application, hence "bloc-on-top".
 
 Let's assume `FooBloc` is used by multiple flows.
 
@@ -330,7 +330,7 @@ lib
       home_page.dart
 ```
 
-The `HomeC_SayHelloButton` will fire the `GreetingsEvent_SayHello`. Our GreetingsBloc will handles the event and perform a "double yield" of `GreetingsState`s. The first state will be what our `HomeC_SayHelloStatusListener` will trigger a `snack bar` off of. The second state will reset the status back to idle, so we could potentially fire another snack bar in the future.
+The `HomeC_SayHelloButton` will fire the `GreetingsEvent_SayHello`. Our GreetingsBloc will handle the event and perform a "double yield" of `GreetingsState`s. The first state will be what our `HomeC_SayHelloStatusListener` will trigger a `snack bar` off of. The second state will reset the status back to idle, so we could potentially fire another snack bar in the future.
 
 Here is the say hello button:
 
@@ -385,4 +385,4 @@ class HomeC_SayHelloStatusListener extends StatelessWidget {
 }
 ```
 
-_Note: we are called `.hideCurrentSnackBar` in case the user tried to fire multiple snack bars really quickly before they have a chance to disappear on their own._
+_Note: we are calling `.hideCurrentSnackBar` in case the user tried to fire multiple snack bars in quick succession ... before they have a chance to disappear on their own._
