@@ -13,10 +13,10 @@ void main(List<String> args) {
   final cubitsPath = '$applicationPath/lib/blocs/cubits'..replaceAll('//', '/');
 
   final cubitPrefix = dcli.ask(
-    '${dcli.green('Cubit name')} (e.g. Foo):',
+    '${dcli.green('Cubit name')} (e.g. User or FooBar):',
   );
 
-  final cubitName = '${cubitPrefix}Cubit';
+  final cubitName = '${cubitPrefix.pascalCase.replaceAll('Cubit', '')}Cubit';
 
   ///
   /// Generate Cubit file

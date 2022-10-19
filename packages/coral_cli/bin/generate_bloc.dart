@@ -10,16 +10,18 @@ const fileNames = <String>['analytic_listener', 'bloc', 'event', 'state'];
 
 void main(List<String> args) {
   final applicationPath = args.first;
-  final blocsPath = '$applicationPath/lib/blocs/'..replaceAll('//', '/');
+  final blocsPath = '$applicationPath/lib/blocs'..replaceAll('//', '/');
 
-  final blocName = dcli.ask(
-    '${dcli.green('New bloc name')} (e.g. counter or foo_bar):',
+  final _blocName = dcli.ask(
+    '${dcli.green('New bloc name')} (e.g. Counter or FooBar):',
     validator: dcli.Ask.all(
       [
         dcli.Ask.required,
       ],
     ),
   );
+
+  final blocName = _blocName.snakeCase.replaceAll('Bloc', '');
 
   final blocPath = '$blocsPath/$blocName';
 
