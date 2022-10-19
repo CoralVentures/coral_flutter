@@ -25,6 +25,9 @@ sed -i '' -e "s/CHANGE_ME/$1/g" README.md
 sed -i '' -e "s/CHANGE_ME/$1/g" pubspec.yaml
 sed -i '' -e "s/CHANGE_ME/$1/g" mkdocs.yml
 
+sed -i '' -e "s/change-me-dev-segment/${DEV_SEGMENT_API_WRITE_KEY:-change-me-dev-segment}/g" lib/main/main_configuration.dart 
+sed -i '' -e "s~change-me-dev-sentry~${DEV_SENTRY_DSN:-change-me-dev-sentry}~g" lib/main/main_configuration.dart 
+
 echo "---"
 echo "Your coral_flutter application has been made."
 echo ""

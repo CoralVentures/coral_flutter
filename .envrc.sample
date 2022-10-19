@@ -1,0 +1,2 @@
+export DEV_SEGMENT_API_WRITE_KEY=your-api-write-key
+export DEV_SENTRY_DSN=your-sentry-dsn

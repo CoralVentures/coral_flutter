@@ -8,10 +8,10 @@ class MainConfiguration {
   static CoralBootstrapConfiguration development({required bool isIOS}) =>
       CoralBootstrapConfiguration(
         segmentConfiguration: CoralSegmentConfiguration(
-          apiWriteKey: 'change-me',
+          apiWriteKey: 'change-me-dev-segment',
         ),
         sentryConfiguration: CoralSentryConfiguration(
-          dsn: 'change-me',
+          dsn: 'change-me-dev-sentry',
           sentryEnvironment: 'development',
           isIOS: isIOS,
         ),
@@ -20,10 +20,10 @@ class MainConfiguration {
   static CoralBootstrapConfiguration production({required bool isIOS}) =>
       CoralBootstrapConfiguration(
         segmentConfiguration: CoralSegmentConfiguration(
-          apiWriteKey: 'change-me',
+          apiWriteKey: 'change-me-prod-segment',
         ),
         sentryConfiguration: CoralSentryConfiguration(
-          dsn: 'change-me',
+          dsn: 'change-me-prod-sentry',
           sentryEnvironment: 'production',
           isIOS: isIOS,
         ),
