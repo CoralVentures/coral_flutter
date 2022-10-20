@@ -42,6 +42,30 @@ remotedev --port 8001
 
 Then open a browser to <a href="http://localhost:8001" target="_blank">localhost:8001</a>
 
+## Graphviz
+
+```sh
+brew install graphviz
+```
+
+## lcov
+
+```sh
+brew install lcov
+```
+
+## genhtml
+
+```sh
+brew install genhtml
+```
+
+## dcli
+
+```sh
+dart pub global activate dcli
+```
+
 ## Proxyman
 
 Install [Proxyman](https://proxyman.io/).
