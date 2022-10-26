@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class SharedC_BottomNavbar extends StatelessWidget {
-  const SharedC_BottomNavbar({super.key});
+class LaunchpadC_BottomNavbar extends StatelessWidget {
+  const LaunchpadC_BottomNavbar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,11 @@ class SharedC_BottomNavbar extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
           icon: const Icon(Icons.home),
-          label: l10n.shared_home,
+          label: l10n.launchpad_home,
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.settings),
-          label: l10n.shared_settings,
+          label: l10n.launchpad_settings,
         ),
       ],
     );

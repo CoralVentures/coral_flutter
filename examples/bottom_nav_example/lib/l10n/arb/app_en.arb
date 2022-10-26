@@ -3,7 +3,7 @@
   "home_pageTitle": "Home",
   "settings_pageTitle": "Settings",
 
-  "shared_home": "Home",
-  "shared_settings": "Settings"
+  "launchpad_home": "Home",
+  "launchpad_settings": "Settings"
 
 }
