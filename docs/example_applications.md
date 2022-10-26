@@ -6,3 +6,4 @@ We have several example applications, and we recommend reviewing them in the fol
 - routing_example
 - double_yield_example
 - data_layer_example
+- bottom_nav_example
