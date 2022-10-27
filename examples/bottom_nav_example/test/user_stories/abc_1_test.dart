@@ -47,7 +47,10 @@ void main() {
               );
           },
           expectedEvents: [BottomNavEvent_ToHome],
-          expectedAnalytics: ['Screen: /:screen(home|settings)'],
+          expectedAnalytics: [
+            'Screen: home',
+            'Screen: launchpad',
+          ],
         );
 
         await tester.screenshot(
@@ -87,7 +90,7 @@ void main() {
               );
           },
           expectedEvents: [BottomNavEvent_ToSettings],
-          expectedAnalytics: [],
+          expectedAnalytics: ['Screen: settings'],
         );
 
         await tester.screenshot(
@@ -124,7 +127,7 @@ void main() {
               );
           },
           expectedEvents: [BottomNavEvent_ToHome],
-          expectedAnalytics: [],
+          expectedAnalytics: ['Screen: home'],
         );
       },
     );

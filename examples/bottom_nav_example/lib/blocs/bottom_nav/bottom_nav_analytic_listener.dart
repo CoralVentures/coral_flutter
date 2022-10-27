@@ -12,8 +12,10 @@ class BottomNavEvent_AnalyticListener
   }) {
     switch (event.eventType) {
       case BottomNavEvents.toHome:
+        analyticsRepository.screen(screenName: BottomNavTab.home.name);
+        break;
       case BottomNavEvents.toSettings:
-        // no-op because screen events are already tracked by route observer
+        analyticsRepository.screen(screenName: BottomNavTab.settings.name);
         break;
     }
   }

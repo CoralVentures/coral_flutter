@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+enum AppRoutes { launchpad }
+
 GoRouter appRouter({
   required CoralAnalyticsRepository? analyticsRepository,
 }) =>
@@ -34,12 +36,13 @@ GoRouter appRouter({
           },
         ),
         GoRoute(
-          path: '/:screen(home|settings)',
+          path: '/:bottomNavTab(home|settings)',
+          name: AppRoutes.launchpad.name,
           builder: (BuildContext context, GoRouterState state) {
-            final screen = state.params['screen']!;
+            final bottomNavTab = state.params['bottomNavTab']!;
 
             final bottomNavBloc = context.read<BottomNavBloc>();
-            final tab = BottomNavTab.values.byName(screen);
+            final tab = BottomNavTab.values.byName(bottomNavTab);
 
             switch (tab) {
               case BottomNavTab.home:

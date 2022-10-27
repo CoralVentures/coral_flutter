@@ -1,3 +1,4 @@
+import 'package:bottom_nav_example/app/app_router.dart';
 import 'package:bottom_nav_example/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:bottom_nav_example/l10n/l10n.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +21,16 @@ class LaunchpadC_BottomNavbar extends StatelessWidget {
 
         switch (tappedTab) {
           case BottomNavTab.home:
-            router.go('/home');
+            router.goNamed(
+              AppRoutes.launchpad.name,
+              params: {'bottomNavTab': BottomNavTab.home.name},
+            );
             break;
           case BottomNavTab.settings:
-            router.go('/settings');
+            router.goNamed(
+              AppRoutes.launchpad.name,
+              params: {'bottomNavTab': BottomNavTab.settings.name},
+            );
             break;
         }
       },
