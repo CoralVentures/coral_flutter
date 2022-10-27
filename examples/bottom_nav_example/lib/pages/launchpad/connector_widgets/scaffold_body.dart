@@ -1,7 +1,7 @@
 import 'package:bottom_nav_example/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:bottom_nav_example/pages/home/widgets_dumb/scaffold_body.dart';
 import 'package:bottom_nav_example/pages/settings/widgets_dumb/scaffold_body.dart';
-import 'package:bottom_nav_example/pages/shared/widgets_dumb/fade_up_transition_container.dart';
+import 'package:bottom_nav_example/pages/shared/widgets_dumb/scale_and_fade_transition_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
