@@ -87,7 +87,7 @@ void remoteReduxDevtoolsOnEvent({
   required dynamic event,
 }) {
   if (shouldConnectReduxRemoteDevtools) {
-    final blocTypeEnum = blocType.toEnum();
+    final blocTypeEnum = blocType.toBlocTypeEnum();
 
     switch (blocTypeEnum) {
       case BlocType.quote:
@@ -106,7 +106,7 @@ void remoteReduxDevtoolsOnClose({
   required String blocType,
 }) {
   if (shouldConnectReduxRemoteDevtools) {
-    final blocTypeEnum = blocType.toEnum();
+    final blocTypeEnum = blocType.toBlocTypeEnum();
 
     switch (blocTypeEnum) {
       case BlocType.quote:

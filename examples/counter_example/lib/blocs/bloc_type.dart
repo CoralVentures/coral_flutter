@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 extension BlocTypeEx on String {
-  BlocType toEnum() =>
+  BlocType toBlocTypeEnum() =>
       BlocType.values.firstWhere((bt) => describeEnum(bt) == toLowerCase());
 }
 
