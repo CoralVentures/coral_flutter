@@ -1,6 +1,6 @@
-import 'package:bottom_nav_example/pages/launchpad/connector_widgets/app_bar.dart';
-import 'package:bottom_nav_example/pages/launchpad/connector_widgets/bottom_navbar.dart';
-import 'package:bottom_nav_example/pages/launchpad/connector_widgets/scaffold_body.dart';
+import 'package:bottom_nav_example/pages/launchpad/widgets_connector/app_bar.dart';
+import 'package:bottom_nav_example/pages/launchpad/widgets_connector/bottom_navbar.dart';
+import 'package:bottom_nav_example/pages/launchpad/widgets_connector/scaffold_body.dart';
 import 'package:flutter/material.dart';
 
 class Launchpad_Page extends StatelessWidget {
