@@ -21,5 +21,6 @@ And go to localhost:8000
 ## License
 
 Copyright © 2022 Matthew Jaoudi
+Copyright © 2022 Tuan Vu
 
 Distributed under the The MIT License (MIT).
