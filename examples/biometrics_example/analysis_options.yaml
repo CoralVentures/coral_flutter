@@ -1,0 +1,16 @@
+include: package:very_good_analysis/analysis_options.3.1.0.yaml
+
+linter:
+  rules:
+    public_member_api_docs: false
+    constant_identifier_names: false
+    camel_case_types: false
+    no_leading_underscores_for_local_identifiers: false
+
+analyzer:
+  # Note: because of a bug with the analyzer that is out of our control whenever
+  # you add an exclude here, also add it to:
+  # - `./tools/check_coverage.sh`
+  # - `./github/workflows/<worflow_name>.yaml`
+  exclude:
+    - '**/*.g.dart'

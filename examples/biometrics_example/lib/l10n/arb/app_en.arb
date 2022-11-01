@@ -1,0 +1,18 @@
+{
+  "@@locale": "en",
+  "loading_authDescription": "Use biometrics to login",
+  "loading_appLoading": "App Loading...",
+
+
+  "home_pageTitle": "Home Page",
+
+  "login_pageTitle": "Login Page",
+  "login_biometricsStatus": "Biometrics status: {status}",
+  "@login_biometricsStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  }
+}

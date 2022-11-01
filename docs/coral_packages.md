@@ -7,6 +7,7 @@ _Note: In the image above, the orange boxes are things you will likely use at so
 coral_flutter includes the following packages:
 
 - `coral_analytics_repository`
+- `coral_biometrics_repository`
 - `coral_bloc`
 - `coral_bootstrap`
 - `coral_cli`
@@ -51,6 +52,48 @@ GoRouter appRouter({
 ```
 
 4) The `CoralSegmentConfiguration` is used by the `CoralBootstrapConfiguration` and will be how you pass in your Segment api key.
+
+## Coral Biometrics Repository
+
+This package exposes the `CoralBiometricsRepository` which has a single method, `authenticateWithBiometrics`.
+
+_Note: you should only attempt to check authentication with biometrics if you have a token from something like Auth0 that says you are already authenticated and it hasn't expired._
+
+---
+
+There is some set up you need to do to your [android](https://pub.dev/packages/local_auth#android-integration) and [iOS](https://pub.dev/packages/local_auth#ios-integration) folders to get the biometrics repository to work.
+
+_Note: see the `biometrics_example` to see how this is implemented._
+
+Inside of `ios/Runner/info.plist`, this was added:
+
+```xml
+ <key>NSFaceIDUsageDescription</key>
+ <string>Use biometrics to login</string>
+```
+
+Inside of `android/app/src/main/kotlin/MainActivity.kt`, the FlutterActivity was changed to FlutterFragmentActivity:
+
+```kt
+import io.flutter.embedding.android.FlutterFragmentActivity
+
+class MainActivity: FlutterFragmentActivity() {
+    // ...
+}
+```
+
+Inside of `android.local.properties`, add:
+
+```properties
+flutter.compileSdkVersion=33
+```
+
+Inside of `android/app/build.gradle`, update the `compileSdkVersion` to:
+
+```gradle
+android {
+    compileSdkVersion localProperties.getProperty('flutter.compileSdkVersion').toInteger()
+```
 
 ## Coral Bloc
 
