@@ -22,32 +22,13 @@ class App extends StatelessWidget {
     super.key,
     required this.analyticsRepository,
   }) : _routerConfig = GoRouter(
-          initialLocation: '/initialize',
+          initialLocation: '/home',
           observers: [
             CoralAnalyticRouteObserver(
               analyticsRepository: analyticsRepository,
             ),
           ],
           routes: <GoRoute>[
-            /// Note: we are adding `/initialize` to play nicely with Flutter's
-            /// hot-reload.
-            GoRoute(
-              path: '/initialize',
-              redirect: (context, state) {
-                final bottomNavBloc = context.read<BottomNavBloc>();
-                final tab = bottomNavBloc.state.tab;
-
-                switch (tab) {
-                  case BottomNavTab.home:
-                    return '/home';
-
-                  // coverage:ignore-start
-                  case BottomNavTab.settings:
-                    return '/settings';
-                  // coverage:ignore-end
-                }
-              },
-            ),
             GoRoute(
               path: '/:bottomNavTab(home|settings)',
               name: AppRoutes.launchpad.name,
