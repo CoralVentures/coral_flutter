@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:routing_example/pages/about/widget_connectors/go_to_home_button.dart';
-import 'package:routing_example/pages/about/widget_connectors/title.dart';
+import 'package:routing_example/pages/about/widgets_connector/go_to_home_button.dart';
+import 'package:routing_example/pages/about/widgets_connector/title.dart';
 
 class About_Page extends StatelessWidget {
   const About_Page({super.key});

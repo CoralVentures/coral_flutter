@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:routing_example/app/app_router.dart';
+import 'package:routing_example/app/app_builder.dart';
 import 'package:routing_example/l10n/l10n.dart';
 import 'package:routing_example/pages/shared/widgets_dumb/button.dart';
 

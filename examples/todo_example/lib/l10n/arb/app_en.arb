@@ -1,3 +1,4 @@
 {
-  "@@locale": "en"
+  "@@locale": "en",
+  "home_todoPlaceholder": "What needs to be done?"
 }

@@ -1,5 +1,5 @@
-import 'package:biometrics_example/pages/login/widget_connectors/biometrics_status_text.dart';
-import 'package:biometrics_example/pages/login/widget_connectors/page_title_text.dart';
+import 'package:biometrics_example/pages/login/widgets_connector/biometrics_status_text.dart';
+import 'package:biometrics_example/pages/login/widgets_connector/page_title_text.dart';
 import 'package:flutter/material.dart';
 
 class Login_Page extends StatelessWidget {

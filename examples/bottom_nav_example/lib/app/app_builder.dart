@@ -1,12 +1,15 @@
 import 'dart:async';
 
-import 'package:bottom_nav_example/app/app_router.dart';
 import 'package:bottom_nav_example/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:bottom_nav_example/l10n/l10n.dart';
+import 'package:bottom_nav_example/pages/launchpad/launchpad_page.dart';
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
+
+enum AppRoutes { launchpad }
 
 FutureOr<Widget> appBuilder({
   CoralAnalyticsRepository? analyticsRepository,
@@ -15,12 +18,64 @@ FutureOr<Widget> appBuilder({
 }
 
 class App extends StatelessWidget {
-  const App({
+  App({
     super.key,
     required this.analyticsRepository,
-  });
+  }) : _routerConfig = GoRouter(
+          initialLocation: '/initialize',
+          observers: [
+            CoralAnalyticRouteObserver(
+              analyticsRepository: analyticsRepository,
+            ),
+          ],
+          routes: <GoRoute>[
+            /// Note: we are adding `/initialize` to play nicely with Flutter's
+            /// hot-reload.
+            GoRoute(
+              path: '/initialize',
+              redirect: (context, state) {
+                final bottomNavBloc = context.read<BottomNavBloc>();
+                final tab = bottomNavBloc.state.tab;
+
+                switch (tab) {
+                  case BottomNavTab.home:
+                    return '/home';
+
+                  // coverage:ignore-start
+                  case BottomNavTab.settings:
+                    return '/settings';
+                  // coverage:ignore-end
+                }
+              },
+            ),
+            GoRoute(
+              path: '/:bottomNavTab(home|settings)',
+              name: AppRoutes.launchpad.name,
+              builder: (BuildContext context, GoRouterState state) {
+                final bottomNavTab = state.params['bottomNavTab']!;
+
+                final bottomNavBloc = context.read<BottomNavBloc>();
+                final tab = BottomNavTab.values.byName(bottomNavTab);
+
+                switch (tab) {
+                  case BottomNavTab.home:
+                    bottomNavBloc.add(const BottomNavEvent_ToHome());
+                    break;
+                  case BottomNavTab.settings:
+                    bottomNavBloc.add(const BottomNavEvent_ToSettings());
+                    break;
+                }
+
+                return Launchpad_Page(
+                  key: state.pageKey,
+                );
+              },
+            ),
+          ],
+        );
 
   final CoralAnalyticsRepository? analyticsRepository;
+  final GoRouter _routerConfig;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +89,7 @@ class App extends StatelessWidget {
             GlobalMaterialLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          routerConfig: appRouter(
-            analyticsRepository: analyticsRepository,
-          ),
+          routerConfig: _routerConfig,
         ),
       ),
     );

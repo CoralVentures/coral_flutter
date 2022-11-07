@@ -1,4 +1,4 @@
-import 'package:biometrics_example/app/app_router.dart';
+import 'package:biometrics_example/app/app_builder.dart';
 import 'package:biometrics_example/blocs/authentication/authentication_bloc.dart';
 import 'package:biometrics_example/l10n/l10n.dart';
 import 'package:coral_biometrics_repository/coral_biometrics_repository.dart';

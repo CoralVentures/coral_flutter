@@ -1,6 +1,6 @@
 import 'package:double_yield_example/blocs/greetings/greetings_bloc.dart';
-import 'package:double_yield_example/pages/home/widget_connectors/say_hello_button.dart';
-import 'package:double_yield_example/pages/home/widget_connectors/say_hello_status_listener.dart';
+import 'package:double_yield_example/pages/home/widgets_connector/say_hello_button.dart';
+import 'package:double_yield_example/pages/home/widgets_connector/say_hello_status_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

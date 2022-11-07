@@ -3,7 +3,7 @@ import 'package:data_layer_example/blocs/analytic_listeners.dart';
 import 'package:data_layer_example/blocs/quote/quote_bloc.dart';
 import 'package:data_layer_example/data_providers/quotable/quotable_models.dart';
 import 'package:data_layer_example/pages/home/home_page.dart';
-import 'package:data_layer_example/pages/home/widget_connectors/quote_button.dart';
+import 'package:data_layer_example/pages/home/widgets_connector/quote_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

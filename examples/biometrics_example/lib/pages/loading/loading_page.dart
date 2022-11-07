@@ -1,4 +1,4 @@
-import 'package:biometrics_example/pages/loading/widget_connectors/app_loading_text.dart';
+import 'package:biometrics_example/pages/loading/widgets_connector/app_loading_text.dart';
 import 'package:flutter/material.dart';
 
 class Loading_Page extends StatelessWidget {

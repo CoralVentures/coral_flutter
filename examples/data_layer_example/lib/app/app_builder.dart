@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
-import 'package:data_layer_example/app/app_router.dart';
 import 'package:data_layer_example/l10n/l10n.dart';
+import 'package:data_layer_example/pages/home/home_page.dart';
 import 'package:data_layer_example/repositories/quote/quote_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
+
+enum AppRoutes { home }
 
 FutureOr<Widget> appBuilder({
   CoralAnalyticsRepository? analyticsRepository,
@@ -19,14 +22,30 @@ FutureOr<Widget> appBuilder({
 }
 
 class App extends StatelessWidget {
-  const App({
+  App({
     super.key,
     required this.analyticsRepository,
     required this.quoteRepository,
-  });
+  }) : _routerConfig = GoRouter(
+          observers: [
+            CoralAnalyticRouteObserver(
+              analyticsRepository: analyticsRepository,
+            ),
+          ],
+          routes: <GoRoute>[
+            GoRoute(
+              name: AppRoutes.home.name,
+              path: '/',
+              builder: (BuildContext context, GoRouterState state) =>
+                  const Home_Page(),
+            ),
+          ],
+        );
 
   final CoralAnalyticsRepository? analyticsRepository;
   final QuoteRepository quoteRepository;
+
+  final GoRouter _routerConfig;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +60,7 @@ class App extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        routerConfig: appRouter(
-          analyticsRepository: analyticsRepository,
-        ),
+        routerConfig: _routerConfig,
       ),
     );
   }

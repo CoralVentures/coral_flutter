@@ -10,7 +10,6 @@ The counter example is our basic example using coral_flutter, and we will use it
 lib/
   app/
     app_builder.dart
-    app_router.dart
 ```
 
 The app directory contains our `appBuilder`, which we can use to build our `App`.  This is used from the `lib/main/main_x.dart` files. This is also used in our tests to ensure we are building our app the same way.

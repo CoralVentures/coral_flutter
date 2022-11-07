@@ -1,7 +1,7 @@
 import 'package:data_layer_example/blocs/quote/quote_bloc.dart';
-import 'package:data_layer_example/pages/home/widget_connectors/quote_button.dart';
-import 'package:data_layer_example/pages/home/widget_connectors/quote_listener.dart';
-import 'package:data_layer_example/pages/home/widget_connectors/quote_text.dart';
+import 'package:data_layer_example/pages/home/widgets_connector/quote_button.dart';
+import 'package:data_layer_example/pages/home/widgets_connector/quote_listener.dart';
+import 'package:data_layer_example/pages/home/widgets_connector/quote_text.dart';
 import 'package:data_layer_example/repositories/quote/quote_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

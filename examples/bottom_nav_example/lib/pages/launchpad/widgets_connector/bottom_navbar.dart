@@ -1,4 +1,4 @@
-import 'package:bottom_nav_example/app/app_router.dart';
+import 'package:bottom_nav_example/app/app_builder.dart';
 import 'package:bottom_nav_example/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:bottom_nav_example/l10n/l10n.dart';
 import 'package:flutter/material.dart';

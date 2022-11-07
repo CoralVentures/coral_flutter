@@ -1,4 +1,4 @@
-import 'package:biometrics_example/pages/home/widget_connectors/page_title_text.dart';
+import 'package:biometrics_example/pages/home/widgets_connector/page_title_text.dart';
 import 'package:flutter/material.dart';
 
 class Home_Page extends StatelessWidget {
