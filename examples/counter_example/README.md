@@ -1,4 +1,4 @@
-# Counter Example
+# counter_example
 
 This example was created with the following flutter version:
 
