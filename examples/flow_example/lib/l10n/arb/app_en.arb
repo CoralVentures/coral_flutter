@@ -1,0 +1,14 @@
+{
+  "@@locale": "en",
+  "home_createTodoItem": "Create TODO item",
+  "home_todoItems": "Todo Items",
+
+  "createTodoStep1_task": "What is the task?",
+  "createTodoStep1_continue": "Continue",
+
+  "createTodoStep2_priority": "What is the priority?",
+  "createTodoStep2_continue": "Continue",
+  
+  "createTodoStep3_assignee": "Who is this task assigned to?",
+  "createTodoStep3_submit": "Submit"
+}

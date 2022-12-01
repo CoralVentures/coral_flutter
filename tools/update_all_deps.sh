@@ -17,5 +17,6 @@ flutter pub get examples/bottom_nav_example
 flutter pub get examples/counter_example
 flutter pub get examples/data_layer_example
 flutter pub get examples/double_yield_example
+flutter pub get examples/flow_example
 flutter pub get examples/routing_example
 flutter pub get examples/todo_example

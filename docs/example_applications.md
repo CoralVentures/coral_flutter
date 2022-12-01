@@ -4,6 +4,7 @@ We have several example applications, and we recommend reviewing them in the fol
 
 - counter_example
 - routing_example
+- flow_example
 - todo_example
 - double_yield_example
 - data_layer_example
