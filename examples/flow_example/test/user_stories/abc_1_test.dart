@@ -26,8 +26,6 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'create_todo',
       test: (tester) async {
-        await tester.pumpApp();
-
         await tester.screenshot(
           comment: 'Should start with no TODOs',
           takeActions: null,

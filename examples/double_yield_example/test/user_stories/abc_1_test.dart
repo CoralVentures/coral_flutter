@@ -15,8 +15,6 @@ void main() {
       mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
       test: (tester) async {
-        await tester.pumpApp();
-
         await tester.screenshot(
           comment: 'Should see a single button to trigger a snack bar',
           takeActions: () async {},

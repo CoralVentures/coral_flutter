@@ -16,18 +16,16 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_passes',
       printApplicationLogs: true,
-      test: (tester) async {
+      mockRepositoriesBeforeTest: (mockedApp) {
         when(
-          () => tester.mockedApp.mocks.biometricsRepository
-              .authenticateWithBiometrics(
+          () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
             authDescription: any(named: 'authDescription'),
           ),
         ).thenAnswer(
           (invocation) async => CoralBiometricsStatus.authenticationPassed,
         );
-
-        await tester.pumpApp();
-
+      },
+      test: (tester) async {
         await tester.screenshot(
           runExpectations: () {
             tester.expect(
@@ -58,8 +56,6 @@ void main() {
       screenshotDir: 'biometrics_error',
       printApplicationLogs: true,
       test: (tester) async {
-        await tester.pumpApp();
-
         await tester.screenshot(
           runExpectations: () {
             tester
@@ -107,8 +103,6 @@ void main() {
           (invocation) async => CoralBiometricsStatus.unsupported,
         );
 
-        await tester.pumpApp();
-
         await tester.screenshot(
           runExpectations: () {
             tester.expect(
@@ -149,8 +143,6 @@ void main() {
           (invocation) async => CoralBiometricsStatus.supportedButNotSetUp,
         );
 
-        await tester.pumpApp();
-
         await tester.screenshot(
           runExpectations: () {
             tester.expect(
@@ -190,8 +182,6 @@ void main() {
         ).thenAnswer(
           (invocation) async => CoralBiometricsStatus.authenticationFailed,
         );
-
-        await tester.pumpApp();
 
         await tester.screenshot(
           runExpectations: () {

@@ -18,8 +18,6 @@ void main() {
         mockedApp: CoralMockedApp(appBuilder: appBuilder),
         analyticListeners: analyticListeners,
         test: (tester) async {
-          await tester.pumpApp();
-
           await tester.screenshot(
             comment: '''Should start on the home page with a count of zero.''',
             takeActions: () async {},
@@ -119,8 +117,6 @@ void main() {
         mockedApp: CoralMockedApp(appBuilder: appBuilder),
         analyticListeners: analyticListeners,
         test: (tester) async {
-          await tester.pumpApp();
-
           await tester.screenshot(
             comment: '''Should start on the home page with a count of zero.''',
             takeActions: () async {},

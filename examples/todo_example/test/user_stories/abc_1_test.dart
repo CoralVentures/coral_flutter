@@ -15,8 +15,6 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'todo_item',
       test: (tester) async {
-        await tester.pumpApp();
-
         await tester.screenshot(
           comment:
               '''Before entering a todo item, there should be no todo items''',

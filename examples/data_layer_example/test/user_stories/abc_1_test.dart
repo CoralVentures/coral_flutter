@@ -21,12 +21,9 @@ void main() {
         mockedApp: MockedApp(MocksContainer()),
         analyticListeners: analyticListeners,
         test: (tester) async {
-          await tester.pumpApp();
-
           await tester.screenshot(
             comment:
                 '''When I first open the app, I want to be on the home page and see a button to get a random quote.''',
-            takeActions: () async {},
             runExpectations: () {
               tester
                 ..expect(
@@ -47,16 +44,17 @@ void main() {
           await tester.screenshot(
             comment:
                 '''When I tap on the random quote button, I should see a quote displayed on the screen.''',
-            takeActions: () async {
+            mockRepositories: (mockedApp) {
               when(
-                () => tester.mockedApp.mocks.quoteRepository.getRandomQuote(),
+                () => mockedApp.mocks.quoteRepository.getRandomQuote(),
               ).thenAnswer(
                 (_) async => const QuotableQuote(
                   id: '1',
                   content: 'I know that I know nothing',
                 ),
               );
-
+            },
+            takeActions: () async {
               await tester.userAction.tap(
                 find.byType(HomeC_QuoteButton),
               );

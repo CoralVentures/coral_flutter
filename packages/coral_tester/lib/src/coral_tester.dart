@@ -85,11 +85,16 @@ class CoralTester<T extends CoralMockedApp> {
 
   Future<void> screenshot({
     String? comment,
+    void Function(T mockedApp)? mockRepositories,
     AsyncCallback? takeActions,
     VoidCallback? runExpectations,
     List<Type> expectedEvents = const [],
     List<String> expectedAnalytics = const [],
   }) async {
+    if (mockRepositories != null) {
+      mockRepositories.call(mockedApp);
+    }
+
     if (takeActions != null) {
       await takeActions.call();
     }

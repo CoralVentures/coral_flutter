@@ -13,8 +13,6 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'change_count',
       test: (tester) async {
-        await tester.pumpApp();
-
         await tester.screenshot(
           runExpectations: () {
             tester
