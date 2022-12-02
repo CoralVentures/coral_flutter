@@ -100,7 +100,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
     }
 
     if (actions.isNotEmpty) {
-      buffer.writeln('Actions:');
+      buffer.writeln('User Actions:');
 
       for (final element in actions) {
         buffer.writeln('  $element');
@@ -161,7 +161,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
 
     if (actions.isNotEmpty) {
       buffer
-        ..writeln('<b>Actions:</b>')
+        ..writeln('<b>User Actions:</b>')
         ..writeln('<ul>');
       for (final element in actions) {
         buffer.writeln('  <li>$element</li>');
