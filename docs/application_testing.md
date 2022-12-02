@@ -97,7 +97,8 @@ void main() {
           },
      // 7)
           takeActions: () async {
-            await tester.tap(find.text('Decrement'));
+            await tester.userAction.tap(find.text('Decrement'));
+            await tester.testerAction.pumpAndSettle();
           },
      // 8)
           expectedEvents: [
@@ -133,6 +134,13 @@ _If you haven't seen it before, the `..` is called cascade notation and will ret
 
 6) The `CoralTester` keeps track of all of the analytics we would have been sending off to Segment (or whatever our vendor of choice may be). We can then test that we are sending off the analytics that we expect to send off. Since this will also end up in the gallery, it will help our Product team understand our application and give them an opportunity to self-serve when it comes to making analytic dashboards and funnels.
 
-7) `takeActions` is where we will simulate user actions. For now, the `CoralTester` knows about the `tap` event and will report it to our gallery. In the future, we want to add more actions beyond just tap. For now though, you can find the normal `WidgetTester` under `tester.widgetTester`.
+7) `takeActions` is where we will simulate user actions. We have split out actions in to 'user' actions and 'tester' actions. For example, if you wanted to tap a button, you'd write:
+
+```dart
+await tester.userAction.tap(find.text('Submit'));
+await tester.testerAction.pumpAndSettle();
+```
+
+*Note: The 'user' actions are technically also available on the 'tester' actions, but please user the 'user' actions instead. This is because the user actions are sniffed and will be echoed back in the tester logs and the gallery while tester actions won't be.*
 
 8) The `CoralTester` keeps track of all of our bloc events. We can then test to make sure the bloc events are coming in as expected and in the proper order. This is especially helpful to prevent us from accidentally introducing logic that affects flows we aren't working on.  These events will also be shown in the gallery (along with a graphviz image representation).
