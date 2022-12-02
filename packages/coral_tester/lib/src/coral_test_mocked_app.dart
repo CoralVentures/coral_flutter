@@ -35,6 +35,7 @@ void coralTestGroup(
 /// - [screenshotDir] is used to namespace the golden images into a specific
 ///   directory
 /// - [skip] to skip the test
+/// - [mockRepositoriesBeforeTest] to add mocks before the test runs
 /// - [test] is the test body
 /// - [printTesterLogs] will print tester logs, defaults to true
 /// - [printApplicationLogs] will print application logs, defaults to false
@@ -136,7 +137,7 @@ void coralTestMockedApp<T extends CoralMockedApp>(
               [
                 graphvizFilePath,
                 '-Tpng',
-                '-Gdpi=400',
+                '-Gdpi=300',
                 '-o',
                 'test/gallery/${checkpoint.screenshotPath}.png',
               ],

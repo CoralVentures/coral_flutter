@@ -194,7 +194,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
         ..writeln('</ul>')
         ..writeln('<br>')
         ..writeln(
-          '<img src="./${screenshotPathListSansUserStoryId.join('/')}.png", width=400>',
+          '<img width="300" src="./${screenshotPathListSansUserStoryId.join('/')}.png">',
         )
         ..writeln('<br>');
     }
@@ -213,7 +213,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
       '''
       </td>
       <td>
-      <img src="../../user_stories/goldens/$screenshotPath.iphone11.png">
+      <img width="300" src="../../user_stories/goldens/$screenshotPath.iphone11.png">
       </td>
    </tr>
   </tbody>
