@@ -56,10 +56,10 @@ void main() {
         await tester.screenshot(
           comment: 'Should be able to go to the settings tab',
           takeActions: () async {
-            await tester.tap(
+            await tester.userAction.tap(
               find.byIcon(Icons.settings),
-              pumpAndSettle: true,
             );
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester
@@ -96,7 +96,8 @@ void main() {
         await tester.screenshot(
           comment: 'Should be able to go back to the home tab',
           takeActions: () async {
-            await tester.tap(find.byIcon(Icons.home), pumpAndSettle: true);
+            await tester.userAction.tap(find.byIcon(Icons.home));
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester

@@ -52,10 +52,10 @@ void main() {
           comment:
               '''After tapping create todo button, should be asked to enter task''',
           takeActions: () async {
-            await tester.tap(
+            await tester.userAction.tap(
               find.byType(HomeC_CreateTodoButton),
-              pumpAndSettle: true,
             );
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester
@@ -77,11 +77,11 @@ void main() {
         await tester.screenshot(
           comment: '''Should be able to enter the task''',
           takeActions: () async {
-            await tester.widgetTester.enterText(
+            await tester.userAction.enterText(
               find.byType(CreateTodoStep1C_TaskInput),
               'Take out the trash',
             );
-            await tester.widgetTester.pumpAndSettle();
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester.expect(
@@ -97,10 +97,10 @@ void main() {
         await tester.screenshot(
           comment: '''Should be able to continue after entering the task''',
           takeActions: () async {
-            await tester.tap(
+            await tester.userAction.tap(
               find.byType(CreateTodoStep1C_ContinueButton),
-              pumpAndSettle: true,
             );
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester.expect(
@@ -116,11 +116,11 @@ void main() {
         await tester.screenshot(
           comment: '''Should be able to enter the priority''',
           takeActions: () async {
-            await tester.widgetTester.enterText(
+            await tester.userAction.enterText(
               find.byType(CreateTodoStep2C_PriorityInput),
               'High',
             );
-            await tester.widgetTester.pumpAndSettle();
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester.expect(
@@ -136,10 +136,10 @@ void main() {
         await tester.screenshot(
           comment: '''Should be able to continue after entering the priority''',
           takeActions: () async {
-            await tester.tap(
+            await tester.userAction.tap(
               find.byType(CreateTodoStep2C_ContinueButton),
-              pumpAndSettle: true,
             );
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester.expect(
@@ -155,11 +155,11 @@ void main() {
         await tester.screenshot(
           comment: '''Should be able to enter the assignee''',
           takeActions: () async {
-            await tester.widgetTester.enterText(
+            await tester.userAction.enterText(
               find.byType(CreateTodoStep3C_AssigneeInput),
               'Jane',
             );
-            await tester.widgetTester.pumpAndSettle();
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester.expect(
@@ -175,10 +175,10 @@ void main() {
         await tester.screenshot(
           comment: '''Should be able to submit the todo item''',
           takeActions: () async {
-            await tester.tap(
+            await tester.userAction.tap(
               find.byType(CreateTodoStep3C_SubmitButton),
-              pumpAndSettle: true,
             );
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester

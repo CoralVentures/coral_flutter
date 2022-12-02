@@ -34,9 +34,10 @@ void main() {
         await tester.screenshot(
           comment: '''After tapping button, should see a snack bar''',
           takeActions: () async {
-            await tester.tap(
+            await tester.userAction.tap(
               find.byType(HomeC_SayHelloButton),
             );
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester.expect(

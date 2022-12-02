@@ -35,9 +35,9 @@ void main() {
           comment:
               '''Should see potential todo while typing, but shouldn't see todo item until the user has hit submit''',
           takeActions: () async {
-            await tester.widgetTester
+            await tester.userAction
                 .enterText(find.byType(TextField), 'Take out the trash');
-            await tester.widgetTester.pumpAndSettle();
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester.expect(
@@ -54,9 +54,9 @@ void main() {
         await tester.screenshot(
           comment: '''Should see todo once user hits submit.''',
           takeActions: () async {
-            await tester.widgetTester.testTextInput
+            await tester.testerAction.testTextInput
                 .receiveAction(TextInputAction.done);
-            await tester.widgetTester.pumpAndSettle();
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester
@@ -83,10 +83,10 @@ void main() {
         await tester.screenshot(
           comment: '''After tapping on todo, should see completed todo item.''',
           takeActions: () async {
-            await tester.tap(
+            await tester.userAction.tap(
               find.byType(HomeD_TodoItem),
-              pumpAndSettle: true,
             );
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester
@@ -125,10 +125,10 @@ void main() {
           comment:
               '''After tapping todo item again, should reactivate todo item.''',
           takeActions: () async {
-            await tester.tap(
+            await tester.userAction.tap(
               find.byType(HomeD_TodoItem),
-              pumpAndSettle: true,
             );
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester

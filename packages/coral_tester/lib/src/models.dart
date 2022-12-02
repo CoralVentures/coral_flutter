@@ -58,20 +58,16 @@ class CoralTesterScreen extends CoralTesterRecord {
   }
 }
 
-enum CoralTesterActions { tap }
-
 class CoralTesterAction {
   CoralTesterAction({
-    required this.action,
-    required this.finderDescription,
+    required this.description,
   });
 
-  final CoralTesterActions action;
-  final String finderDescription;
+  final String description;
 
   @override
   String toString() {
-    return '${action.name.toUpperCase()}: $finderDescription';
+    return description;
   }
 }
 
@@ -103,15 +99,6 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
         ..writeln();
     }
 
-    if (expectationReasons.isNotEmpty) {
-      buffer.writeln('Expect:');
-
-      for (final element in expectationReasons) {
-        buffer.writeln('  $element');
-      }
-      buffer.writeln();
-    }
-
     if (actions.isNotEmpty) {
       buffer.writeln('Actions:');
 
@@ -119,6 +106,15 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
         buffer.writeln('  $element');
       }
 
+      buffer.writeln();
+    }
+
+    if (expectationReasons.isNotEmpty) {
+      buffer.writeln('Expect:');
+
+      for (final element in expectationReasons) {
+        buffer.writeln('  $element');
+      }
       buffer.writeln();
     }
 
@@ -163,21 +159,21 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
 ''',
     );
 
-    if (expectationReasons.isNotEmpty) {
-      buffer
-        ..writeln('<b>Expect:</b>')
-        ..writeln('<ul>');
-      for (final element in expectationReasons) {
-        buffer.writeln('  <li>$element</li>');
-      }
-      buffer.writeln('</ul>');
-    }
-
     if (actions.isNotEmpty) {
       buffer
         ..writeln('<b>Actions:</b>')
         ..writeln('<ul>');
       for (final element in actions) {
+        buffer.writeln('  <li>$element</li>');
+      }
+      buffer.writeln('</ul>');
+    }
+
+    if (expectationReasons.isNotEmpty) {
+      buffer
+        ..writeln('<b>Expect:</b>')
+        ..writeln('<ul>');
+      for (final element in expectationReasons) {
         buffer.writeln('  <li>$element</li>');
       }
       buffer.writeln('</ul>');

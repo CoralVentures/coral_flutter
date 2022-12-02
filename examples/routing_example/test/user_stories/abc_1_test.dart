@@ -43,8 +43,9 @@ void main() {
           await tester.screenshot(
             comment: '''Should be able to change the Home Page's count''',
             takeActions: () async {
-              await tester.tap(find.text('Increment'));
-              await tester.tap(find.text('Increment'), pumpAndSettle: true);
+              await tester.userAction.tap(find.text('Increment'));
+              await tester.userAction.tap(find.text('Increment'));
+              await tester.testerAction.pumpAndSettle();
             },
             runExpectations: () async {
               tester.expect(
@@ -67,10 +68,10 @@ void main() {
             comment:
                 '''If we 'push' to the about page, we should see the about page''',
             takeActions: () async {
-              await tester.tap(
+              await tester.userAction.tap(
                 find.text('Push to About Page'),
-                pumpAndSettle: true,
               );
+              await tester.testerAction.pumpAndSettle();
             },
             runExpectations: () async {
               tester.expect(
@@ -87,10 +88,10 @@ void main() {
             comment:
                 '''Since we pushed to the about page, we have a stack of pages (about page on top of home page). If we pop the about page off, and go back to the home page, the home page's count should be preserved.''',
             takeActions: () async {
-              await tester.tap(
+              await tester.userAction.tap(
                 find.byType(BackButton),
-                pumpAndSettle: true,
               );
+              await tester.testerAction.pumpAndSettle();
             },
             runExpectations: () async {
               tester
@@ -143,8 +144,9 @@ void main() {
           await tester.screenshot(
             comment: '''Should be able to change the Home Page's count''',
             takeActions: () async {
-              await tester.tap(find.text('Decrement'));
-              await tester.tap(find.text('Decrement'), pumpAndSettle: true);
+              await tester.userAction.tap(find.text('Decrement'));
+              await tester.userAction.tap(find.text('Decrement'));
+              await tester.testerAction.pumpAndSettle();
             },
             runExpectations: () async {
               tester.expect(
@@ -167,10 +169,10 @@ void main() {
             comment:
                 '''If we 'go' to the about page, we should see the about page''',
             takeActions: () async {
-              await tester.tap(
+              await tester.userAction.tap(
                 find.text('Go to About Page'),
-                pumpAndSettle: true,
               );
+              await tester.testerAction.pumpAndSettle();
             },
             runExpectations: () async {
               tester.expect(
@@ -187,10 +189,10 @@ void main() {
             comment:
                 '''Since we 'go'ed to the about page, we do not have a stack of pages, we only have the about page. The original home page does not exist. So if we go back to the home page, it will get recreated and the counter will be reset to 0.''',
             takeActions: () async {
-              await tester.tap(
+              await tester.userAction.tap(
                 find.text('Go to Home Page'),
-                pumpAndSettle: true,
               );
+              await tester.testerAction.pumpAndSettle();
             },
             runExpectations: () async {
               tester

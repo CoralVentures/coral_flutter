@@ -57,10 +57,10 @@ void main() {
                 ),
               );
 
-              await tester.tap(
+              await tester.userAction.tap(
                 find.byType(HomeC_QuoteButton),
-                pumpAndSettle: true,
               );
+              await tester.testerAction.pumpAndSettle();
             },
             runExpectations: () {
               tester.expect(
@@ -81,10 +81,10 @@ void main() {
                 () => tester.mockedApp.mocks.quoteRepository.getRandomQuote(),
               ).thenThrow(Exception('BOOM'));
 
-              await tester.tap(
+              await tester.userAction.tap(
                 find.byType(HomeC_QuoteButton),
-                pumpAndSettle: true,
               );
+              await tester.testerAction.pumpAndSettle();
             },
             runExpectations: () {
               tester

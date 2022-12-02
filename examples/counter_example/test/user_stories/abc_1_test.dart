@@ -40,7 +40,8 @@ void main() {
         await tester.screenshot(
           comment: 'As a user, I want to be able to decrement the count',
           takeActions: () async {
-            await tester.tap(find.text('Decrement'));
+            await tester.userAction.tap(find.text('Decrement'));
+            await tester.testerAction.pumpAndSettle();
           },
           runExpectations: () {
             tester.expect(
@@ -67,8 +68,9 @@ void main() {
             );
           },
           takeActions: () async {
-            await tester.tap(find.text('Increment'));
-            await tester.tap(find.text('Increment'));
+            await tester.userAction.tap(find.text('Increment'));
+            await tester.userAction.tap(find.text('Increment'));
+            await tester.testerAction.pumpAndSettle();
           },
           expectedEvents: [
             CounterEvent_Increment,
