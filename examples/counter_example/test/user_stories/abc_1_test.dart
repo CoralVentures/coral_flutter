@@ -12,37 +12,26 @@ void main() {
       mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
       screenshotDir: 'change_count',
-      test: (tester) async {
-        await tester.screenshot(
-          runExpectations: () {
-            tester
-              ..expect(
-                find.text('Count: 0'),
-                findsOneWidget,
-                reason: 'Should see initial count of zero',
-              )
-              ..expect(
-                find.text('Count: -1'),
-                findsNothing,
-                reason: 'Should not see a count of -1',
-              )
-              ..expect(
-                find.text('Count: 1'),
-                findsNothing,
-                reason: 'Should not see a count of 1',
-              );
+      test: (screenshot) async {
+        await screenshot(
+          runExpectations: (exepect) {
+            expect(
+              find.text('Count: 0'),
+              findsOneWidget,
+              reason: 'Should see initial count of zero',
+            );
           },
           expectedAnalytics: ['Screen: home'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: 'As a user, I want to be able to decrement the count',
-          takeActions: () async {
-            await tester.userAction.tap(find.text('Decrement'));
-            await tester.testerAction.pumpAndSettle();
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(find.text('Decrement'));
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (expect) {
+            expect(
               find.text('Count: -1'),
               findsOneWidget,
               reason: 'Should see count decremented by one',
@@ -56,19 +45,19 @@ void main() {
           ],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: 'As a user, I want to be able to increment the count',
-          runExpectations: () {
-            tester.expect(
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(find.text('Increment'));
+            await userAction.tap(find.text('Increment'));
+            await testerAction.pumpAndSettle();
+          },
+          runExpectations: (expect) {
+            expect(
               find.text('Count: 1'),
               findsOneWidget,
               reason: 'Should see count incremented by two',
             );
-          },
-          takeActions: () async {
-            await tester.userAction.tap(find.text('Increment'));
-            await tester.userAction.tap(find.text('Increment'));
-            await tester.testerAction.pumpAndSettle();
           },
           expectedEvents: [
             CounterEvent_Increment,

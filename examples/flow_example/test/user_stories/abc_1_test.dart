@@ -25,64 +25,61 @@ void main() {
       mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
       screenshotDir: 'create_todo',
-      test: (tester) async {
-        await tester.screenshot(
+      test: (screenshot) async {
+        await screenshot(
           comment: 'Should start with no TODOs',
-          takeActions: null,
-          runExpectations: () {
-            tester
-              ..expect(
-                find.byType(Home_Page),
-                findsOneWidget,
-                reason: 'Should start on the Home Page',
-              )
-              ..expect(
-                find.byType(HomeC_CreateTodoButton),
-                findsOneWidget,
-                reason: 'Should see button to create a TODO',
-              );
+          runExpectations: (expect) {
+            expect(
+              find.byType(Home_Page),
+              findsOneWidget,
+              reason: 'Should start on the Home Page',
+            );
+            expect(
+              find.byType(HomeC_CreateTodoButton),
+              findsOneWidget,
+              reason: 'Should see button to create a TODO',
+            );
           },
           expectedEvents: [],
           expectedAnalytics: ['Screen: home'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment:
               '''After tapping create todo button, should be asked to enter task''',
-          takeActions: () async {
-            await tester.userAction.tap(
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(
               find.byType(HomeC_CreateTodoButton),
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester
-              ..expect(
-                find.byType(CreateTodoStep1_Page),
-                findsOneWidget,
-                reason: 'Should be on the Step1 page',
-              )
-              ..expect(
-                find.byType(CreateTodoStep1C_TaskInput),
-                findsOneWidget,
-                reason: 'Should see input to enter the task',
-              );
+          runExpectations: (expect) {
+            expect(
+              find.byType(CreateTodoStep1_Page),
+              findsOneWidget,
+              reason: 'Should be on the Step1 page',
+            );
+            expect(
+              find.byType(CreateTodoStep1C_TaskInput),
+              findsOneWidget,
+              reason: 'Should see input to enter the task',
+            );
           },
           expectedEvents: [],
           expectedAnalytics: ['Screen: createTodo'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: '''Should be able to enter the task''',
-          takeActions: () async {
-            await tester.userAction.enterText(
+          takeActions: (userAction, testerAction) async {
+            await userAction.enterText(
               find.byType(CreateTodoStep1C_TaskInput),
               'Take out the trash',
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (expect) {
+            expect(
               find.text('Take out the trash'),
               findsOneWidget,
               reason: 'Should see the task entered in the input field',
@@ -92,16 +89,16 @@ void main() {
           expectedAnalytics: [],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: '''Should be able to continue after entering the task''',
-          takeActions: () async {
-            await tester.userAction.tap(
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(
               find.byType(CreateTodoStep1C_ContinueButton),
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (expect) {
+            expect(
               find.byType(CreateTodoStep2_Page),
               findsOneWidget,
               reason: 'Should be on the step 2 page',
@@ -111,17 +108,17 @@ void main() {
           expectedAnalytics: ['Track: Create TODO: Add Task'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: '''Should be able to enter the priority''',
-          takeActions: () async {
-            await tester.userAction.enterText(
+          takeActions: (userAction, testerAction) async {
+            await userAction.enterText(
               find.byType(CreateTodoStep2C_PriorityInput),
               'High',
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (expect) {
+            expect(
               find.text('High'),
               findsOneWidget,
               reason: 'Should see the priority entered in the input field',
@@ -131,16 +128,16 @@ void main() {
           expectedAnalytics: [],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: '''Should be able to continue after entering the priority''',
-          takeActions: () async {
-            await tester.userAction.tap(
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(
               find.byType(CreateTodoStep2C_ContinueButton),
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (expect) {
+            expect(
               find.byType(CreateTodoStep3_Page),
               findsOneWidget,
               reason: 'Should be on the step 3 page',
@@ -150,17 +147,17 @@ void main() {
           expectedAnalytics: ['Track: Create TODO: Add Priority'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: '''Should be able to enter the assignee''',
-          takeActions: () async {
-            await tester.userAction.enterText(
+          takeActions: (userAction, testerAction) async {
+            await userAction.enterText(
               find.byType(CreateTodoStep3C_AssigneeInput),
               'Jane',
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (expect) {
+            expect(
               find.text('Jane'),
               findsOneWidget,
               reason: 'Should see the assignee entered in the input field',
@@ -170,26 +167,25 @@ void main() {
           expectedAnalytics: [],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: '''Should be able to submit the todo item''',
-          takeActions: () async {
-            await tester.userAction.tap(
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(
               find.byType(CreateTodoStep3C_SubmitButton),
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester
-              ..expect(
-                find.byType(Home_Page),
-                findsOneWidget,
-                reason: 'Should be on the home page',
-              )
-              ..expect(
-                find.byType(ListTile),
-                findsOneWidget,
-                reason: 'Should have one todo item in a ListTile',
-              );
+          runExpectations: (expect) {
+            expect(
+              find.byType(Home_Page),
+              findsOneWidget,
+              reason: 'Should be on the home page',
+            );
+            expect(
+              find.byType(ListTile),
+              findsOneWidget,
+              reason: 'Should have one todo item in a ListTile',
+            );
           },
           expectedEvents: [
             CreateTodoEvent_AddAssigneeToTodo,

@@ -50,7 +50,7 @@ void coralTestMockedApp<T extends CoralMockedApp>(
   bool printTesterLogs = true,
   bool printApplicationLogs = false,
   void Function(T mockedApp)? mockRepositoriesBeforeTest,
-  required Future<void> Function(CoralTester<T> tester) test,
+  required Future<void> Function(CoralScreenshot<T>) test,
 }) {
   final basePath = '${userStoryId.snakeCase}/$screenshotDir';
 
@@ -98,7 +98,7 @@ void coralTestMockedApp<T extends CoralMockedApp>(
       }
 
       await coralTester.pumpApp();
-      await test(coralTester);
+      await test(coralTester.screenshot);
 
       /// If running Golden tests, then also generate markdown and graphvz files
       if (autoUpdateGoldenFiles) {

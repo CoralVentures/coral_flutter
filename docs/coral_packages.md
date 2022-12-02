@@ -202,6 +202,6 @@ import 'package:coral_tester/coral_tester.dart';
 const testExecutable = coralTestExecutable;
 ```
 
-4. `coralTestGroup` and `coralTestMockedApp` should be used for all of our application tests. `coralTestGroup` allows you to pass in a userStoryId to organize our tests. `coralTestMockedApp` is similar to `widgetTest` but it gives you a `CoralTester` instead of a `widgetTester`.
+4. `coralTestGroup` and `coralTestMockedApp` should be used for all of our application tests. `coralTestGroup` allows you to pass in a userStoryId to organize our tests. `coralTestMockedApp` is similar to `widgetTest` but it gives you a `CoralScreenshot` instead of a `widgetTester`.
 
-5. The `CoralTester` is a superset of the `widgetTester` and gives you several pieces of functionality to make writing tests easier. In particular, it will keep track of your bloc events, analytics, user actions, and expectations, and then create a gallery from them.
+5. The `CoralScreenshot` is a way to tests user journeys in your application while keeping track of bloc events, analytics, user actions, expectations, etc. It also produces a gallery.

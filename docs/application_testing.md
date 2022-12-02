@@ -50,57 +50,42 @@ Let's go over the counter_example tests.
 void main() {
  // 1)
   coralTestGroup('ABC-1', (userStoryId) {
-  // 2)
+    // 2)
     coralTestMockedApp(
       '''As a user, I should be able to change the count, so that I can keep count of things.''',
       userStoryId: userStoryId,
       mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
       screenshotDir: 'change_count',
-      test: (tester) async {
+      test: (screenshot) async {
     // 3)
-        await tester.pumpApp();
-
-    // 4)
-        await tester.screenshot(
-     // 5)
-          runExpectations: () {
-            tester
-              ..expect(
-                find.text('Count: 0'),
-                findsOneWidget,
-                reason: 'Should see initial count of zero',
-              )
-              ..expect(
-                find.text('Count: -1'),
-                findsNothing,
-                reason: 'Should not see a count of -1',
-              )
-              ..expect(
-                find.text('Count: 1'),
-                findsNothing,
-                reason: 'Should not see a count of 1',
-              );
+        await screenshot(
+          // 4)
+          runExpectations: (exepect) {
+            expect(
+              find.text('Count: 0'),
+              findsOneWidget,
+              reason: 'Should see initial count of zero',
+            );
           },
-     // 6)
+          // 5)
           expectedAnalytics: ['Screen: home'],
         );
-
-        await tester.screenshot(
+        await screenshot(
           comment: 'As a user, I want to be able to decrement the count',
-          runExpectations: () {
-            tester.expect(
+          // 6)
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(find.text('Decrement'));
+            await testerAction.pumpAndSettle();
+          },
+          runExpectations: (expect) {
+            expect(
               find.text('Count: -1'),
               findsOneWidget,
               reason: 'Should see count decremented by one',
             );
           },
-     // 7)
-          takeActions: () async {
-            await tester.userAction.tap(find.text('Decrement'));
-            await tester.testerAction.pumpAndSettle();
-          },
-     // 8)
+          // 7)
           expectedEvents: [
             CounterEvent_Decrement,
           ],
@@ -108,10 +93,6 @@ void main() {
             'Track: Counter: Decrement',
           ],
         );
-      },
-    );
-  });
-}
 ```
 
 1) Instead of using `group` we use `coralTestGroup`. This will use the  `description` (which should be the user story id) of the group and pass it to the anonymous function as `userStoryId`.  
@@ -120,27 +101,16 @@ void main() {
 
 2) Instead of using `test` we use `coralTestMockedApp`. *This is where the magic happens.*
 
-This will take in a mocked version of our app (we mock the repository layer), and give us a `CoralTester` instead of a `WidgetTester`. The `CoralTester` will keep track of various things, like analytics, tap events, our expectations, etc. The `coralTestMockedApp` uses this information (that our `CoralTester` is aggregating) and turns it into the gallery.
+This will take in a mocked version of our app (we mock the repository layer), and give us a `CoralScreenshot` instead of a `WidgetTester`. The `CoralScreenshot` will keep track of various things, like analytics, tap events, our expectations, etc. The `coralTestMockedApp` uses this information (that our `CoralScreenshot` is aggregating) and turns it into the gallery.
 
-3) Because we passed in a mocked version of our app earlier, this special `tester.pumpApp()` function will create our App widget that can then be interacted with throughout our tests.
+3) Everything we do in our tests will be inside of `screenshot`. This is because every time we take a user action, we want to take a new screenshot to capture every moment along the user's journey.
 
-*This means we no longer need to wrap our widgets in MaterialApp or test our widgets in isolation. We always test the entire application and mock our way to the specific pathways we want to test.*
+4) `runExpectations` is a place to isolate what we expect to happen.  You will have access to the `expect` function which will keep track of our expectations, so we can display them in our gallery.
 
-4) Everything we do in our tests will be inside of `tester.screenshot`. This is because every time we take a user action, we want to take a new screenshot to capture every moment along the user's journey.
+5) The `CoralScreenshot` keeps track of all of the analytics we would have been sending off to Segment (or whatever our vendor of choice may be). We can then test that we are sending off the analytics that we expect to send off. Since this will also end up in the gallery, it will help our Product team understand our application and give them an opportunity to self-serve when it comes to making analytic dashboards and funnels.
 
-5) `runExpectations` is a place to isolate what we expect to happen.  The `CoralTester` has a special `expect` method that will keep track of our expectations, so we can display them in our gallery.
+7) `takeActions` is where we will simulate user actions. You will have access to `userAction` and `testerAction`.
 
-_If you haven't seen it before, the `..` is called cascade notation and will return the object instead of the result of the method call. We use it here to quickly create our expectations._
+*Note: The user actions in `userAction` are technically also available in `testerAction`, but please use `userAction` instead. This is because the user actions are sniffed when used by `userAction` and will be echoed back in the tester logs and included the gallery.*
 
-6) The `CoralTester` keeps track of all of the analytics we would have been sending off to Segment (or whatever our vendor of choice may be). We can then test that we are sending off the analytics that we expect to send off. Since this will also end up in the gallery, it will help our Product team understand our application and give them an opportunity to self-serve when it comes to making analytic dashboards and funnels.
-
-7) `takeActions` is where we will simulate user actions. We have split out actions in to 'user' actions and 'tester' actions. For example, if you wanted to tap a button, you'd write:
-
-```dart
-await tester.userAction.tap(find.text('Submit'));
-await tester.testerAction.pumpAndSettle();
-```
-
-*Note: The 'user' actions are technically also available on the 'tester' actions, but please user the 'user' actions instead. This is because the user actions are sniffed and will be echoed back in the tester logs and the gallery while tester actions won't be.*
-
-8) The `CoralTester` keeps track of all of our bloc events. We can then test to make sure the bloc events are coming in as expected and in the proper order. This is especially helpful to prevent us from accidentally introducing logic that affects flows we aren't working on.  These events will also be shown in the gallery (along with a graphviz image representation).
+8) The `CoralScreenshot` keeps track of all of our bloc events. We can then test to make sure the bloc events are coming in as expected and in the proper order. This is especially helpful to prevent us from accidentally introducing logic that affects flows we aren't working on.  These events will also be shown in the gallery (along with a graphviz image representation).

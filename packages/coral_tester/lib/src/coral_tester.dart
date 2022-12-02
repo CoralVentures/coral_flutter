@@ -9,6 +9,27 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart' as ft;
 import 'package:golden_toolkit/golden_toolkit.dart';
 
+typedef CoralExpect = void Function(
+  dynamic actual,
+  dynamic matcher, {
+  required String reason,
+  dynamic skip,
+});
+
+typedef CoralTakeActions = Future<void> Function(
+  CoralTesterUserActions userAction,
+  ft.WidgetTester testerAction,
+);
+
+typedef CoralScreenshot<T> = Future<void> Function({
+  String? comment,
+  void Function(T mockedApp)? mockRepositories,
+  CoralTakeActions? takeActions,
+  void Function(CoralExpect expect)? runExpectations,
+  List<Type> expectedEvents,
+  List<String> expectedAnalytics,
+});
+
 class CoralTester<T extends CoralMockedApp> {
   CoralTester({
     required this.mockedApp,
@@ -86,8 +107,8 @@ class CoralTester<T extends CoralMockedApp> {
   Future<void> screenshot({
     String? comment,
     void Function(T mockedApp)? mockRepositories,
-    AsyncCallback? takeActions,
-    VoidCallback? runExpectations,
+    CoralTakeActions? takeActions,
+    void Function(CoralExpect expect)? runExpectations,
     List<Type> expectedEvents = const [],
     List<String> expectedAnalytics = const [],
   }) async {
@@ -96,7 +117,10 @@ class CoralTester<T extends CoralMockedApp> {
     }
 
     if (takeActions != null) {
-      await takeActions.call();
+      await takeActions.call(
+        userAction,
+        testerAction,
+      );
     }
 
     /// Get unique prefix
@@ -121,7 +145,9 @@ class CoralTester<T extends CoralMockedApp> {
     final screenshotPath = '$basePath/$resolvedCounter';
 
     /// Check expectations
-    runExpectations?.call();
+    if (runExpectations != null) {
+      runExpectations.call(expect);
+    }
 
     /// Save checkpoint
     final checkpoint = CoralTesterCheckpoint(

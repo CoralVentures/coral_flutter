@@ -14,12 +14,11 @@ void main() {
       screenshotDir: 'snack_bar',
       mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
-      test: (tester) async {
-        await tester.screenshot(
+      test: (screenshot) async {
+        await screenshot(
           comment: 'Should see a single button to trigger a snack bar',
-          takeActions: () async {},
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (expect) {
+            expect(
               find.byType(HomeC_SayHelloButton),
               findsOneWidget,
               reason: 'Should see say hello button',
@@ -29,16 +28,16 @@ void main() {
           expectedAnalytics: ['Screen: home'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: '''After tapping button, should see a snack bar''',
-          takeActions: () async {
-            await tester.userAction.tap(
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(
               find.byType(HomeC_SayHelloButton),
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (expect) {
+            expect(
               find.byType(SnackBar),
               findsOneWidget,
               reason: 'Should see a snack bar',

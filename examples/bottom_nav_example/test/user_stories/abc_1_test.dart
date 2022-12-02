@@ -13,36 +13,35 @@ void main() {
       screenshotDir: 'tabs',
       mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
-      test: (tester) async {
-        await tester.screenshot(
+      test: (screenshot) async {
+        await screenshot(
           comment: 'Should start on the home tab',
-          runExpectations: () {
-            tester
-              ..expect(
-                find.byWidgetPredicate((widget) {
-                  if (widget is AppBar) {
-                    if (widget.title is Text) {
-                      final widgetText = widget.title as Text?;
+          runExpectations: (expect) {
+            expect(
+              find.byWidgetPredicate((widget) {
+                if (widget is AppBar) {
+                  if (widget.title is Text) {
+                    final widgetText = widget.title as Text?;
 
-                      return widgetText?.data == 'Home';
-                    }
+                    return widgetText?.data == 'Home';
                   }
+                }
 
-                  return false;
-                }),
-                findsOneWidget,
-                reason: 'Should see the Home app bar',
-              )
-              ..expect(
-                find.byWidgetPredicate((widget) {
-                  if (widget is BottomNavigationBar) {
-                    return widget.currentIndex == 0;
-                  }
-                  return false;
-                }),
-                findsOneWidget,
-                reason: 'Bottom navigation index should be 0',
-              );
+                return false;
+              }),
+              findsOneWidget,
+              reason: 'Should see the Home app bar',
+            );
+            expect(
+              find.byWidgetPredicate((widget) {
+                if (widget is BottomNavigationBar) {
+                  return widget.currentIndex == 0;
+                }
+                return false;
+              }),
+              findsOneWidget,
+              reason: 'Bottom navigation index should be 0',
+            );
           },
           expectedEvents: [BottomNavEvent_ToHome],
           expectedAnalytics: [
@@ -51,79 +50,77 @@ void main() {
           ],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: 'Should be able to go to the settings tab',
-          takeActions: () async {
-            await tester.userAction.tap(
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(
               find.byIcon(Icons.settings),
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester
-              ..expect(
-                find.byWidgetPredicate((widget) {
-                  if (widget is AppBar) {
-                    if (widget.title is Text) {
-                      final widgetText = widget.title as Text?;
+          runExpectations: (expect) {
+            expect(
+              find.byWidgetPredicate((widget) {
+                if (widget is AppBar) {
+                  if (widget.title is Text) {
+                    final widgetText = widget.title as Text?;
 
-                      return widgetText?.data == 'Settings';
-                    }
+                    return widgetText?.data == 'Settings';
                   }
+                }
 
-                  return false;
-                }),
-                findsOneWidget,
-                reason: 'Should see the Settings app bar',
-              )
-              ..expect(
-                find.byWidgetPredicate((widget) {
-                  if (widget is BottomNavigationBar) {
-                    return widget.currentIndex == 1;
-                  }
-                  return false;
-                }),
-                findsOneWidget,
-                reason: 'Bottom navigation index should be 1',
-              );
+                return false;
+              }),
+              findsOneWidget,
+              reason: 'Should see the Settings app bar',
+            );
+            expect(
+              find.byWidgetPredicate((widget) {
+                if (widget is BottomNavigationBar) {
+                  return widget.currentIndex == 1;
+                }
+                return false;
+              }),
+              findsOneWidget,
+              reason: 'Bottom navigation index should be 1',
+            );
           },
           expectedEvents: [BottomNavEvent_ToSettings],
           expectedAnalytics: ['Screen: settings'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: 'Should be able to go back to the home tab',
-          takeActions: () async {
-            await tester.userAction.tap(find.byIcon(Icons.home));
-            await tester.testerAction.pumpAndSettle();
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(find.byIcon(Icons.home));
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester
-              ..expect(
-                find.byWidgetPredicate((widget) {
-                  if (widget is AppBar) {
-                    if (widget.title is Text) {
-                      final widgetText = widget.title as Text?;
+          runExpectations: (expect) {
+            expect(
+              find.byWidgetPredicate((widget) {
+                if (widget is AppBar) {
+                  if (widget.title is Text) {
+                    final widgetText = widget.title as Text?;
 
-                      return widgetText?.data == 'Home';
-                    }
+                    return widgetText?.data == 'Home';
                   }
+                }
 
-                  return false;
-                }),
-                findsOneWidget,
-                reason: 'Should see the Home app bar',
-              )
-              ..expect(
-                find.byWidgetPredicate((widget) {
-                  if (widget is BottomNavigationBar) {
-                    return widget.currentIndex == 0;
-                  }
-                  return false;
-                }),
-                findsOneWidget,
-                reason: 'Bottom navigation index should be 0',
-              );
+                return false;
+              }),
+              findsOneWidget,
+              reason: 'Should see the Home app bar',
+            );
+            expect(
+              find.byWidgetPredicate((widget) {
+                if (widget is BottomNavigationBar) {
+                  return widget.currentIndex == 0;
+                }
+                return false;
+              }),
+              findsOneWidget,
+              reason: 'Bottom navigation index should be 0',
+            );
           },
           expectedEvents: [BottomNavEvent_ToHome],
           expectedAnalytics: ['Screen: home'],

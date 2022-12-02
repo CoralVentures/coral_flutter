@@ -14,12 +14,12 @@ void main() {
       mockedApp: CoralMockedApp(appBuilder: appBuilder),
       analyticListeners: analyticListeners,
       screenshotDir: 'todo_item',
-      test: (tester) async {
-        await tester.screenshot(
+      test: (screenshot) async {
+        await screenshot(
           comment:
               '''Before entering a todo item, there should be no todo items''',
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (expect) {
+            expect(
               find.byType(HomeD_TodoItem),
               findsNothing,
               reason: 'Should not find todo item',
@@ -29,16 +29,18 @@ void main() {
           expectedAnalytics: ['Screen: home'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment:
               '''Should see potential todo while typing, but shouldn't see todo item until the user has hit submit''',
-          takeActions: () async {
-            await tester.userAction
-                .enterText(find.byType(TextField), 'Take out the trash');
-            await tester.testerAction.pumpAndSettle();
+          takeActions: (userAction, testerAction) async {
+            await userAction.enterText(
+              find.byType(TextField),
+              'Take out the trash',
+            );
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester.expect(
+          runExpectations: (exect) {
+            expect(
               find.byType(HomeD_TodoItem),
               findsNothing,
               reason:
@@ -49,97 +51,94 @@ void main() {
           expectedAnalytics: [],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: '''Should see todo once user hits submit.''',
-          takeActions: () async {
-            await tester.testerAction.testTextInput
+          takeActions: (userAction, testerAction) async {
+            await testerAction.testTextInput
                 .receiveAction(TextInputAction.done);
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester
-              ..expect(
-                find.byType(HomeD_TodoItem),
-                findsOneWidget,
-                reason: '''Should see todo item''',
-              )
-              ..expect(
-                find.byIcon(Icons.check_box_outline_blank),
-                findsOneWidget,
-                reason: '''Should see checkbox outline''',
-              )
-              ..expect(
-                find.text('Take out the trash'),
-                findsOneWidget,
-                reason: '''Should see the todo item's text''',
-              );
+          runExpectations: (expect) {
+            expect(
+              find.byType(HomeD_TodoItem),
+              findsOneWidget,
+              reason: '''Should see todo item''',
+            );
+            expect(
+              find.byIcon(Icons.check_box_outline_blank),
+              findsOneWidget,
+              reason: '''Should see checkbox outline''',
+            );
+            expect(
+              find.text('Take out the trash'),
+              findsOneWidget,
+              reason: '''Should see the todo item's text''',
+            );
           },
           expectedEvents: [TodosEvent_AddTodoItem],
           expectedAnalytics: ['Track: TODO: Created'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment: '''After tapping on todo, should see completed todo item.''',
-          takeActions: () async {
-            await tester.userAction.tap(
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(
               find.byType(HomeD_TodoItem),
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester
-              ..expect(
-                find.byWidgetPredicate((widget) {
-                  if (widget is Icon) {
-                    final correctIcon = widget.icon == Icons.check_box_outlined;
-                    final correctColor = widget.color == Colors.green;
-                    return correctIcon && correctColor;
-                  }
-                  return false;
-                }),
-                findsOneWidget,
-                reason: '''Should see green checkbox''',
-              )
-              ..expect(
-                find.byWidgetPredicate((widget) {
-                  if (widget is Text) {
-                    final correctText = widget.data == 'Take out the trash';
-                    final correctDecoration =
-                        widget.style?.decoration == TextDecoration.lineThrough;
-                    return correctText && correctDecoration;
-                  }
-                  return false;
-                }),
-                findsOneWidget,
-                reason:
-                    '''Should see the todo item's text with a line through it''',
-              );
+          runExpectations: (expect) {
+            expect(
+              find.byWidgetPredicate((widget) {
+                if (widget is Icon) {
+                  final correctIcon = widget.icon == Icons.check_box_outlined;
+                  final correctColor = widget.color == Colors.green;
+                  return correctIcon && correctColor;
+                }
+                return false;
+              }),
+              findsOneWidget,
+              reason: '''Should see green checkbox''',
+            );
+            expect(
+              find.byWidgetPredicate((widget) {
+                if (widget is Text) {
+                  final correctText = widget.data == 'Take out the trash';
+                  final correctDecoration =
+                      widget.style?.decoration == TextDecoration.lineThrough;
+                  return correctText && correctDecoration;
+                }
+                return false;
+              }),
+              findsOneWidget,
+              reason:
+                  '''Should see the todo item's text with a line through it''',
+            );
           },
           expectedEvents: [TodosEvent_CompleteTodoItem],
           expectedAnalytics: ['Track: TODO: Completed'],
         );
 
-        await tester.screenshot(
+        await screenshot(
           comment:
               '''After tapping todo item again, should reactivate todo item.''',
-          takeActions: () async {
-            await tester.userAction.tap(
+          takeActions: (userAction, testerAction) async {
+            await userAction.tap(
               find.byType(HomeD_TodoItem),
             );
-            await tester.testerAction.pumpAndSettle();
+            await testerAction.pumpAndSettle();
           },
-          runExpectations: () {
-            tester
-              ..expect(
-                find.byIcon(Icons.check_box_outline_blank),
-                findsOneWidget,
-                reason: '''Should see checkbox outline''',
-              )
-              ..expect(
-                find.text('Take out the trash'),
-                findsOneWidget,
-                reason: '''Should see the todo item's text''',
-              );
+          runExpectations: (expect) {
+            expect(
+              find.byIcon(Icons.check_box_outline_blank),
+              findsOneWidget,
+              reason: '''Should see checkbox outline''',
+            );
+            expect(
+              find.text('Take out the trash'),
+              findsOneWidget,
+              reason: '''Should see the todo item's text''',
+            );
           },
           expectedEvents: [TodosEvent_ActivateTodoItem],
           expectedAnalytics: ['Track: TODO: Reactivated'],

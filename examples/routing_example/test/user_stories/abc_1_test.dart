@@ -17,36 +17,34 @@ void main() {
         screenshotDir: 'push_route',
         mockedApp: CoralMockedApp(appBuilder: appBuilder),
         analyticListeners: analyticListeners,
-        test: (tester) async {
-          await tester.screenshot(
+        test: (screenshot) async {
+          await screenshot(
             comment: '''Should start on the home page with a count of zero.''',
-            takeActions: () async {},
-            runExpectations: () async {
-              tester
-                ..expect(
-                  find.byType(Home_Page),
-                  findsOneWidget,
-                  reason: 'Should be on the home page',
-                )
-                ..expect(
-                  find.text('Count: 0'),
-                  findsOneWidget,
-                  reason: 'Count should be at 0',
-                );
+            runExpectations: (expect) async {
+              expect(
+                find.byType(Home_Page),
+                findsOneWidget,
+                reason: 'Should be on the home page',
+              );
+              expect(
+                find.text('Count: 0'),
+                findsOneWidget,
+                reason: 'Count should be at 0',
+              );
             },
             expectedEvents: [],
             expectedAnalytics: ['Screen: home'],
           );
 
-          await tester.screenshot(
+          await screenshot(
             comment: '''Should be able to change the Home Page's count''',
-            takeActions: () async {
-              await tester.userAction.tap(find.text('Increment'));
-              await tester.userAction.tap(find.text('Increment'));
-              await tester.testerAction.pumpAndSettle();
+            takeActions: (userAction, testerAction) async {
+              await userAction.tap(find.text('Increment'));
+              await userAction.tap(find.text('Increment'));
+              await testerAction.pumpAndSettle();
             },
-            runExpectations: () async {
-              tester.expect(
+            runExpectations: (expect) async {
+              expect(
                 find.text('Count: 2'),
                 findsOneWidget,
                 reason: 'Count should be at 2',
@@ -62,17 +60,17 @@ void main() {
             ],
           );
 
-          await tester.screenshot(
+          await screenshot(
             comment:
                 '''If we 'push' to the about page, we should see the about page''',
-            takeActions: () async {
-              await tester.userAction.tap(
+            takeActions: (userAction, testerAction) async {
+              await userAction.tap(
                 find.text('Push to About Page'),
               );
-              await tester.testerAction.pumpAndSettle();
+              await testerAction.pumpAndSettle();
             },
-            runExpectations: () async {
-              tester.expect(
+            runExpectations: (expect) async {
+              expect(
                 find.byType(About_Page),
                 findsOneWidget,
                 reason: 'Should be on the about page',
@@ -82,27 +80,26 @@ void main() {
             expectedAnalytics: ['Screen: about'],
           );
 
-          await tester.screenshot(
+          await screenshot(
             comment:
                 '''Since we pushed to the about page, we have a stack of pages (about page on top of home page). If we pop the about page off, and go back to the home page, the home page's count should be preserved.''',
-            takeActions: () async {
-              await tester.userAction.tap(
+            takeActions: (userAction, testerAction) async {
+              await userAction.tap(
                 find.byType(BackButton),
               );
-              await tester.testerAction.pumpAndSettle();
+              await testerAction.pumpAndSettle();
             },
-            runExpectations: () async {
-              tester
-                ..expect(
-                  find.byType(Home_Page),
-                  findsOneWidget,
-                  reason: 'Should be on the home page',
-                )
-                ..expect(
-                  find.text('Count: 2'),
-                  findsOneWidget,
-                  reason: 'Count should still be at 2',
-                );
+            runExpectations: (expect) async {
+              expect(
+                find.byType(Home_Page),
+                findsOneWidget,
+                reason: 'Should be on the home page',
+              );
+              expect(
+                find.text('Count: 2'),
+                findsOneWidget,
+                reason: 'Count should still be at 2',
+              );
             },
             expectedEvents: [],
             expectedAnalytics: ['Screen: home'],
@@ -116,36 +113,34 @@ void main() {
         screenshotDir: 'go_to_route',
         mockedApp: CoralMockedApp(appBuilder: appBuilder),
         analyticListeners: analyticListeners,
-        test: (tester) async {
-          await tester.screenshot(
+        test: (screenshot) async {
+          await screenshot(
             comment: '''Should start on the home page with a count of zero.''',
-            takeActions: () async {},
-            runExpectations: () async {
-              tester
-                ..expect(
-                  find.byType(Home_Page),
-                  findsOneWidget,
-                  reason: 'Should be on the home page',
-                )
-                ..expect(
-                  find.text('Count: 0'),
-                  findsOneWidget,
-                  reason: 'Count should be at 0',
-                );
+            runExpectations: (expect) async {
+              expect(
+                find.byType(Home_Page),
+                findsOneWidget,
+                reason: 'Should be on the home page',
+              );
+              expect(
+                find.text('Count: 0'),
+                findsOneWidget,
+                reason: 'Count should be at 0',
+              );
             },
             expectedEvents: [],
             expectedAnalytics: ['Screen: home'],
           );
 
-          await tester.screenshot(
+          await screenshot(
             comment: '''Should be able to change the Home Page's count''',
-            takeActions: () async {
-              await tester.userAction.tap(find.text('Decrement'));
-              await tester.userAction.tap(find.text('Decrement'));
-              await tester.testerAction.pumpAndSettle();
+            takeActions: (userAction, testerAction) async {
+              await userAction.tap(find.text('Decrement'));
+              await userAction.tap(find.text('Decrement'));
+              await testerAction.pumpAndSettle();
             },
-            runExpectations: () async {
-              tester.expect(
+            runExpectations: (expect) async {
+              expect(
                 find.text('Count: -2'),
                 findsOneWidget,
                 reason: 'Count should be at -2',
@@ -161,17 +156,17 @@ void main() {
             ],
           );
 
-          await tester.screenshot(
+          await screenshot(
             comment:
                 '''If we 'go' to the about page, we should see the about page''',
-            takeActions: () async {
-              await tester.userAction.tap(
+            takeActions: (userAction, testerAction) async {
+              await userAction.tap(
                 find.text('Go to About Page'),
               );
-              await tester.testerAction.pumpAndSettle();
+              await testerAction.pumpAndSettle();
             },
-            runExpectations: () async {
-              tester.expect(
+            runExpectations: (expect) async {
+              expect(
                 find.byType(About_Page),
                 findsOneWidget,
                 reason: 'Should be on the about page',
@@ -181,33 +176,32 @@ void main() {
             expectedAnalytics: ['Screen: about'],
           );
 
-          await tester.screenshot(
+          await screenshot(
             comment:
                 '''Since we 'go'ed to the about page, we do not have a stack of pages, we only have the about page. The original home page does not exist. So if we go back to the home page, it will get recreated and the counter will be reset to 0.''',
-            takeActions: () async {
-              await tester.userAction.tap(
+            takeActions: (userAction, testerAction) async {
+              await userAction.tap(
                 find.text('Go to Home Page'),
               );
-              await tester.testerAction.pumpAndSettle();
+              await testerAction.pumpAndSettle();
             },
-            runExpectations: () async {
-              tester
-                ..expect(
-                  find.byType(Home_Page),
-                  findsOneWidget,
-                  reason: 'Should be on the home page',
-                )
-                ..expect(
-                  find.byType(BackButton),
-                  findsNothing,
-                  reason:
-                      '''The back button should not exist, because there isn't a stack of routes.''',
-                )
-                ..expect(
-                  find.text('Count: 0'),
-                  findsOneWidget,
-                  reason: 'Count should not be -2, and should be reset to 0',
-                );
+            runExpectations: (expect) async {
+              expect(
+                find.byType(Home_Page),
+                findsOneWidget,
+                reason: 'Should be on the home page',
+              );
+              expect(
+                find.byType(BackButton),
+                findsNothing,
+                reason:
+                    '''The back button should not exist, because there isn't a stack of routes.''',
+              );
+              expect(
+                find.text('Count: 0'),
+                findsOneWidget,
+                reason: 'Count should not be -2, and should be reset to 0',
+              );
             },
             expectedEvents: [],
             expectedAnalytics: ['Screen: home'],

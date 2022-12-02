@@ -25,10 +25,10 @@ void main() {
           (invocation) async => CoralBiometricsStatus.authenticationPassed,
         );
       },
-      test: (tester) async {
-        await tester.screenshot(
-          runExpectations: () {
-            tester.expect(
+      test: (screenshot) async {
+        await screenshot(
+          runExpectations: (expect) {
+            expect(
               find.text('Home Page'),
               findsOneWidget,
               reason: '''Should see the home page when biometrics pass''',
@@ -55,22 +55,21 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_error',
       printApplicationLogs: true,
-      test: (tester) async {
-        await tester.screenshot(
-          runExpectations: () {
-            tester
-              ..expect(
-                find.text('Login Page'),
-                findsOneWidget,
-                reason:
-                    '''If the biometrics repository breaks, should go to the login page''',
-              )
-              ..expect(
-                find.text('Biometrics status: authenticationFailed'),
-                findsOneWidget,
-                reason:
-                    '''If biometrics breaks, the status should be authentication failed''',
-              );
+      test: (screenshot) async {
+        await screenshot(
+          runExpectations: (expect) {
+            expect(
+              find.text('Login Page'),
+              findsOneWidget,
+              reason:
+                  '''If the biometrics repository breaks, should go to the login page''',
+            );
+            expect(
+              find.text('Biometrics status: authenticationFailed'),
+              findsOneWidget,
+              reason:
+                  '''If biometrics breaks, the status should be authentication failed''',
+            );
           },
           expectedEvents: [
             AuthenticationEvent_BiometricAuthenticationStarted,
@@ -93,19 +92,19 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_unsupported',
       printApplicationLogs: true,
-      test: (tester) async {
+      mockRepositoriesBeforeTest: (mockedApp) {
         when(
-          () => tester.mockedApp.mocks.biometricsRepository
-              .authenticateWithBiometrics(
+          () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
             authDescription: any(named: 'authDescription'),
           ),
         ).thenAnswer(
           (invocation) async => CoralBiometricsStatus.unsupported,
         );
-
-        await tester.screenshot(
-          runExpectations: () {
-            tester.expect(
+      },
+      test: (screenshot) async {
+        await screenshot(
+          runExpectations: (expect) {
+            expect(
               find.text('Login Page'),
               findsOneWidget,
               reason:
@@ -133,19 +132,19 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_notSetUp',
       printApplicationLogs: true,
-      test: (tester) async {
+      mockRepositoriesBeforeTest: (mockedApp) {
         when(
-          () => tester.mockedApp.mocks.biometricsRepository
-              .authenticateWithBiometrics(
+          () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
             authDescription: any(named: 'authDescription'),
           ),
         ).thenAnswer(
           (invocation) async => CoralBiometricsStatus.supportedButNotSetUp,
         );
-
-        await tester.screenshot(
-          runExpectations: () {
-            tester.expect(
+      },
+      test: (screenshot) async {
+        await screenshot(
+          runExpectations: (expect) {
+            expect(
               find.text('Login Page'),
               findsOneWidget,
               reason:
@@ -173,19 +172,19 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_authFailed',
       printApplicationLogs: true,
-      test: (tester) async {
+      mockRepositoriesBeforeTest: (mockedApp) {
         when(
-          () => tester.mockedApp.mocks.biometricsRepository
-              .authenticateWithBiometrics(
+          () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
             authDescription: any(named: 'authDescription'),
           ),
         ).thenAnswer(
           (invocation) async => CoralBiometricsStatus.authenticationFailed,
         );
-
-        await tester.screenshot(
-          runExpectations: () {
-            tester.expect(
+      },
+      test: (screenshot) async {
+        await screenshot(
+          runExpectations: (expect) {
+            expect(
               find.text('Login Page'),
               findsOneWidget,
               reason:

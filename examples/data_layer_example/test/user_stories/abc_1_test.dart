@@ -20,28 +20,27 @@ void main() {
         screenshotDir: 'random_quote',
         mockedApp: MockedApp(MocksContainer()),
         analyticListeners: analyticListeners,
-        test: (tester) async {
-          await tester.screenshot(
+        test: (screenshot) async {
+          await screenshot(
             comment:
                 '''When I first open the app, I want to be on the home page and see a button to get a random quote.''',
-            runExpectations: () {
-              tester
-                ..expect(
-                  find.byType(Home_Page),
-                  findsOneWidget,
-                  reason: 'Should be on the home page',
-                )
-                ..expect(
-                  find.byType(HomeC_QuoteButton),
-                  findsOneWidget,
-                  reason: 'Should see button that will generate a random quote',
-                );
+            runExpectations: (expect) {
+              expect(
+                find.byType(Home_Page),
+                findsOneWidget,
+                reason: 'Should be on the home page',
+              );
+              expect(
+                find.byType(HomeC_QuoteButton),
+                findsOneWidget,
+                reason: 'Should see button that will generate a random quote',
+              );
             },
             expectedEvents: [],
             expectedAnalytics: ['Screen: home'],
           );
 
-          await tester.screenshot(
+          await screenshot(
             comment:
                 '''When I tap on the random quote button, I should see a quote displayed on the screen.''',
             mockRepositories: (mockedApp) {
@@ -54,14 +53,14 @@ void main() {
                 ),
               );
             },
-            takeActions: () async {
-              await tester.userAction.tap(
+            takeActions: (userAction, testerAction) async {
+              await userAction.tap(
                 find.byType(HomeC_QuoteButton),
               );
-              await tester.testerAction.pumpAndSettle();
+              await testerAction.pumpAndSettle();
             },
-            runExpectations: () {
-              tester.expect(
+            runExpectations: (expect) {
+              expect(
                 find.text('I know that I know nothing'),
                 findsOneWidget,
                 reason: 'Should see a random quote displayed',
@@ -71,36 +70,36 @@ void main() {
             expectedAnalytics: ['Track: Quote: Get Random Quote'],
           );
 
-          await tester.screenshot(
+          await screenshot(
             comment:
                 '''If I tap on the random quote button, and there is an error, I should see a snack bar.''',
-            takeActions: () async {
+            mockRepositories: (mockedApp) {
               when(
-                () => tester.mockedApp.mocks.quoteRepository.getRandomQuote(),
+                mockedApp.mocks.quoteRepository.getRandomQuote,
               ).thenThrow(Exception('BOOM'));
-
-              await tester.userAction.tap(
+            },
+            takeActions: (userAction, testerAction) async {
+              await userAction.tap(
                 find.byType(HomeC_QuoteButton),
               );
-              await tester.testerAction.pumpAndSettle();
+              await testerAction.pumpAndSettle();
             },
-            runExpectations: () {
-              tester
-                ..expect(
-                  find.text('I know that I know nothing'),
-                  findsNothing,
-                  reason: 'Should not see the random quote anymore',
-                )
-                ..expect(
-                  find.byType(SnackBar),
-                  findsOneWidget,
-                  reason: 'Should see an error snack bar',
-                )
-                ..expect(
-                  find.text('Uh oh, something went wrong'),
-                  findsOneWidget,
-                  reason: 'Should see error text that something went wrong',
-                );
+            runExpectations: (expect) {
+              expect(
+                find.text('I know that I know nothing'),
+                findsNothing,
+                reason: 'Should not see the random quote anymore',
+              );
+              expect(
+                find.byType(SnackBar),
+                findsOneWidget,
+                reason: 'Should see an error snack bar',
+              );
+              expect(
+                find.text('Uh oh, something went wrong'),
+                findsOneWidget,
+                reason: 'Should see error text that something went wrong',
+              );
             },
             expectedEvents: [QuoteEvent_RandomQuote],
             expectedAnalytics: ['Track: Quote: Get Random Quote'],
