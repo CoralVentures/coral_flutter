@@ -15,8 +15,8 @@ void main() {
       analyticListeners: analyticListeners,
       test: (screenshot) async {
         await screenshot(
-          comment: 'Should start on the home tab',
-          runExpectations: (expect) {
+          description: 'Should start on the home tab',
+          expectations: (expect) {
             expect(
               find.byWidgetPredicate((widget) {
                 if (widget is AppBar) {
@@ -51,14 +51,14 @@ void main() {
         );
 
         await screenshot(
-          comment: 'Should be able to go to the settings tab',
-          takeActions: (userAction, testerAction) async {
+          description: 'Should be able to go to the settings tab',
+          actions: (userAction, testerAction) async {
             await userAction.tap(
               find.byIcon(Icons.settings),
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byWidgetPredicate((widget) {
                 if (widget is AppBar) {
@@ -90,12 +90,12 @@ void main() {
         );
 
         await screenshot(
-          comment: 'Should be able to go back to the home tab',
-          takeActions: (userAction, testerAction) async {
+          description: 'Should be able to go back to the home tab',
+          actions: (userAction, testerAction) async {
             await userAction.tap(find.byIcon(Icons.home));
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byWidgetPredicate((widget) {
                 if (widget is AppBar) {

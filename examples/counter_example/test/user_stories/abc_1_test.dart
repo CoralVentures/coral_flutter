@@ -14,7 +14,7 @@ void main() {
       screenshotDir: 'change_count',
       test: (screenshot) async {
         await screenshot(
-          runExpectations: (exepect) {
+          expectations: (exepect) {
             expect(
               find.text('Count: 0'),
               findsOneWidget,
@@ -25,12 +25,12 @@ void main() {
         );
 
         await screenshot(
-          comment: 'As a user, I want to be able to decrement the count',
-          takeActions: (userAction, testerAction) async {
+          description: 'As a user, I want to be able to decrement the count',
+          actions: (userAction, testerAction) async {
             await userAction.tap(find.text('Decrement'));
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('Count: -1'),
               findsOneWidget,
@@ -46,13 +46,13 @@ void main() {
         );
 
         await screenshot(
-          comment: 'As a user, I want to be able to increment the count',
-          takeActions: (userAction, testerAction) async {
+          description: 'As a user, I want to be able to increment the count',
+          actions: (userAction, testerAction) async {
             await userAction.tap(find.text('Increment'));
             await userAction.tap(find.text('Increment'));
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('Count: 1'),
               findsOneWidget,

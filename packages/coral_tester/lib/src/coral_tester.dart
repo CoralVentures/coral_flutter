@@ -22,10 +22,10 @@ typedef CoralTakeActions = Future<void> Function(
 );
 
 typedef CoralScreenshot<T> = Future<void> Function({
-  String? comment,
-  void Function(T mockedApp)? mockRepositories,
-  CoralTakeActions? takeActions,
-  void Function(CoralExpect expect)? runExpectations,
+  String? description,
+  void Function(T mockedApp)? mocks,
+  CoralTakeActions? actions,
+  void Function(CoralExpect expect)? expectations,
   List<Type> expectedEvents,
   List<String> expectedAnalytics,
 });
@@ -105,19 +105,19 @@ class CoralTester<T extends CoralMockedApp> {
   int _screenshotCounter = 0;
 
   Future<void> screenshot({
-    String? comment,
-    void Function(T mockedApp)? mockRepositories,
-    CoralTakeActions? takeActions,
-    void Function(CoralExpect expect)? runExpectations,
+    String? description,
+    void Function(T mockedApp)? mocks,
+    CoralTakeActions? actions,
+    void Function(CoralExpect expect)? expectations,
     List<Type> expectedEvents = const [],
     List<String> expectedAnalytics = const [],
   }) async {
-    if (mockRepositories != null) {
-      mockRepositories.call(mockedApp);
+    if (mocks != null) {
+      mocks.call(mockedApp);
     }
 
-    if (takeActions != null) {
-      await takeActions.call(
+    if (actions != null) {
+      await actions.call(
         userAction,
         testerAction,
       );
@@ -145,8 +145,8 @@ class CoralTester<T extends CoralMockedApp> {
     final screenshotPath = '$basePath/$resolvedCounter';
 
     /// Check expectations
-    if (runExpectations != null) {
-      runExpectations.call(expect);
+    if (expectations != null) {
+      expectations.call(expect);
     }
 
     /// Save checkpoint
@@ -156,7 +156,7 @@ class CoralTester<T extends CoralMockedApp> {
       expectationReasons: List.from(expectationReasons),
       events: List.from(blocObserver.events),
       analytics: List.from(blocObserver.analytics),
-      comment: comment,
+      description: description,
     );
 
     if (printTesterLogs) {

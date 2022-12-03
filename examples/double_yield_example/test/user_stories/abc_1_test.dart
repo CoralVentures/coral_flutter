@@ -16,8 +16,8 @@ void main() {
       analyticListeners: analyticListeners,
       test: (screenshot) async {
         await screenshot(
-          comment: 'Should see a single button to trigger a snack bar',
-          runExpectations: (expect) {
+          description: 'Should see a single button to trigger a snack bar',
+          expectations: (expect) {
             expect(
               find.byType(HomeC_SayHelloButton),
               findsOneWidget,
@@ -29,14 +29,14 @@ void main() {
         );
 
         await screenshot(
-          comment: '''After tapping button, should see a snack bar''',
-          takeActions: (userAction, testerAction) async {
+          description: '''After tapping button, should see a snack bar''',
+          actions: (userAction, testerAction) async {
             await userAction.tap(
               find.byType(HomeC_SayHelloButton),
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byType(SnackBar),
               findsOneWidget,

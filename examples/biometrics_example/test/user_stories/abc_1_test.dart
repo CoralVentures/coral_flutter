@@ -27,7 +27,7 @@ void main() {
       },
       test: (screenshot) async {
         await screenshot(
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('Home Page'),
               findsOneWidget,
@@ -57,7 +57,7 @@ void main() {
       printApplicationLogs: true,
       test: (screenshot) async {
         await screenshot(
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('Login Page'),
               findsOneWidget,
@@ -103,7 +103,7 @@ void main() {
       },
       test: (screenshot) async {
         await screenshot(
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('Login Page'),
               findsOneWidget,
@@ -143,7 +143,7 @@ void main() {
       },
       test: (screenshot) async {
         await screenshot(
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('Login Page'),
               findsOneWidget,
@@ -183,7 +183,7 @@ void main() {
       },
       test: (screenshot) async {
         await screenshot(
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('Login Page'),
               findsOneWidget,

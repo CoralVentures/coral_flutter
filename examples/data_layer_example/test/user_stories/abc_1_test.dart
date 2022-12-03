@@ -22,9 +22,9 @@ void main() {
         analyticListeners: analyticListeners,
         test: (screenshot) async {
           await screenshot(
-            comment:
+            description:
                 '''When I first open the app, I want to be on the home page and see a button to get a random quote.''',
-            runExpectations: (expect) {
+            expectations: (expect) {
               expect(
                 find.byType(Home_Page),
                 findsOneWidget,
@@ -41,9 +41,9 @@ void main() {
           );
 
           await screenshot(
-            comment:
+            description:
                 '''When I tap on the random quote button, I should see a quote displayed on the screen.''',
-            mockRepositories: (mockedApp) {
+            mocks: (mockedApp) {
               when(
                 () => mockedApp.mocks.quoteRepository.getRandomQuote(),
               ).thenAnswer(
@@ -53,13 +53,13 @@ void main() {
                 ),
               );
             },
-            takeActions: (userAction, testerAction) async {
+            actions: (userAction, testerAction) async {
               await userAction.tap(
                 find.byType(HomeC_QuoteButton),
               );
               await testerAction.pumpAndSettle();
             },
-            runExpectations: (expect) {
+            expectations: (expect) {
               expect(
                 find.text('I know that I know nothing'),
                 findsOneWidget,
@@ -71,20 +71,20 @@ void main() {
           );
 
           await screenshot(
-            comment:
+            description:
                 '''If I tap on the random quote button, and there is an error, I should see a snack bar.''',
-            mockRepositories: (mockedApp) {
+            mocks: (mockedApp) {
               when(
                 mockedApp.mocks.quoteRepository.getRandomQuote,
               ).thenThrow(Exception('BOOM'));
             },
-            takeActions: (userAction, testerAction) async {
+            actions: (userAction, testerAction) async {
               await userAction.tap(
                 find.byType(HomeC_QuoteButton),
               );
               await testerAction.pumpAndSettle();
             },
-            runExpectations: (expect) {
+            expectations: (expect) {
               expect(
                 find.text('I know that I know nothing'),
                 findsNothing,

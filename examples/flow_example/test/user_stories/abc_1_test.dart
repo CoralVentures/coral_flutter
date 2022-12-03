@@ -27,8 +27,8 @@ void main() {
       screenshotDir: 'create_todo',
       test: (screenshot) async {
         await screenshot(
-          comment: 'Should start with no TODOs',
-          runExpectations: (expect) {
+          description: 'Should start with no TODOs',
+          expectations: (expect) {
             expect(
               find.byType(Home_Page),
               findsOneWidget,
@@ -45,15 +45,15 @@ void main() {
         );
 
         await screenshot(
-          comment:
+          description:
               '''After tapping create todo button, should be asked to enter task''',
-          takeActions: (userAction, testerAction) async {
+          actions: (userAction, testerAction) async {
             await userAction.tap(
               find.byType(HomeC_CreateTodoButton),
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byType(CreateTodoStep1_Page),
               findsOneWidget,
@@ -70,15 +70,15 @@ void main() {
         );
 
         await screenshot(
-          comment: '''Should be able to enter the task''',
-          takeActions: (userAction, testerAction) async {
+          description: '''Should be able to enter the task''',
+          actions: (userAction, testerAction) async {
             await userAction.enterText(
               find.byType(CreateTodoStep1C_TaskInput),
               'Take out the trash',
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('Take out the trash'),
               findsOneWidget,
@@ -90,14 +90,14 @@ void main() {
         );
 
         await screenshot(
-          comment: '''Should be able to continue after entering the task''',
-          takeActions: (userAction, testerAction) async {
+          description: '''Should be able to continue after entering the task''',
+          actions: (userAction, testerAction) async {
             await userAction.tap(
               find.byType(CreateTodoStep1C_ContinueButton),
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byType(CreateTodoStep2_Page),
               findsOneWidget,
@@ -109,15 +109,15 @@ void main() {
         );
 
         await screenshot(
-          comment: '''Should be able to enter the priority''',
-          takeActions: (userAction, testerAction) async {
+          description: '''Should be able to enter the priority''',
+          actions: (userAction, testerAction) async {
             await userAction.enterText(
               find.byType(CreateTodoStep2C_PriorityInput),
               'High',
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('High'),
               findsOneWidget,
@@ -129,14 +129,15 @@ void main() {
         );
 
         await screenshot(
-          comment: '''Should be able to continue after entering the priority''',
-          takeActions: (userAction, testerAction) async {
+          description:
+              '''Should be able to continue after entering the priority''',
+          actions: (userAction, testerAction) async {
             await userAction.tap(
               find.byType(CreateTodoStep2C_ContinueButton),
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byType(CreateTodoStep3_Page),
               findsOneWidget,
@@ -148,15 +149,15 @@ void main() {
         );
 
         await screenshot(
-          comment: '''Should be able to enter the assignee''',
-          takeActions: (userAction, testerAction) async {
+          description: '''Should be able to enter the assignee''',
+          actions: (userAction, testerAction) async {
             await userAction.enterText(
               find.byType(CreateTodoStep3C_AssigneeInput),
               'Jane',
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.text('Jane'),
               findsOneWidget,
@@ -168,14 +169,14 @@ void main() {
         );
 
         await screenshot(
-          comment: '''Should be able to submit the todo item''',
-          takeActions: (userAction, testerAction) async {
+          description: '''Should be able to submit the todo item''',
+          actions: (userAction, testerAction) async {
             await userAction.tap(
               find.byType(CreateTodoStep3C_SubmitButton),
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byType(Home_Page),
               findsOneWidget,

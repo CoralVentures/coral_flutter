@@ -16,9 +16,9 @@ void main() {
       screenshotDir: 'todo_item',
       test: (screenshot) async {
         await screenshot(
-          comment:
+          description:
               '''Before entering a todo item, there should be no todo items''',
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byType(HomeD_TodoItem),
               findsNothing,
@@ -30,16 +30,16 @@ void main() {
         );
 
         await screenshot(
-          comment:
+          description:
               '''Should see potential todo while typing, but shouldn't see todo item until the user has hit submit''',
-          takeActions: (userAction, testerAction) async {
+          actions: (userAction, testerAction) async {
             await userAction.enterText(
               find.byType(TextField),
               'Take out the trash',
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (exect) {
+          expectations: (exect) {
             expect(
               find.byType(HomeD_TodoItem),
               findsNothing,
@@ -52,13 +52,13 @@ void main() {
         );
 
         await screenshot(
-          comment: '''Should see todo once user hits submit.''',
-          takeActions: (userAction, testerAction) async {
+          description: '''Should see todo once user hits submit.''',
+          actions: (userAction, testerAction) async {
             await testerAction.testTextInput
                 .receiveAction(TextInputAction.done);
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byType(HomeD_TodoItem),
               findsOneWidget,
@@ -80,14 +80,15 @@ void main() {
         );
 
         await screenshot(
-          comment: '''After tapping on todo, should see completed todo item.''',
-          takeActions: (userAction, testerAction) async {
+          description:
+              '''After tapping on todo, should see completed todo item.''',
+          actions: (userAction, testerAction) async {
             await userAction.tap(
               find.byType(HomeD_TodoItem),
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byWidgetPredicate((widget) {
                 if (widget is Icon) {
@@ -120,15 +121,15 @@ void main() {
         );
 
         await screenshot(
-          comment:
+          description:
               '''After tapping todo item again, should reactivate todo item.''',
-          takeActions: (userAction, testerAction) async {
+          actions: (userAction, testerAction) async {
             await userAction.tap(
               find.byType(HomeD_TodoItem),
             );
             await testerAction.pumpAndSettle();
           },
-          runExpectations: (expect) {
+          expectations: (expect) {
             expect(
               find.byIcon(Icons.check_box_outline_blank),
               findsOneWidget,

@@ -19,8 +19,9 @@ void main() {
         analyticListeners: analyticListeners,
         test: (screenshot) async {
           await screenshot(
-            comment: '''Should start on the home page with a count of zero.''',
-            runExpectations: (expect) async {
+            description:
+                '''Should start on the home page with a count of zero.''',
+            expectations: (expect) async {
               expect(
                 find.byType(Home_Page),
                 findsOneWidget,
@@ -37,13 +38,13 @@ void main() {
           );
 
           await screenshot(
-            comment: '''Should be able to change the Home Page's count''',
-            takeActions: (userAction, testerAction) async {
+            description: '''Should be able to change the Home Page's count''',
+            actions: (userAction, testerAction) async {
               await userAction.tap(find.text('Increment'));
               await userAction.tap(find.text('Increment'));
               await testerAction.pumpAndSettle();
             },
-            runExpectations: (expect) async {
+            expectations: (expect) async {
               expect(
                 find.text('Count: 2'),
                 findsOneWidget,
@@ -61,15 +62,15 @@ void main() {
           );
 
           await screenshot(
-            comment:
+            description:
                 '''If we 'push' to the about page, we should see the about page''',
-            takeActions: (userAction, testerAction) async {
+            actions: (userAction, testerAction) async {
               await userAction.tap(
                 find.text('Push to About Page'),
               );
               await testerAction.pumpAndSettle();
             },
-            runExpectations: (expect) async {
+            expectations: (expect) async {
               expect(
                 find.byType(About_Page),
                 findsOneWidget,
@@ -81,15 +82,15 @@ void main() {
           );
 
           await screenshot(
-            comment:
+            description:
                 '''Since we pushed to the about page, we have a stack of pages (about page on top of home page). If we pop the about page off, and go back to the home page, the home page's count should be preserved.''',
-            takeActions: (userAction, testerAction) async {
+            actions: (userAction, testerAction) async {
               await userAction.tap(
                 find.byType(BackButton),
               );
               await testerAction.pumpAndSettle();
             },
-            runExpectations: (expect) async {
+            expectations: (expect) async {
               expect(
                 find.byType(Home_Page),
                 findsOneWidget,
@@ -115,8 +116,9 @@ void main() {
         analyticListeners: analyticListeners,
         test: (screenshot) async {
           await screenshot(
-            comment: '''Should start on the home page with a count of zero.''',
-            runExpectations: (expect) async {
+            description:
+                '''Should start on the home page with a count of zero.''',
+            expectations: (expect) async {
               expect(
                 find.byType(Home_Page),
                 findsOneWidget,
@@ -133,13 +135,13 @@ void main() {
           );
 
           await screenshot(
-            comment: '''Should be able to change the Home Page's count''',
-            takeActions: (userAction, testerAction) async {
+            description: '''Should be able to change the Home Page's count''',
+            actions: (userAction, testerAction) async {
               await userAction.tap(find.text('Decrement'));
               await userAction.tap(find.text('Decrement'));
               await testerAction.pumpAndSettle();
             },
-            runExpectations: (expect) async {
+            expectations: (expect) async {
               expect(
                 find.text('Count: -2'),
                 findsOneWidget,
@@ -157,15 +159,15 @@ void main() {
           );
 
           await screenshot(
-            comment:
+            description:
                 '''If we 'go' to the about page, we should see the about page''',
-            takeActions: (userAction, testerAction) async {
+            actions: (userAction, testerAction) async {
               await userAction.tap(
                 find.text('Go to About Page'),
               );
               await testerAction.pumpAndSettle();
             },
-            runExpectations: (expect) async {
+            expectations: (expect) async {
               expect(
                 find.byType(About_Page),
                 findsOneWidget,
@@ -177,15 +179,15 @@ void main() {
           );
 
           await screenshot(
-            comment:
+            description:
                 '''Since we 'go'ed to the about page, we do not have a stack of pages, we only have the about page. The original home page does not exist. So if we go back to the home page, it will get recreated and the counter will be reset to 0.''',
-            takeActions: (userAction, testerAction) async {
+            actions: (userAction, testerAction) async {
               await userAction.tap(
                 find.text('Go to Home Page'),
               );
               await testerAction.pumpAndSettle();
             },
-            runExpectations: (expect) async {
+            expectations: (expect) async {
               expect(
                 find.byType(Home_Page),
                 findsOneWidget,

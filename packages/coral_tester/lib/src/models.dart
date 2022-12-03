@@ -79,7 +79,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
     required this.actions,
     required this.events,
     required this.analytics,
-    this.comment,
+    this.description,
   });
 
   final String screenshotPath;
@@ -87,15 +87,15 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
   final List<CoralTesterAction> actions;
   final List<Type> events;
   final List<String> analytics;
-  final String? comment;
+  final String? description;
 
   @override
   String toString() {
     final buffer = StringBuffer();
 
-    if (comment != null) {
+    if (description != null) {
       buffer
-        ..writeln(comment)
+        ..writeln(description)
         ..writeln();
     }
 
@@ -146,8 +146,8 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
   String toMarkdown() {
     final buffer = StringBuffer();
 
-    if (comment != null) {
-      buffer.write('\n## $comment\n');
+    if (description != null) {
+      buffer.write('\n## $description\n');
     }
 
     buffer.write(
