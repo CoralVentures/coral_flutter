@@ -16,7 +16,7 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_passes',
       printApplicationLogs: true,
-      mockRepositoriesBeforeTest: (mockedApp) {
+      mocksBeforeTest: (mockedApp) {
         when(
           () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
             authDescription: any(named: 'authDescription'),
@@ -92,7 +92,7 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_unsupported',
       printApplicationLogs: true,
-      mockRepositoriesBeforeTest: (mockedApp) {
+      mocksBeforeTest: (mockedApp) {
         when(
           () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
             authDescription: any(named: 'authDescription'),
@@ -132,7 +132,7 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_notSetUp',
       printApplicationLogs: true,
-      mockRepositoriesBeforeTest: (mockedApp) {
+      mocksBeforeTest: (mockedApp) {
         when(
           () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
             authDescription: any(named: 'authDescription'),
@@ -172,7 +172,7 @@ void main() {
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_authFailed',
       printApplicationLogs: true,
-      mockRepositoriesBeforeTest: (mockedApp) {
+      mocksBeforeTest: (mockedApp) {
         when(
           () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
             authDescription: any(named: 'authDescription'),

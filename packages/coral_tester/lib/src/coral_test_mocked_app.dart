@@ -35,7 +35,7 @@ void coralTestGroup(
 /// - [screenshotDir] is used to namespace the golden images into a specific
 ///   directory
 /// - [skip] to skip the test
-/// - [mockRepositoriesBeforeTest] to add mocks before the test runs
+/// - [mocksBeforeTest] to add mocks before the test runs
 /// - [test] is the test body
 /// - [printTesterLogs] will print tester logs, defaults to true
 /// - [printApplicationLogs] will print application logs, defaults to false
@@ -50,7 +50,7 @@ void coralTestMockedApp<T extends CoralMockedApp>(
   bool skip = false,
   bool printTesterLogs = true,
   bool printApplicationLogs = false,
-  void Function(T mockedApp)? mockRepositoriesBeforeTest,
+  void Function(T mockedApp)? mocksBeforeTest,
   required Future<void> Function(CoralScreenshot<T>) test,
 }) {
   final basePath = '${userStoryId.snakeCase}/$screenshotDir';
@@ -94,8 +94,8 @@ void coralTestMockedApp<T extends CoralMockedApp>(
 
       coralTester.testerRecords.add(descriptionRecord);
 
-      if (mockRepositoriesBeforeTest != null) {
-        mockRepositoriesBeforeTest.call(mockedApp);
+      if (mocksBeforeTest != null) {
+        mocksBeforeTest.call(mockedApp);
       }
 
       await coralTester.pumpApp();
