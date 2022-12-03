@@ -1,4 +1,4 @@
-enum CoralStyle_Colors {
+enum CoralStyle_Color {
   primary50,
   primary100,
   primary200,
@@ -92,4 +92,20 @@ enum CoralStyle_Typography {
   body2,
   caption,
   overline,
+}
+
+enum CoralStyle_Spacing {
+  none, // 0
+  xxxSmall, // 2
+  xxSmall, // 4
+  xSmall, // 8
+  small, // 10
+  smallPlus, // 12
+  medium, // 16
+  mediumPlus, // 24
+  large, // 32
+  xLarge, // 40
+  xxLarge, // 60
+  xxxLarge, // 80
+  xxxxLarge, //100
 }

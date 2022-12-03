@@ -5,7 +5,7 @@ class CoralD_Text extends StatelessWidget {
   const CoralD_Text(
     this.data, {
     super.key,
-    this.color = CoralStyle_Colors.neutral1000,
+    this.color,
     required this.typography,
     this.textAlign,
     this.textDirection,
@@ -16,7 +16,7 @@ class CoralD_Text extends StatelessWidget {
   });
 
   final String data;
-  final CoralStyle_Colors color;
+  final CoralStyle_Color? color;
   final CoralStyle_Typography typography;
   final TextAlign? textAlign;
   final TextDirection? textDirection;
@@ -26,14 +26,14 @@ class CoralD_Text extends StatelessWidget {
   final String? semanticsLabel;
 
   static void registerWidget({
-    required Map<CoralStyle_Colors, Color> colorsMap,
+    required Map<CoralStyle_Color, Color> colorsMap,
     required Map<CoralStyle_Typography, TextStyle> typographyMap,
   }) {
     _colorsMap = colorsMap;
     _typographyMap = typographyMap;
   }
 
-  static late Map<CoralStyle_Colors, Color> _colorsMap;
+  static late Map<CoralStyle_Color, Color> _colorsMap;
   static late Map<CoralStyle_Typography, TextStyle> _typographyMap;
 
   TextStyle get _textStyle {
@@ -43,6 +43,10 @@ class CoralD_Text extends StatelessWidget {
       );
     }
     final ts = _typographyMap[typography]!;
+
+    if (color == null) {
+      return ts;
+    }
 
     if (!_colorsMap.containsKey(color)) {
       throw Exception(

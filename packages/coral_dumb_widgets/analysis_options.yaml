@@ -4,3 +4,4 @@ linter:
     public_member_api_docs: false
     use_colored_box: false
     camel_case_types: false
+    use_setters_to_change_properties: false
