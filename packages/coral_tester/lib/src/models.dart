@@ -80,6 +80,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
     required this.events,
     required this.analytics,
     this.description,
+    required this.testerTotalTripCount,
   });
 
   final String screenshotPath;
@@ -88,6 +89,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
   final List<Type> events;
   final List<String> analytics;
   final String? description;
+  final int testerTotalTripCount;
 
   @override
   String toString() {
@@ -155,7 +157,7 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
 <table>
   <tbody>
    <tr>
-      <td>
+      <td width="300" style="vertical-align:top">
 ''',
     );
 
@@ -209,12 +211,19 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
       buffer.writeln('</ul>');
     }
 
-    buffer.write(
-      '''
+    // We are only going to run `toMarkdown` on the first trip, but we want to
+    // see all the images from each trip.
+    final _trips = List<int>.generate(testerTotalTripCount, (i) => i);
+    for (final _trip in _trips) {
+      buffer.write('''
       </td>
       <td>
-      <img width="300" src="../../user_stories/goldens/$screenshotPath.iphone11.png">
-      </td>
+      <img width="300" src="../../user_stories/goldens/$screenshotPath.$_trip.iphone11.png">
+      </td>''');
+    }
+
+    buffer.write(
+      '''
    </tr>
   </tbody>
 </table>

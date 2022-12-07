@@ -15,7 +15,7 @@ void main() {
       mockedApp: MockedApp(MocksContainer()),
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_passes',
-      printApplicationLogs: true,
+      printApplicationLogs: false,
       mocksBeforeTest: (mockedApp) {
         when(
           () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(

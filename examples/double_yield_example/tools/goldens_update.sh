@@ -2,6 +2,9 @@
 
 set -e
 
+# remove gallery directory
+rm -rf test/gallery
+
 # remove golden directories
 cd test/user_stories
 find . -type d -name "goldens" -exec rm -rf {} +

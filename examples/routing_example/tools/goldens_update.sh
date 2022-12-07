@@ -2,7 +2,7 @@
 
 set -e
 
-# remove test gallery
+# remove gallery directory
 rm -rf test/gallery
 
 # remove golden directories
