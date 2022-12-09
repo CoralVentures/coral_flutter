@@ -54,7 +54,7 @@ void main() {
       mockedApp: MockedApp(MocksContainer()),
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_error',
-      printApplicationLogs: true,
+      printApplicationLogs: false,
       test: (screenshot) async {
         await screenshot(
           expectations: (expect) {
@@ -91,7 +91,7 @@ void main() {
       mockedApp: MockedApp(MocksContainer()),
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_unsupported',
-      printApplicationLogs: true,
+      printApplicationLogs: false,
       mocksBeforeTest: (mockedApp) {
         when(
           () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
@@ -131,7 +131,7 @@ void main() {
       mockedApp: MockedApp(MocksContainer()),
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_notSetUp',
-      printApplicationLogs: true,
+      printApplicationLogs: false,
       mocksBeforeTest: (mockedApp) {
         when(
           () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(
@@ -171,7 +171,7 @@ void main() {
       mockedApp: MockedApp(MocksContainer()),
       analyticListeners: analyticListeners,
       screenshotDir: 'biometrics_authFailed',
-      printApplicationLogs: true,
+      printApplicationLogs: false,
       mocksBeforeTest: (mockedApp) {
         when(
           () => mockedApp.mocks.biometricsRepository.authenticateWithBiometrics(

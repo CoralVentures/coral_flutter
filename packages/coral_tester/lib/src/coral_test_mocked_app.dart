@@ -60,6 +60,14 @@ void coralTestMockedApp<T extends CoralMockedApp>(
     'coral_tester: should use mockedApp or mockedApps, but not both',
   );
 
+  // From the CLI, you can use `--dart-define silenceAllLogs=true` to prevent
+  // any logs from printing, regardless of the printApplicationLogs and
+  // printTesterLogs values.
+  var silenceAllLogs = false;
+  try {
+    silenceAllLogs = const bool.fromEnvironment('silenceAllLogs');
+  } catch (_) {}
+
   final basePath = '${userStoryId.snakeCase}/$screenshotDir';
 
   testGoldens(
@@ -87,6 +95,12 @@ void coralTestMockedApp<T extends CoralMockedApp>(
         // Keep track if this is the first trip or not.
         final isFirstTrip = testerTripCount == 0;
 
+        // Only print if first trip and logs are not silenced
+        final _printTesterLogs =
+            printTesterLogs && isFirstTrip && !silenceAllLogs;
+        final _printApplicationLogs =
+            printApplicationLogs && isFirstTrip && !silenceAllLogs;
+
         // Set up the bloc observer, which will keep track of analytic events
         // (without forwarding them to Segment).
         final blocObserver = CoralTestBlocObserver(
@@ -97,7 +111,7 @@ void coralTestMockedApp<T extends CoralMockedApp>(
         blocObserver.mockAnalytics();
 
         // We can optionally print logs from our application.
-        if (printApplicationLogs && isFirstTrip) {
+        if (_printApplicationLogs) {
           CoralLogger.addPrintClient();
         }
         putLumberdashToWork(
@@ -111,7 +125,7 @@ void coralTestMockedApp<T extends CoralMockedApp>(
           blocObserver: blocObserver,
           widgetTester: tester,
           basePath: basePath,
-          printTesterLogs: printTesterLogs && isFirstTrip,
+          printTesterLogs: _printTesterLogs,
           testerTripCount: testerTripCount,
           testerTotalTripCount: _mockedApps.length,
         );
@@ -125,7 +139,7 @@ void coralTestMockedApp<T extends CoralMockedApp>(
 
         // test logs are different from application logs. If test logs are
         // turned on, then we will print the description record first.
-        if (printTesterLogs && isFirstTrip) {
+        if (_printTesterLogs) {
           print(descriptionRecord);
         }
 

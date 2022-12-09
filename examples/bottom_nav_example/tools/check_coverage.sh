@@ -13,7 +13,7 @@ PROJECT_COVERAGE=${PROJECT_PATH}/coverage/lcov.info
 FILTERED_COVERAGE=${PROJECT_PATH}/coverage/filtered.info
 
 rm -rf ./coverage
-flutter test --no-pub --test-randomize-ordering-seed random --coverage
+flutter test --no-pub --test-randomize-ordering-seed random --coverage --dart-define silenceAllLogs=true
 lcov --remove ${PROJECT_COVERAGE} -o ${FILTERED_COVERAGE}\
     '**/*.g.dart' \
     '**/bloc_type.dart' \

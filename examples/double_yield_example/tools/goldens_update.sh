@@ -11,7 +11,7 @@ find . -type d -name "goldens" -exec rm -rf {} +
 
 # generate new goldens
 cd ../../
-flutter test --update-goldens test/user_stories
+flutter test --update-goldens test/user_stories --dart-define silenceAllLogs=true
 
 # go back to original directory
 cd ../..
