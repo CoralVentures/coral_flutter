@@ -192,13 +192,16 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
       final screenshotPathListSansUserStoryId = screenshotPath.split('/')
         ..removeAt(0);
 
-      buffer
-        ..writeln('</ul>')
-        ..writeln('<br>')
-        ..writeln(
-          '<img width="300" src="./${screenshotPathListSansUserStoryId.join('/')}.png">',
-        )
-        ..writeln('<br>');
+      // only show graphviz image if more than one event
+      if (events.length > 1) {
+        buffer
+          ..writeln('</ul>')
+          ..writeln('<br>')
+          ..writeln(
+            '<img width="300" src="./${screenshotPathListSansUserStoryId.join('/')}.png">',
+          )
+          ..writeln('<br>');
+      }
     }
 
     if (analytics.isNotEmpty) {
@@ -232,48 +235,52 @@ class CoralTesterCheckpoint extends CoralTesterRecord {
     return buffer.toString();
   }
 
-  String toGraphviz() {
-    final buffer = StringBuffer()..writeln('digraph {');
+  String? toGraphviz() {
+    // only return if more than one event
+    if (events.length > 1) {
+      final buffer = StringBuffer()..writeln('digraph {');
 
-    final subgraphs = <String, List<String>>{};
+      final subgraphs = <String, List<String>>{};
 
-    final graphvizEvents = [
-      'Event_Start',
-      ...events.map((e) => e.toString()),
-      'Event_End',
-    ];
+      final graphvizEvents = [
+        'Event_Start',
+        ...events.map((e) => e.toString()),
+        'Event_End',
+      ];
 
-    for (var i = 0; i < graphvizEvents.length; i++) {
-      final eventParts = graphvizEvents[i].split('_');
+      for (var i = 0; i < graphvizEvents.length; i++) {
+        final eventParts = graphvizEvents[i].split('_');
 
-      final eventBlocName = eventParts.first.replaceAll('Event', '');
-      final eventName = eventParts.last;
+        final eventBlocName = eventParts.first.replaceAll('Event', '');
+        final eventName = eventParts.last;
 
-      subgraphs[eventBlocName] = (subgraphs[eventBlocName] ?? [])
-        ..add('$i [label="$eventName";];');
+        subgraphs[eventBlocName] = (subgraphs[eventBlocName] ?? [])
+          ..add('$i [label="$eventName";];');
 
-      if (i + 1 < graphvizEvents.length) {
-        buffer.writeln('  $i -> ${i + 1};');
+        if (i + 1 < graphvizEvents.length) {
+          buffer.writeln('  $i -> ${i + 1};');
+        }
       }
+
+      var subgraphCounter = 0;
+      subgraphs.forEach((blocName, eventNames) {
+        buffer
+          ..writeln('  subgraph cluster_$subgraphCounter {')
+          ..writeln('    label="$blocName";');
+
+        for (final eventName in eventNames) {
+          buffer.writeln('    $eventName');
+        }
+
+        buffer.writeln('  }');
+
+        subgraphCounter++;
+      });
+
+      buffer.writeln('}');
+
+      return buffer.toString();
     }
-
-    var subgraphCounter = 0;
-    subgraphs.forEach((blocName, eventNames) {
-      buffer
-        ..writeln('  subgraph cluster_$subgraphCounter {')
-        ..writeln('    label="$blocName";');
-
-      for (final eventName in eventNames) {
-        buffer.writeln('    $eventName');
-      }
-
-      buffer.writeln('  }');
-
-      subgraphCounter++;
-    });
-
-    buffer.writeln('}');
-
-    return buffer.toString();
+    return null;
   }
 }

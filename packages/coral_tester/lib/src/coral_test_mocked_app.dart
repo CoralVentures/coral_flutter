@@ -189,7 +189,11 @@ void coralTestMockedApp<T extends CoralMockedApp>(
               final checkpoints =
                   coralTester.testerRecords.whereType<CoralTesterCheckpoint>();
 
-              for (final checkpoint in checkpoints) {
+              // only checkpoints with more than one event
+              final checkpointsWithMoreThanOneEvent = checkpoints
+                  .where((checkpoint) => checkpoint.events.length > 1);
+
+              for (final checkpoint in checkpointsWithMoreThanOneEvent) {
                 final graphvizFilePath =
                     'test/gallery/${checkpoint.screenshotPath}.dot';
                 final graphvizFile =
