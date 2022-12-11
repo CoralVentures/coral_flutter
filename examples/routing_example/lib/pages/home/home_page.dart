@@ -5,7 +5,6 @@ import 'package:routing_example/pages/home/widgets_connector/counter_text.dart';
 import 'package:routing_example/pages/home/widgets_connector/decrement_button.dart';
 import 'package:routing_example/pages/home/widgets_connector/go_to_about_button.dart';
 import 'package:routing_example/pages/home/widgets_connector/increment_button.dart';
-import 'package:routing_example/pages/home/widgets_connector/push_to_about_button.dart';
 import 'package:routing_example/pages/home/widgets_connector/title.dart';
 import 'package:routing_example/styles/app_spacings.dart';
 
@@ -44,7 +43,6 @@ class Home_Scaffold extends StatelessWidget {
                   ],
                 ),
                 const HomeC_GoToAboutButton(),
-                const HomeC_PushToAboutButton(),
               ],
             ),
           ),

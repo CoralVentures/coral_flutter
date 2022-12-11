@@ -1,9 +1,7 @@
-import 'package:bottom_nav_example/app/app_builder.dart';
 import 'package:bottom_nav_example/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:bottom_nav_example/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class LaunchpadC_BottomNavbar extends StatelessWidget {
   const LaunchpadC_BottomNavbar({super.key});
@@ -15,22 +13,13 @@ class LaunchpadC_BottomNavbar extends StatelessWidget {
 
     return BottomNavigationBar(
       currentIndex: bottomNavBloc.state.tab.index,
-      onTap: (tappedIndex) {
-        final tappedTab = BottomNavTab.values[tappedIndex];
-        final router = GoRouter.of(context);
-
-        switch (tappedTab) {
-          case BottomNavTab.home:
-            router.goNamed(
-              AppRoutes.launchpad.name,
-              params: {'bottomNavTab': BottomNavTab.home.name},
-            );
+      onTap: (index) {
+        switch (index) {
+          case 1:
+            bottomNavBloc.add(const BottomNavEvent_ToSettings());
             break;
-          case BottomNavTab.settings:
-            router.goNamed(
-              AppRoutes.launchpad.name,
-              params: {'bottomNavTab': BottomNavTab.settings.name},
-            );
+          default:
+            bottomNavBloc.add(const BottomNavEvent_ToHome());
             break;
         }
       },

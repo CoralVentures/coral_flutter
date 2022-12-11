@@ -12,10 +12,10 @@ class BottomNavEvent_AnalyticListener
   }) {
     switch (event.eventType) {
       case BottomNavEvents.toHome:
-        analyticsRepository.screen(screenName: BottomNavTab.home.name);
+        analyticsRepository.screen(screenName: 'Home');
         break;
       case BottomNavEvents.toSettings:
-        analyticsRepository.screen(screenName: BottomNavTab.settings.name);
+        analyticsRepository.screen(screenName: 'Settings');
         break;
     }
   }

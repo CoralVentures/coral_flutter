@@ -14,5 +14,5 @@ jobs:
       flutter_version: 3.3.4
       working_directory: './examples/biometrics_example'
       test_recursion: true
-      coverage_excludes: '**/*.g.dart **/bloc_type.dart **/redux_remote_devtools.dart'
+      coverage_excludes: '**/*.g.dart **/*.gr.dart **/bloc_type.dart **/redux_remote_devtools.dart'
       min_coverage: 100

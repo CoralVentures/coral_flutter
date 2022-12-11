@@ -6,10 +6,11 @@ import 'package:redux/redux.dart';
 import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
+import './app/app_bloc.dart';
 import './bloc_type.dart';
-
 import './create_todo/create_todo_bloc.dart';
 import './todos/todos_bloc.dart';
+
 // CORAL_CLI_IMPORT
 
 part 'redux_remote_devtools.g.dart';
@@ -53,6 +54,7 @@ class DevtoolsDb {
   const DevtoolsDb({
     this.createTodoState,
     this.todosState,
+    this.appState,
     // CORAL_CLI_DB_THIS
   });
 
@@ -65,6 +67,7 @@ class DevtoolsDb {
 
   final CreateTodoState? createTodoState;
   final TodosState? todosState;
+  final AppState? appState;
   // CORAL_CLI_DB_ATTR
 
   DevtoolsDb copyWith({
@@ -72,6 +75,8 @@ class DevtoolsDb {
     bool clearCreateTodoState = false,
     TodosState? todosState,
     bool clearTodosState = false,
+    AppState? appState,
+    bool clearAppState = false,
     // CORAL_CLI_COPY_WITH_PARAMETER
   }) {
     var _createTodoState = createTodoState ?? this.createTodoState;
@@ -79,14 +84,19 @@ class DevtoolsDb {
       _createTodoState = null;
     }
     var _todosState = todosState ?? this.todosState;
-    if(clearTodosState) {
+    if (clearTodosState) {
       _todosState = null;
+    }
+    var _appState = appState ?? this.appState;
+    if (clearAppState) {
+      _appState = null;
     }
     // CORAL_CLI_COPY_WITH_CLEAR
 
     return DevtoolsDb(
       createTodoState: _createTodoState,
       todosState: _todosState,
+      appState: _appState,
       // CORAL_CLI_COPY_WITH_ARG
     );
   }
@@ -111,6 +121,11 @@ void remoteReduxDevtoolsOnEvent({
           todosState: state as TodosState,
         );
         break;
+      case BlocType.app:
+        devtoolsDB = devtoolsDB.copyWith(
+          appState: state as AppState,
+        );
+        break;
       // CORAL_CLI_ON_EVENT
     }
 
@@ -130,6 +145,9 @@ void remoteReduxDevtoolsOnClose({
         break;
       case BlocType.todos:
         devtoolsDB = devtoolsDB.copyWith(clearTodosState: true);
+        break;
+      case BlocType.app:
+        devtoolsDB = devtoolsDB.copyWith(clearAppState: true);
         break;
       // CORAL_CLI_ON_CLOSE
     }

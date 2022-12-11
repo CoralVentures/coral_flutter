@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class CoralAnalyticRouteObserver extends RouteObserver<PageRoute<dynamic>> {
+class CoralAnalyticRouteObserver extends AutoRouteObserver {
   CoralAnalyticRouteObserver({
     required this.analyticsRepository,
   });
@@ -10,9 +11,13 @@ class CoralAnalyticRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   final CoralAnalyticsRepository? analyticsRepository;
 
   void _sendScreenView(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    if (route.settings.name != null) {
+    // We use widgets ending in _Flow to coordinate pages. Because of this, we
+    // do not report _Flow screens and on report _Page screens.
+    if (route.settings.name != null && !route.settings.name!.contains('Flow')) {
       analyticsRepository?.screen(
-        screenName: route.settings.name!,
+        // auto_route renames _Page to _PageRoute. We strip this off when
+        // sending analytics to make it cleaner.
+        screenName: route.settings.name!.replaceAll('_PageRoute', ''),
       );
     }
   }

@@ -1,6 +1,7 @@
 import 'package:coral_tester/coral_tester.dart';
 import 'package:flow_example/app/app_builder.dart';
 import 'package:flow_example/blocs/analytic_listeners.dart';
+import 'package:flow_example/blocs/app/app_bloc.dart';
 import 'package:flow_example/blocs/create_todo/create_todo_bloc.dart';
 import 'package:flow_example/blocs/todos/todos_bloc.dart';
 import 'package:flow_example/pages/create_todo/step1/create_todo_step1_page.dart';
@@ -41,7 +42,7 @@ void main() {
             );
           },
           expectedEvents: [],
-          expectedAnalytics: ['Screen: home'],
+          expectedAnalytics: ['Screen: Home'],
         );
 
         await screenshot(
@@ -65,8 +66,8 @@ void main() {
               reason: 'Should see input to enter the task',
             );
           },
-          expectedEvents: [],
-          expectedAnalytics: ['Screen: createTodo'],
+          expectedEvents: [AppEvent_ToCreateTodoFlow],
+          expectedAnalytics: ['Screen: CreateTodoStep1'],
         );
 
         await screenshot(
@@ -105,7 +106,10 @@ void main() {
             );
           },
           expectedEvents: [CreateTodoEvent_AddTaskToTodo],
-          expectedAnalytics: ['Track: Create TODO: Add Task'],
+          expectedAnalytics: [
+            'Track: Create TODO: Add Task',
+            'Screen: CreateTodoStep2',
+          ],
         );
 
         await screenshot(
@@ -145,7 +149,10 @@ void main() {
             );
           },
           expectedEvents: [CreateTodoEvent_AddPriorityToTodo],
-          expectedAnalytics: ['Track: Create TODO: Add Priority'],
+          expectedAnalytics: [
+            'Track: Create TODO: Add Priority',
+            'Screen: CreateTodoStep3',
+          ],
         );
 
         await screenshot(
@@ -191,11 +198,12 @@ void main() {
           expectedEvents: [
             CreateTodoEvent_AddAssigneeToTodo,
             TodosEvent_AddTodo,
+            AppEvent_ToHomeFlow,
           ],
           expectedAnalytics: [
             'Track: Create TODO: Add Assignee',
             'Track: Todos: Item Created',
-            'Screen: home',
+            'Screen: Home',
           ],
         );
       },

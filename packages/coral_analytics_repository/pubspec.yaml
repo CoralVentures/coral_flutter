@@ -6,6 +6,7 @@ environment:
   sdk: '>=2.17.0 <3.0.0'
 
 dependencies:
+  auto_route: ^5.0.4
   flutter:
     sdk: flutter
   flutter_segment: ^3.7.0

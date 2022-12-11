@@ -8,5 +8,6 @@ extension BlocTypeEx on String {
 enum BlocType {
   createTodo,
   todos,
+  app,
   // CORAL_CLI_BLOC_TYPE
 }

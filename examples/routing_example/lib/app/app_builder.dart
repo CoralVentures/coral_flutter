@@ -1,15 +1,11 @@
 import 'dart:async';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:coral_analytics_repository/coral_analytics_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:go_router/go_router.dart';
+import 'package:routing_example/app/app_router.dart';
 import 'package:routing_example/l10n/l10n.dart';
-import 'package:routing_example/pages/about/about_page.dart';
-import 'package:routing_example/pages/home/home_page.dart';
-
-enum AppRoutes { home, about }
 
 FutureOr<Widget> appBuilder({
   CoralAnalyticsRepository? analyticsRepository,
@@ -21,31 +17,10 @@ class App extends StatelessWidget {
   App({
     super.key,
     required this.analyticsRepository,
-  }) : _routerConfig = GoRouter(
-          observers: [
-            CoralAnalyticRouteObserver(
-              analyticsRepository: analyticsRepository,
-            ),
-          ],
-          routes: <GoRoute>[
-            GoRoute(
-              name: AppRoutes.home.name,
-              path: '/',
-              builder: (BuildContext context, GoRouterState state) =>
-                  const Home_Page(),
-            ),
-            GoRoute(
-              name: AppRoutes.about.name,
-              path: '/about',
-              builder: (BuildContext context, GoRouterState state) =>
-                  const About_Page(),
-            ),
-          ],
-        );
+  }) : _appRouter = AppRouter();
 
   final CoralAnalyticsRepository? analyticsRepository;
-
-  final GoRouter _routerConfig;
+  final AppRouter _appRouter;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +32,20 @@ class App extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        routerConfig: _routerConfig,
+        routerDelegate: AutoRouterDelegate.declarative(
+          _appRouter,
+          routes: (handler) {
+            return [
+              const App_FlowsRoute(),
+            ];
+          },
+          navigatorObservers: () => [
+            CoralAnalyticRouteObserver(
+              analyticsRepository: analyticsRepository,
+            ),
+          ],
+        ),
+        routeInformationParser: _appRouter.defaultRouteParser(),
       ),
     );
   }

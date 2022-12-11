@@ -30,7 +30,11 @@ class CreateTodoBloc extends CoralBloc<CreateTodoEvent, CreateTodoState> {
         {
           final _event = event as CreateTodoEvent_AddTaskToTodo;
           final todoItem = state.todoItem.copyWith(task: _event.task);
-          yield CreateTodoState(todoItem: todoItem, todoCreated: false);
+          yield CreateTodoState(
+            step: CreateTodoSteps.step2,
+            todoItem: todoItem,
+            todoCreated: false,
+          );
         }
 
         break;
@@ -38,14 +42,24 @@ class CreateTodoBloc extends CoralBloc<CreateTodoEvent, CreateTodoState> {
         {
           final _event = event as CreateTodoEvent_AddPriorityToTodo;
           final todoItem = state.todoItem.copyWith(priority: _event.priority);
-          yield CreateTodoState(todoItem: todoItem, todoCreated: false);
+          yield CreateTodoState(
+            step: CreateTodoSteps.step3,
+            todoItem: todoItem,
+            todoCreated: false,
+          );
         }
         break;
       case CreateTodoEvents.addAssigneeToTodo:
         {
           final _event = event as CreateTodoEvent_AddAssigneeToTodo;
           final todoItem = state.todoItem.copyWith(assignee: _event.assignee);
-          yield CreateTodoState(todoItem: todoItem, todoCreated: true);
+          yield CreateTodoState(
+            // still on step three, will use listener to change back to Home
+            // page
+            step: CreateTodoSteps.step3,
+            todoItem: todoItem,
+            todoCreated: true,
+          );
         }
         break;
     }

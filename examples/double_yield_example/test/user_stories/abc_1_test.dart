@@ -25,7 +25,7 @@ void main() {
             );
           },
           expectedEvents: [],
-          expectedAnalytics: ['Screen: home'],
+          expectedAnalytics: ['Screen: Home'],
         );
 
         await screenshot(

@@ -21,7 +21,7 @@ void main() {
               reason: 'Should see initial count of zero',
             );
           },
-          expectedAnalytics: ['Screen: home'],
+          expectedAnalytics: ['Screen: Home'],
         );
 
         await screenshot(

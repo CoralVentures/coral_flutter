@@ -6,12 +6,16 @@ PODS:
   - AppsFlyerFramework (6.8.1):
     - AppsFlyerFramework/Main (= 6.8.1)
   - AppsFlyerFramework/Main (6.8.1)
+  - device_info_plus (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_segment (3.12.1):
     - Analytics (= 4.1.6)
     - Flutter
     - Segment-Amplitude (= 3.3.2)
     - segment-appsflyer-ios (= 6.8.0)
+  - package_info_plus (0.4.5):
+    - Flutter
   - Segment-Amplitude (3.3.2):
     - Amplitude (~> 8.3)
     - Analytics
@@ -21,10 +25,20 @@ PODS:
   - segment-appsflyer-ios/Main (6.8.0):
     - Analytics
     - AppsFlyerFramework (~> 6.8.0)
+  - Sentry (7.28.0):
+    - Sentry/Core (= 7.28.0)
+  - Sentry/Core (7.28.0)
+  - sentry_flutter (0.0.1):
+    - Flutter
+    - FlutterMacOS
+    - Sentry (~> 7.28.0)
 
 DEPENDENCIES:
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_segment (from `.symlinks/plugins/flutter_segment/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
 
 SPEC REPOS:
   trunk:
@@ -34,22 +48,33 @@ SPEC REPOS:
     - AppsFlyerFramework
     - Segment-Amplitude
     - segment-appsflyer-ios
+    - Sentry
 
 EXTERNAL SOURCES:
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
     :path: Flutter
   flutter_segment:
     :path: ".symlinks/plugins/flutter_segment/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
+  sentry_flutter:
+    :path: ".symlinks/plugins/sentry_flutter/ios"
 
 SPEC CHECKSUMS:
   Amplitude: bff4ceaad2a79e908682134d75dc862960594ea6
   Analytics: eefe524436f904b8bb3f8c8c3425280e43b34efc
   AnalyticsConnector: 4c386d5972ac9da86e22d668564dbbac97558754
   AppsFlyerFramework: a664325124485223296354b4eec335f5340a6df8
+  device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_segment: 367b7d9f7d74b3875198524ff4d24c381d93e317
+  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   Segment-Amplitude: 6c1e59c8c278a21029ba7a6a788fcb31b9233a2c
   segment-appsflyer-ios: 9b84c1b7f94bb7a3c5826c9214cd0630b831e208
+  Sentry: 2c6053e4cfe6dea6608135dea1928ffbb4ecfba5
+  sentry_flutter: fad3ef0917dc1afa7d242af0743696ed9a9a8864
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 

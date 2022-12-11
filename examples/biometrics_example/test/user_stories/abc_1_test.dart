@@ -39,10 +39,10 @@ void main() {
             AuthenticationEvent_BiometricAuthenticationSucceeded,
           ],
           expectedAnalytics: [
-            'Screen: loading',
+            'Screen: Loading',
             'Track: Biometrics Authentication: Started',
             'Track: Biometrics Authentication: Succeeded',
-            'Screen: home',
+            'Screen: Home',
           ],
         );
       },
@@ -76,10 +76,10 @@ void main() {
             AuthenticationEvent_BiometricAuthenticationFailed,
           ],
           expectedAnalytics: [
-            'Screen: loading',
+            'Screen: Loading',
             'Track: Biometrics Authentication: Started',
             'Track: Biometrics Authentication: Failed',
-            'Screen: login',
+            'Screen: Login',
           ],
         );
       },
@@ -116,10 +116,10 @@ void main() {
             AuthenticationEvent_BiometricAuthenticationFailed,
           ],
           expectedAnalytics: [
-            'Screen: loading',
+            'Screen: Loading',
             'Track: Biometrics Authentication: Started',
             'Track: Biometrics Authentication: Failed',
-            'Screen: login',
+            'Screen: Login',
           ],
         );
       },
@@ -156,10 +156,10 @@ void main() {
             AuthenticationEvent_BiometricAuthenticationFailed,
           ],
           expectedAnalytics: [
-            'Screen: loading',
+            'Screen: Loading',
             'Track: Biometrics Authentication: Started',
             'Track: Biometrics Authentication: Failed',
-            'Screen: login',
+            'Screen: Login',
           ],
         );
       },
@@ -196,10 +196,10 @@ void main() {
             AuthenticationEvent_BiometricAuthenticationFailed,
           ],
           expectedAnalytics: [
-            'Screen: loading',
+            'Screen: Loading',
             'Track: Biometrics Authentication: Started',
             'Track: Biometrics Authentication: Failed',
-            'Screen: login',
+            'Screen: Login',
           ],
         );
       },

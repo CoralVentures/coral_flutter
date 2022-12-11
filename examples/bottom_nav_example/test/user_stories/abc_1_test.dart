@@ -43,10 +43,9 @@ void main() {
               reason: 'Bottom navigation index should be 0',
             );
           },
-          expectedEvents: [BottomNavEvent_ToHome],
+          expectedEvents: [],
           expectedAnalytics: [
-            'Screen: home',
-            'Screen: launchpad',
+            'Screen: Launchpad',
           ],
         );
 
@@ -86,7 +85,7 @@ void main() {
             );
           },
           expectedEvents: [BottomNavEvent_ToSettings],
-          expectedAnalytics: ['Screen: settings'],
+          expectedAnalytics: ['Screen: Settings'],
         );
 
         await screenshot(
@@ -123,7 +122,7 @@ void main() {
             );
           },
           expectedEvents: [BottomNavEvent_ToHome],
-          expectedAnalytics: ['Screen: home'],
+          expectedAnalytics: ['Screen: Home'],
         );
       },
     );

@@ -2,15 +2,23 @@
 
 part of 'create_todo_bloc.dart';
 
+enum CreateTodoSteps {
+  step1,
+  step2,
+  step3,
+}
+
 @JsonSerializable()
 class CreateTodoState extends Equatable {
   const CreateTodoState({
+    required this.step,
     required this.todoItem,
     required this.todoCreated,
   });
 
   const CreateTodoState.initialState()
-      : todoItem = const TodoItem(task: null, priority: null, assignee: null),
+      : step = CreateTodoSteps.step1,
+        todoItem = const TodoItem(task: null, priority: null, assignee: null),
         todoCreated = false;
 
   // coverage:ignore-start
@@ -20,9 +28,10 @@ class CreateTodoState extends Equatable {
   Map<String, dynamic> toJson() => _$CreateTodoStateToJson(this);
   // coverage:ignore-end
 
+  final CreateTodoSteps step;
   final TodoItem todoItem;
   final bool todoCreated;
 
   @override
-  List<Object?> get props => [todoItem, true];
+  List<Object?> get props => [step, todoItem, todoCreated];
 }

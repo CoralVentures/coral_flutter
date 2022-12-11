@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:routing_example/pages/about/widgets_connector/go_to_home_button.dart';
+import 'package:routing_example/pages/about/widgets_connector/back_button.dart';
 import 'package:routing_example/pages/about/widgets_connector/title.dart';
 
 class About_Page extends StatelessWidget {
@@ -19,13 +19,7 @@ class About_Scaffold extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const AboutC_Title(),
-        ),
-        body: const SizedBox.expand(
-          child: SingleChildScrollView(
-            child: Center(
-              child: AboutC_GoToHomeButton(),
-            ),
-          ),
+          leading: const AboutC_BackButton(),
         ),
       ),
     );

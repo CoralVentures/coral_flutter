@@ -16,6 +16,7 @@ rm -rf ./coverage
 flutter test --no-pub --test-randomize-ordering-seed random --coverage --dart-define silenceAllLogs=true
 lcov --remove ${PROJECT_COVERAGE} -o ${FILTERED_COVERAGE}\
     '**/*.g.dart' \
+    '**/*.gr.dart' \
     '**/bloc_type.dart' \
     '**/redux_remote_devtools.dart'
 genhtml ${FILTERED_COVERAGE} -o coverage

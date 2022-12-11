@@ -6,6 +6,7 @@ import 'package:redux/redux.dart';
 import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
+import './app/app_bloc.dart';
 import './bloc_type.dart';
 import './counter/counter_bloc.dart';
 
@@ -51,6 +52,7 @@ Future<DevToolsStore<DevtoolsDb>?> createReduxRemoteDevtoolsStore() async {
 class DevtoolsDb {
   const DevtoolsDb({
     this.counterState,
+    this.appState,
     // CORAL_CLI_DB_THIS
   });
 
@@ -62,21 +64,29 @@ class DevtoolsDb {
   // coverage:ignore-end
 
   final CounterState? counterState;
+  final AppState? appState;
   // CORAL_CLI_DB_ATTR
 
   DevtoolsDb copyWith({
     CounterState? counterState,
     bool clearCounterState = false,
+    AppState? appState,
+    bool clearAppState = false,
     // CORAL_CLI_COPY_WITH_PARAMETER
   }) {
     var _counterState = counterState ?? this.counterState;
     if (clearCounterState) {
       _counterState = null;
     }
+    var _appState = appState ?? this.appState;
+    if (clearAppState) {
+      _appState = null;
+    }
     // CORAL_CLI_COPY_WITH_CLEAR
 
     return DevtoolsDb(
       counterState: _counterState,
+      appState: _appState,
       // CORAL_CLI_COPY_WITH_ARG
     );
   }
@@ -96,6 +106,11 @@ void remoteReduxDevtoolsOnEvent({
           counterState: state as CounterState,
         );
         break;
+      case BlocType.app:
+        devtoolsDB = devtoolsDB.copyWith(
+          appState: state as AppState,
+        );
+        break;
       // CORAL_CLI_ON_EVENT
     }
 
@@ -112,6 +127,9 @@ void remoteReduxDevtoolsOnClose({
     switch (blocTypeEnum) {
       case BlocType.counter:
         devtoolsDB = devtoolsDB.copyWith(clearCounterState: true);
+        break;
+      case BlocType.app:
+        devtoolsDB = devtoolsDB.copyWith(clearAppState: true);
         break;
       // CORAL_CLI_ON_CLOSE
     }

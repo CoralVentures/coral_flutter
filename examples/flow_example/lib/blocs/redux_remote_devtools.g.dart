@@ -14,10 +14,14 @@ DevtoolsDb _$DevtoolsDbFromJson(Map<String, dynamic> json) => DevtoolsDb(
       todosState: json['todosState'] == null
           ? null
           : TodosState.fromJson(json['todosState'] as Map<String, dynamic>),
+      appState: json['appState'] == null
+          ? null
+          : AppState.fromJson(json['appState'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DevtoolsDbToJson(DevtoolsDb instance) =>
     <String, dynamic>{
       'createTodoState': instance.createTodoState,
       'todosState': instance.todosState,
+      'appState': instance.appState,
     };

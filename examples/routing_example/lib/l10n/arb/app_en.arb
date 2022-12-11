@@ -12,8 +12,6 @@
   "home_decrement": "Decrement",
   "home_pageTitle": "Home Page",
   "home_goToAboutPage": "Go to About Page",
-  "home_pushToAboutPage": "Push to About Page",
 
-  "about_pageTitle": "About Page",
-  "about_goToHomePage": "Go to Home Page"
+  "about_pageTitle": "About Page"
 }
