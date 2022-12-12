@@ -145,11 +145,6 @@ class CoralTester<T extends CoralMockedApp> {
 
     final screenshotPath = '$basePath/$resolvedCounter';
 
-    /// Check expectations
-    if (expectations != null) {
-      expectations.call(expect);
-    }
-
     /// Save checkpoint
     final checkpoint = CoralTesterCheckpoint(
       screenshotPath: screenshotPath,
@@ -172,6 +167,11 @@ class CoralTester<T extends CoralMockedApp> {
       '$screenshotPath.$testerTripCount',
       devices: goldenDevices,
     );
+
+    /// Check expectations
+    if (expectations != null) {
+      expectations.call(expect);
+    }
 
     /// Check events and analytics, then clean up all tracked items
     expectEventsInOrder(expectedEvents);
