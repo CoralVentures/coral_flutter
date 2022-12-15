@@ -26,7 +26,7 @@ class CoralThemeData {
     final _darkTheme =
         CoralTheme(colors: _darkThemeColors, typographies: _typographies);
 
-    return _getThemeData(_darkTheme);
+    return _getThemeData(_darkTheme).copyWith(brightness: Brightness.dark);
   }
 
   ThemeData _getThemeData(CoralTheme theme) {
