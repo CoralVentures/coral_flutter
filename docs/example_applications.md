@@ -10,3 +10,4 @@ We have several example applications, and we recommend reviewing them in the fol
 - data_layer_example
 - bottom_nav_example
 - biometrics_example
+- theme_example

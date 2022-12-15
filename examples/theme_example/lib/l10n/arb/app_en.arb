@@ -1,0 +1,13 @@
+{
+  "@@locale": "en",
+  "home_count": "Count: {count}",
+  "@home_count": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "home_increment": "Increment",
+  "home_decrement": "Decrement"
+}
