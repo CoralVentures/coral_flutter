@@ -14,6 +14,7 @@ coral_flutter includes the following packages:
 - `coral_error_monitoring_repository`
 - `coral_poller`
 - `coral_tester`
+- `coral_theme`
 
 ## Coral Analytics Repository
 
@@ -205,3 +206,7 @@ const testExecutable = coralTestExecutable;
 4. `coralTestGroup` and `coralTestMockedApp` should be used for all of our application tests. `coralTestGroup` allows you to pass in a userStoryId to organize our tests. `coralTestMockedApp` is similar to `widgetTest` but it gives you a `CoralScreenshot` instead of a `widgetTester`.
 
 5. The `CoralScreenshot` is a way to tests user journeys in your application while keeping track of bloc events, analytics, user actions, expectations, etc. It also produces a gallery.
+
+## Coral Theme
+
+Docs coming soon...

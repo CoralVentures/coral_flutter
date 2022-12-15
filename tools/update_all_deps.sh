@@ -11,6 +11,7 @@ flutter pub get packages/coral_error_monitoring_repository
 flutter pub get packages/coral_logger
 flutter pub get packages/coral_poller
 flutter pub get packages/coral_tester
+flutter pub get packages/coral_theme
 
 flutter pub get examples/biometrics_example
 flutter pub get examples/bottom_nav_example
