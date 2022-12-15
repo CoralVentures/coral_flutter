@@ -17,7 +17,7 @@ class CoralThemeData {
     final _lightTheme =
         CoralTheme(colors: _lightThemeColors, typographies: _typographies);
 
-    return _getTheme(_lightTheme);
+    return _getThemeData(_lightTheme);
   }
 
   ThemeData get darkTheme {
@@ -26,12 +26,13 @@ class CoralThemeData {
     final _darkTheme =
         CoralTheme(colors: _darkThemeColors, typographies: _typographies);
 
-    return _getTheme(_darkTheme);
+    return _getThemeData(_darkTheme);
   }
 
-  ThemeData _getTheme(CoralTheme theme) {
+  ThemeData _getThemeData(CoralTheme theme) {
     return ThemeData(
       scaffoldBackgroundColor: theme.colors.background,
+      iconTheme: IconThemeData(color: theme.colors.onBackground),
       textTheme: TextTheme(
         displayLarge: theme.typographies.displayLarge,
         displayMedium: theme.typographies.displayLarge,
