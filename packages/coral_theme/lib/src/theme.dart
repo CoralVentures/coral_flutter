@@ -65,5 +65,8 @@ class CoralTheme extends ThemeExtension<CoralTheme> with EquatableMixin {
   }
 
   @override
-  List<Object?> get props => [colors];
+  List<Object?> get props => [
+        colors,
+        typographies,
+      ];
 }
