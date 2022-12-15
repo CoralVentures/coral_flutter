@@ -2,6 +2,7 @@ import 'package:coral_tester/coral_tester.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:theme_example/app/app_builder.dart';
+import 'package:theme_example/app/app_theme.dart';
 import 'package:theme_example/blocs/analytic_listeners.dart';
 import 'package:theme_example/blocs/counter/counter_bloc.dart';
 
@@ -13,6 +14,7 @@ void main() {
           key: const Key('light'),
           analyticsRepository: analyticsRepository,
           themeMode: ThemeMode.light,
+          coralThemeData: appThemeData,
         ),
       ),
       CoralMockedApp(
@@ -20,6 +22,7 @@ void main() {
           key: const Key('dark'),
           analyticsRepository: analyticsRepository,
           themeMode: ThemeMode.dark,
+          coralThemeData: appThemeData,
         ),
       ),
     ];

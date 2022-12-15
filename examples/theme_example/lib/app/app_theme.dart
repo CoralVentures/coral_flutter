@@ -2,68 +2,8 @@ import 'package:coral_theme/coral_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final appThemeLight = ThemeData(
-  scaffoldBackgroundColor: _lightTheme.colors.background,
-  textTheme: TextTheme(
-    displayLarge: _lightTheme.typographies.displayLarge,
-    displayMedium: _lightTheme.typographies.displayLarge,
-    displaySmall: _lightTheme.typographies.displaySmall,
-    headlineLarge: _lightTheme.typographies.headlineLarge,
-    headlineMedium: _lightTheme.typographies.headlineMedium,
-    headlineSmall: _lightTheme.typographies.headlineSmall,
-    titleLarge: _lightTheme.typographies.titleLarge,
-    titleMedium: _lightTheme.typographies.titleMedium,
-    titleSmall: _lightTheme.typographies.titleSmall,
-    bodyLarge: _lightTheme.typographies.bodyLarge,
-    bodyMedium: _lightTheme.typographies.bodyMedium,
-    bodySmall: _lightTheme.typographies.bodySmall,
-    labelLarge: _lightTheme.typographies.labelLarge,
-    labelMedium: _lightTheme.typographies.labelMedium,
-    labelSmall: _lightTheme.typographies.labelSmall,
-  ),
-  extensions: [
-    _lightTheme,
-  ],
-);
-
-final appThemeDark = ThemeData(
-  brightness: Brightness.dark,
-  scaffoldBackgroundColor: _darkTheme.colors.background,
-  textTheme: TextTheme(
-    displayLarge: _darkTheme.typographies.displayLarge,
-    displayMedium: _darkTheme.typographies.displayLarge,
-    displaySmall: _darkTheme.typographies.displaySmall,
-    headlineLarge: _darkTheme.typographies.headlineLarge,
-    headlineMedium: _darkTheme.typographies.headlineMedium,
-    headlineSmall: _darkTheme.typographies.headlineSmall,
-    titleLarge: _darkTheme.typographies.titleLarge,
-    titleMedium: _darkTheme.typographies.titleMedium,
-    titleSmall: _darkTheme.typographies.titleSmall,
-    bodyLarge: _darkTheme.typographies.bodyLarge,
-    bodyMedium: _darkTheme.typographies.bodyMedium,
-    bodySmall: _darkTheme.typographies.bodySmall,
-    labelLarge: _darkTheme.typographies.labelLarge,
-    labelMedium: _darkTheme.typographies.labelMedium,
-    labelSmall: _darkTheme.typographies.labelSmall,
-  ),
-  extensions: [
-    _darkTheme,
-  ],
-);
-
-final _lightTheme = CoralTheme(
-  colors: CoralColors(
-    isDarkTheme: false,
-    themeColorTones: _themeColorTones,
-  ),
-  typographies: _themeTypographies,
-);
-
-final _darkTheme = CoralTheme(
-  colors: CoralColors(
-    isDarkTheme: true,
-    themeColorTones: _themeColorTones,
-  ),
+final appThemeData = CoralThemeData(
+  themeColorTones: _themeColorTones,
   typographies: _themeTypographies,
 );
 
