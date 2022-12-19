@@ -13,13 +13,15 @@ FutureOr<Widget> appBuilder({
   Key? key,
   CoralAnalyticsRepository? analyticsRepository,
   ThemeMode themeMode = ThemeMode.system,
-  required CoralThemeData coralThemeData,
+  required CoralThemeData coralThemeDataLight,
+  required CoralThemeData coralThemeDataDark,
 }) {
   return App(
     key: key,
     analyticsRepository: analyticsRepository,
     themeMode: themeMode,
-    coralThemeData: coralThemeData,
+    coralThemeDataLight: coralThemeDataLight,
+    coralThemeDataDark: coralThemeDataDark,
   );
 }
 
@@ -28,13 +30,15 @@ class App extends StatelessWidget {
     super.key,
     required this.analyticsRepository,
     required this.themeMode,
-    required this.coralThemeData,
+    required this.coralThemeDataLight,
+    required this.coralThemeDataDark,
   }) : _appRouter = AppRouter();
 
   final CoralAnalyticsRepository? analyticsRepository;
   final AppRouter _appRouter;
   final ThemeMode themeMode;
-  final CoralThemeData coralThemeData;
+  final CoralThemeData coralThemeDataLight;
+  final CoralThemeData coralThemeDataDark;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +46,8 @@ class App extends StatelessWidget {
       value: analyticsRepository,
       child: MaterialApp.router(
         themeMode: themeMode,
-        theme: coralThemeData.lightTheme,
-        darkTheme: coralThemeData.darkTheme,
+        theme: coralThemeDataLight.themeData,
+        darkTheme: coralThemeDataDark.themeData,
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

@@ -2,284 +2,179 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 class CoralColors extends Equatable {
-  CoralColors({
-    required this.isDarkTheme,
-    required this.themeColorTones,
-  })  : _primary = CoralColorGetter(
-          colorTones: themeColorTones.primaryTones,
-          isDarkTheme: isDarkTheme,
-        ),
-        _secondary = CoralColorGetter(
-          colorTones: themeColorTones.secondaryTones,
-          isDarkTheme: isDarkTheme,
-        ),
-        _tertiary = CoralColorGetter(
-          colorTones: themeColorTones.tertiaryTones,
-          isDarkTheme: isDarkTheme,
-        ),
-        _error = CoralColorGetter(
-          colorTones: themeColorTones.errorTones,
-          isDarkTheme: isDarkTheme,
-        ),
-        _success = CoralColorGetter(
-          colorTones: themeColorTones.successTones,
-          isDarkTheme: isDarkTheme,
-        ),
-        _neutral = CoralNeutralColorGetter(
-          colorTones: themeColorTones.neutralTones,
-          isDarkTheme: isDarkTheme,
-        ),
-        _neutralVariant = CoralNeutralVariantColorGetter(
-          colorTones: themeColorTones.neutralVariantTones,
-          isDarkTheme: isDarkTheme,
-        );
+  const CoralColors({
+    required this.primary,
+    required this.onPrimary,
+    required this.primaryContainer,
+    required this.onPrimaryContainer,
+    required this.inversePrimary,
+    required this.secondary,
+    required this.onSecondary,
+    required this.secondaryContainer,
+    required this.onSecondaryContainer,
+    required this.inverseSecondary,
+    required this.tertiary,
+    required this.onTertiary,
+    required this.tertiaryContainer,
+    required this.onTertiaryContainer,
+    required this.inverseTertiary,
+    required this.error,
+    required this.onError,
+    required this.errorContainer,
+    required this.onErrorContainer,
+    required this.inverseError,
+    required this.success,
+    required this.onSuccess,
+    required this.successContainer,
+    required this.onSuccessContainer,
+    required this.inverseSuccess,
+    required this.background,
+    required this.onBackground,
+    required this.surface,
+    required this.onSurface,
+    required this.inverseSurface,
+    required this.onInverseSurface,
+    required this.shadow,
+    required this.surfaceVariant,
+    required this.onSurfaceVariant,
+    required this.outline,
+    required this.outlineVariant,
+  });
 
-  final bool isDarkTheme;
-  final CoralThemeColorTones themeColorTones;
+  final Color primary;
+  final Color onPrimary;
+  final Color primaryContainer;
+  final Color onPrimaryContainer;
+  final Color inversePrimary;
 
-  final CoralColorGetter _primary;
-  final CoralColorGetter _secondary;
-  final CoralColorGetter _tertiary;
-  final CoralColorGetter _error;
-  final CoralColorGetter _success;
-  final CoralNeutralColorGetter _neutral;
-  final CoralNeutralVariantColorGetter _neutralVariant;
+  final Color secondary;
+  final Color onSecondary;
+  final Color secondaryContainer;
+  final Color onSecondaryContainer;
+  final Color inverseSecondary;
 
-  Color get primary => _primary.color;
-  Color get onPrimary => _primary.onColor;
-  Color get primaryContainer => _primary.colorContainer;
-  Color get onPrimaryContainer => _primary.onColorContainer;
-  Color get inversePrimary => _primary.inverseColor;
+  final Color tertiary;
+  final Color onTertiary;
+  final Color tertiaryContainer;
+  final Color onTertiaryContainer;
+  final Color inverseTertiary;
 
-  Color get secondary => _secondary.color;
-  Color get onSecondary => _secondary.onColor;
-  Color get secondaryContainer => _secondary.colorContainer;
-  Color get onSecondaryContainer => _secondary.onColorContainer;
-  Color get inverseSecondary => _secondary.inverseColor;
+  final Color error;
+  final Color onError;
+  final Color errorContainer;
+  final Color onErrorContainer;
+  final Color inverseError;
 
-  Color get tertiary => _tertiary.color;
-  Color get onTertiary => _tertiary.onColor;
-  Color get tertiaryContainer => _tertiary.colorContainer;
-  Color get onTertiaryContainer => _tertiary.onColorContainer;
-  Color get inverseTertiary => _tertiary.inverseColor;
+  final Color success;
+  final Color onSuccess;
+  final Color successContainer;
+  final Color onSuccessContainer;
+  final Color inverseSuccess;
 
-  Color get error => _error.color;
-  Color get onError => _error.onColor;
-  Color get errorContainer => _error.colorContainer;
-  Color get onErrorContainer => _error.onColorContainer;
-  Color get inverseError => _error.inverseColor;
+  final Color background;
+  final Color onBackground;
+  final Color surface;
+  final Color onSurface;
+  final Color inverseSurface;
+  final Color onInverseSurface;
+  final Color shadow;
 
-  Color get success => _success.color;
-  Color get onSuccess => _success.onColor;
-  Color get successContainer => _success.colorContainer;
-  Color get onSuccessContainer => _success.onColorContainer;
-  Color get inverseSuccess => _success.inverseColor;
-
-  Color get background => _neutral.background;
-  Color get onBackground => _neutral.onBackground;
-  Color get surface => _neutral.surface;
-  Color get onSurface => _neutral.onSurface;
-  Color get inverseSurface => _neutral.inverseSurface;
-  Color get onInverseSurface => _neutral.onInverseSurface;
-  Color get shadow => _neutral.shadow;
-
-  Color get surfaceVariant => _neutralVariant.surfaceVariant;
-  Color get onSurfaceVariant => _neutralVariant.onSuraceVariant;
-  Color get outline => _neutralVariant.outline;
-  Color get outlineVariant => _neutralVariant.outlineVariant;
+  final Color surfaceVariant;
+  final Color onSurfaceVariant;
+  final Color outline;
+  final Color outlineVariant;
 
   CoralColors lerp(CoralColors? other, double t) {
     if (other is! CoralColors) return this;
     return CoralColors(
-      isDarkTheme: other.isDarkTheme,
-      themeColorTones: themeColorTones.lerp(other.themeColorTones, t),
+      primary: Color.lerp(primary, other.primary, t)!,
+      onPrimary: Color.lerp(onPrimary, other.onPrimary, t)!,
+      primaryContainer:
+          Color.lerp(primaryContainer, other.primaryContainer, t)!,
+      onPrimaryContainer:
+          Color.lerp(onPrimaryContainer, other.onPrimaryContainer, t)!,
+      inversePrimary: Color.lerp(inversePrimary, other.inversePrimary, t)!,
+      secondary: Color.lerp(secondary, other.secondary, t)!,
+      onSecondary: Color.lerp(onSecondary, other.onSecondary, t)!,
+      secondaryContainer:
+          Color.lerp(secondaryContainer, other.secondaryContainer, t)!,
+      onSecondaryContainer:
+          Color.lerp(onSecondaryContainer, other.onSecondaryContainer, t)!,
+      inverseSecondary:
+          Color.lerp(inverseSecondary, other.inverseSecondary, t)!,
+      tertiary: Color.lerp(tertiary, other.tertiary, t)!,
+      onTertiary: Color.lerp(onTertiary, other.onTertiary, t)!,
+      tertiaryContainer:
+          Color.lerp(tertiaryContainer, other.tertiaryContainer, t)!,
+      onTertiaryContainer:
+          Color.lerp(onTertiaryContainer, other.onTertiaryContainer, t)!,
+      inverseTertiary: Color.lerp(inverseTertiary, other.inverseTertiary, t)!,
+      error: Color.lerp(error, other.error, t)!,
+      onError: Color.lerp(onError, other.onError, t)!,
+      errorContainer: Color.lerp(errorContainer, other.errorContainer, t)!,
+      onErrorContainer:
+          Color.lerp(onErrorContainer, other.onErrorContainer, t)!,
+      inverseError: Color.lerp(inverseError, other.inverseError, t)!,
+      success: Color.lerp(success, other.success, t)!,
+      onSuccess: Color.lerp(onSuccess, other.onSuccess, t)!,
+      successContainer:
+          Color.lerp(successContainer, other.successContainer, t)!,
+      onSuccessContainer:
+          Color.lerp(onSuccessContainer, other.onSuccessContainer, t)!,
+      inverseSuccess: Color.lerp(inverseSuccess, other.inverseSuccess, t)!,
+      background: Color.lerp(background, other.background, t)!,
+      onBackground: Color.lerp(onBackground, other.onBackground, t)!,
+      surface: Color.lerp(surface, other.surface, t)!,
+      onSurface: Color.lerp(onSurface, other.onSurface, t)!,
+      inverseSurface: Color.lerp(inverseSurface, other.inverseSurface, t)!,
+      onInverseSurface:
+          Color.lerp(onInverseSurface, other.onInverseSurface, t)!,
+      shadow: Color.lerp(shadow, other.shadow, t)!,
+      surfaceVariant: Color.lerp(surfaceVariant, other.surfaceVariant, t)!,
+      onSurfaceVariant:
+          Color.lerp(onSurfaceVariant, other.onSurfaceVariant, t)!,
+      outline: Color.lerp(outline, other.outline, t)!,
+      outlineVariant: Color.lerp(outlineVariant, other.outlineVariant, t)!,
     );
   }
 
   @override
   List<Object?> get props => [
-        isDarkTheme,
-        themeColorTones,
+        primary,
+        onPrimary,
+        primaryContainer,
+        onPrimaryContainer,
+        inversePrimary,
+        secondary,
+        onSecondary,
+        secondaryContainer,
+        onSecondaryContainer,
+        inverseSecondary,
+        tertiary,
+        onTertiary,
+        tertiaryContainer,
+        onTertiaryContainer,
+        inverseTertiary,
+        error,
+        onError,
+        errorContainer,
+        onErrorContainer,
+        inverseError,
+        success,
+        onSuccess,
+        successContainer,
+        onSuccessContainer,
+        inverseSuccess,
+        background,
+        onBackground,
+        surface,
+        onSurface,
+        inverseSurface,
+        onInverseSurface,
+        shadow,
+        surfaceVariant,
+        onSurfaceVariant,
+        outline,
+        outlineVariant,
       ];
-}
-
-class CoralThemeColorTones extends Equatable {
-  const CoralThemeColorTones({
-    required this.primaryTones,
-    required this.secondaryTones,
-    required this.tertiaryTones,
-    required this.errorTones,
-    required this.successTones,
-    required this.neutralTones,
-    required this.neutralVariantTones,
-  });
-
-  final CoralColorTones primaryTones;
-  final CoralColorTones secondaryTones;
-  final CoralColorTones tertiaryTones;
-  final CoralColorTones errorTones;
-  final CoralColorTones successTones;
-  final CoralColorTones neutralTones;
-  final CoralColorTones neutralVariantTones;
-
-  CoralThemeColorTones lerp(CoralThemeColorTones? other, double t) {
-    if (other is! CoralThemeColorTones) return this;
-    return CoralThemeColorTones(
-      primaryTones: primaryTones.lerp(other.primaryTones, t),
-      secondaryTones: secondaryTones.lerp(other.secondaryTones, t),
-      tertiaryTones: tertiaryTones.lerp(other.tertiaryTones, t),
-      errorTones: errorTones.lerp(other.errorTones, t),
-      successTones: successTones.lerp(other.successTones, t),
-      neutralTones: neutralTones.lerp(other.neutralTones, t),
-      neutralVariantTones:
-          neutralVariantTones.lerp(other.neutralVariantTones, t),
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        primaryTones,
-        secondaryTones,
-        tertiaryTones,
-        errorTones,
-        successTones,
-        neutralTones,
-        neutralVariantTones,
-      ];
-}
-
-class CoralColorTones extends Equatable {
-  const CoralColorTones({
-    required this.tone0,
-    required this.tone10,
-    required this.tone20,
-    required this.tone30,
-    required this.tone40,
-    required this.tone50,
-    required this.tone60,
-    required this.tone70,
-    required this.tone80,
-    required this.tone90,
-    required this.tone95,
-    required this.tone99,
-    required this.tone100,
-  });
-
-  final Color tone0;
-  final Color tone10;
-  final Color tone20;
-  final Color tone30;
-  final Color tone40;
-  final Color tone50;
-  final Color tone60;
-  final Color tone70;
-  final Color tone80;
-  final Color tone90;
-  final Color tone95;
-  final Color tone99;
-  final Color tone100;
-
-  CoralColorTones lerp(CoralColorTones? other, double t) {
-    if (other is! CoralColorTones) return this;
-    return CoralColorTones(
-      tone0: Color.lerp(tone0, other.tone0, t)!,
-      tone10: Color.lerp(tone10, other.tone10, t)!,
-      tone20: Color.lerp(tone20, other.tone20, t)!,
-      tone30: Color.lerp(tone30, other.tone30, t)!,
-      tone40: Color.lerp(tone40, other.tone40, t)!,
-      tone50: Color.lerp(tone50, other.tone50, t)!,
-      tone60: Color.lerp(tone60, other.tone60, t)!,
-      tone70: Color.lerp(tone70, other.tone70, t)!,
-      tone80: Color.lerp(tone80, other.tone80, t)!,
-      tone90: Color.lerp(tone90, other.tone90, t)!,
-      tone95: Color.lerp(tone95, other.tone95, t)!,
-      tone99: Color.lerp(tone99, other.tone99, t)!,
-      tone100: Color.lerp(tone100, other.tone100, t)!,
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        tone0,
-        tone10,
-        tone20,
-        tone30,
-        tone40,
-        tone50,
-        tone60,
-        tone70,
-        tone80,
-        tone90,
-        tone95,
-        tone99,
-        tone100,
-      ];
-}
-
-// https://m3.material.io/styles/color/the-color-system/tokens
-// See baseline color scheme tokens table
-//
-class CoralColorGetter {
-  CoralColorGetter({
-    required this.isDarkTheme,
-    required this.colorTones,
-  });
-
-  final bool isDarkTheme;
-  final CoralColorTones colorTones;
-
-  bool get isLightTheme => !isDarkTheme;
-
-  Color get color => isLightTheme ? colorTones.tone40 : colorTones.tone80;
-  Color get onColor => isLightTheme ? colorTones.tone100 : colorTones.tone20;
-  Color get colorContainer =>
-      isLightTheme ? colorTones.tone90 : colorTones.tone30;
-  Color get onColorContainer =>
-      isLightTheme ? colorTones.tone10 : colorTones.tone90;
-  Color get inverseColor =>
-      isLightTheme ? colorTones.tone80 : colorTones.tone40;
-}
-
-class CoralNeutralColorGetter {
-  CoralNeutralColorGetter({
-    required this.isDarkTheme,
-    required this.colorTones,
-  });
-
-  final bool isDarkTheme;
-  final CoralColorTones colorTones;
-
-  bool get isLightTheme => !isDarkTheme;
-
-  // Note: material3 suggests 99 for background, but using 100 instead
-  Color get background => isLightTheme ? colorTones.tone100 : colorTones.tone10;
-  Color get onBackground =>
-      isLightTheme ? colorTones.tone10 : colorTones.tone90;
-  Color get surface => isLightTheme ? colorTones.tone99 : colorTones.tone10;
-  Color get onSurface => isLightTheme ? colorTones.tone10 : colorTones.tone90;
-  Color get inverseSurface =>
-      isLightTheme ? colorTones.tone20 : colorTones.tone90;
-  Color get onInverseSurface =>
-      isLightTheme ? colorTones.tone95 : colorTones.tone20;
-  Color get shadow => isLightTheme ? colorTones.tone0 : colorTones.tone0;
-}
-
-class CoralNeutralVariantColorGetter {
-  CoralNeutralVariantColorGetter({
-    required this.isDarkTheme,
-    required this.colorTones,
-  });
-
-  final bool isDarkTheme;
-  final CoralColorTones colorTones;
-
-  bool get isLightTheme => !isDarkTheme;
-
-  Color get surfaceVariant =>
-      isLightTheme ? colorTones.tone90 : colorTones.tone30;
-  Color get onSuraceVariant =>
-      isLightTheme ? colorTones.tone30 : colorTones.tone80;
-  Color get outline => isLightTheme ? colorTones.tone50 : colorTones.tone60;
-  Color get outlineVariant =>
-      isLightTheme ? colorTones.tone80 : colorTones.tone30;
 }

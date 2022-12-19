@@ -1,5 +1,6 @@
 library coral_theme;
 
+export 'src/color_tones.dart';
 export 'src/colors.dart';
 export 'src/spacings.dart';
 export 'src/theme.dart';

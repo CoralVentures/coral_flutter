@@ -14,7 +14,8 @@ void main() {
           key: const Key('light'),
           analyticsRepository: analyticsRepository,
           themeMode: ThemeMode.light,
-          coralThemeData: appThemeData,
+          coralThemeDataLight: appThemeDataLight,
+          coralThemeDataDark: appThemeDataDark,
         ),
       ),
       CoralMockedApp(
@@ -22,7 +23,8 @@ void main() {
           key: const Key('dark'),
           analyticsRepository: analyticsRepository,
           themeMode: ThemeMode.dark,
-          coralThemeData: appThemeData,
+          coralThemeDataLight: appThemeDataLight,
+          coralThemeDataDark: appThemeDataDark,
         ),
       ),
     ];

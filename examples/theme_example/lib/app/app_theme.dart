@@ -2,9 +2,22 @@ import 'package:coral_theme/coral_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final appThemeData = CoralThemeData(
-  themeColorTones: _themeColorTones,
-  typographies: _themeTypographies,
+final appThemeDataLight = CoralThemeData(
+  theme: CoralTheme.fromColorTones(
+    isDarkTheme: false,
+    themeColorTones: _themeColorTones,
+    typographies: _themeTypographies,
+    spacings: CoralSpacings.withDefaults(),
+  ),
+);
+
+final appThemeDataDark = CoralThemeData(
+  theme: CoralTheme.fromColorTones(
+    isDarkTheme: true,
+    themeColorTones: _themeColorTones,
+    typographies: _themeTypographies,
+    spacings: CoralSpacings.withDefaults(),
+  ),
 );
 
 const _themeColorTones = CoralThemeColorTones(

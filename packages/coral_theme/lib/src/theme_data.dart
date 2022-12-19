@@ -3,33 +3,12 @@ import 'package:flutter/material.dart';
 
 class CoralThemeData {
   CoralThemeData({
-    required CoralThemeColorTones themeColorTones,
-    required CoralTypographies typographies,
-  })  : _themeColorTones = themeColorTones,
-        _typographies = typographies;
+    required this.theme,
+  });
 
-  final CoralThemeColorTones _themeColorTones;
-  final CoralTypographies _typographies;
+  final CoralTheme theme;
 
-  ThemeData get lightTheme {
-    final _lightThemeColors =
-        CoralColors(isDarkTheme: false, themeColorTones: _themeColorTones);
-    final _lightTheme =
-        CoralTheme(colors: _lightThemeColors, typographies: _typographies);
-
-    return _getThemeData(_lightTheme);
-  }
-
-  ThemeData get darkTheme {
-    final _darkThemeColors =
-        CoralColors(isDarkTheme: true, themeColorTones: _themeColorTones);
-    final _darkTheme =
-        CoralTheme(colors: _darkThemeColors, typographies: _typographies);
-
-    return _getThemeData(_darkTheme).copyWith(brightness: Brightness.dark);
-  }
-
-  ThemeData _getThemeData(CoralTheme theme) {
+  ThemeData get themeData {
     return ThemeData(
       scaffoldBackgroundColor: theme.colors.background,
       iconTheme: IconThemeData(color: theme.colors.onBackground),

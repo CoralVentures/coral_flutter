@@ -11,7 +11,8 @@ void main() async {
   await coralBootstrap(
     builder: ({analyticsRepository}) => appBuilder(
       analyticsRepository: analyticsRepository,
-      coralThemeData: appThemeData,
+      coralThemeDataLight: appThemeDataLight,
+      coralThemeDataDark: appThemeDataDark,
     ),
     analyticListeners: analyticListeners,
     configuration: configuration,
