@@ -13,6 +13,7 @@ extension CoralThemeBuildContext on BuildContext {
 
 class CoralTheme extends ThemeExtension<CoralTheme> with EquatableMixin {
   CoralTheme({
+    required this.isDarkTheme,
     required this.colors,
     required this.typographies,
     required this.spacings,
@@ -119,23 +120,27 @@ class CoralTheme extends ThemeExtension<CoralTheme> with EquatableMixin {
     );
 
     return CoralTheme(
+      isDarkTheme: isDarkTheme,
       colors: _colors,
       typographies: _typographies,
       spacings: spacings,
     );
   }
 
+  final bool isDarkTheme;
   final CoralColors colors;
   final CoralTypographies typographies;
   final CoralSpacings spacings;
 
   @override
   ThemeExtension<CoralTheme> copyWith({
+    bool? isDarkTheme,
     CoralColors? colors,
     CoralTypographies? typographies,
     CoralSpacings? spacings,
   }) {
     return CoralTheme(
+      isDarkTheme: isDarkTheme ?? this.isDarkTheme,
       colors: colors ?? this.colors,
       typographies: typographies ?? this.typographies,
       spacings: spacings ?? this.spacings,
@@ -146,6 +151,7 @@ class CoralTheme extends ThemeExtension<CoralTheme> with EquatableMixin {
   CoralTheme lerp(ThemeExtension<CoralTheme>? other, double t) {
     if (other is! CoralTheme) return this;
     return CoralTheme(
+      isDarkTheme: other.isDarkTheme,
       colors: colors.lerp(other.colors, t),
       typographies: typographies.lerp(other.typographies, t),
       spacings: spacings.lerp(other.spacings, t),
@@ -154,6 +160,7 @@ class CoralTheme extends ThemeExtension<CoralTheme> with EquatableMixin {
 
   @override
   List<Object?> get props => [
+        isDarkTheme,
         colors,
         typographies,
         spacings,

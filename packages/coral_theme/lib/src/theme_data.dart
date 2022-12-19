@@ -10,6 +10,7 @@ class CoralThemeData {
 
   ThemeData get themeData {
     return ThemeData(
+      brightness: theme.isDarkTheme ? Brightness.dark : Brightness.light,
       scaffoldBackgroundColor: theme.colors.background,
       iconTheme: IconThemeData(color: theme.colors.onBackground),
       textTheme: TextTheme(
