@@ -6,6 +6,8 @@ linter:
     constant_identifier_names: false
     camel_case_types: false
     no_leading_underscores_for_local_identifiers: false
+    prefer_relative_imports: true
+    always_use_package_imports: false
 
 analyzer:
   # Note: because of a bug with the analyzer that is out of our control whenever

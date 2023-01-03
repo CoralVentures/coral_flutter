@@ -6,8 +6,8 @@ import 'package:redux/redux.dart';
 import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
-import './authentication/authentication_bloc.dart';
 import './bloc_type.dart';
+import 'authentication/bloc.dart';
 
 // CORAL_CLI_IMPORT
 

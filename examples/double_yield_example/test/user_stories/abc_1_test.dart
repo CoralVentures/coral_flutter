@@ -1,8 +1,8 @@
 import 'package:coral_tester/coral_tester.dart';
-import 'package:double_yield_example/app/app_builder.dart';
+import 'package:double_yield_example/app/builder.dart';
 import 'package:double_yield_example/blocs/analytic_listeners.dart';
-import 'package:double_yield_example/blocs/greetings/greetings_bloc.dart';
-import 'package:double_yield_example/pages/home/widgets_connector/say_hello_button.dart';
+import 'package:double_yield_example/blocs/greetings/bloc.dart';
+import 'package:double_yield_example/pages/home/widgets/connector/say_hello_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -1,12 +1,12 @@
 import 'package:coral_tester/coral_tester.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:routing_example/app/app_builder.dart';
+import 'package:routing_example/app/builder.dart';
 import 'package:routing_example/blocs/analytic_listeners.dart';
-import 'package:routing_example/blocs/app/app_bloc.dart';
-import 'package:routing_example/blocs/counter/counter_bloc.dart';
-import 'package:routing_example/pages/about/about_page.dart';
-import 'package:routing_example/pages/home/home_page.dart';
+import 'package:routing_example/blocs/app/bloc.dart';
+import 'package:routing_example/blocs/counter/bloc.dart';
+import 'package:routing_example/pages/about/page.dart';
+import 'package:routing_example/pages/home/page.dart';
 
 void main() {
   coralTestGroup(

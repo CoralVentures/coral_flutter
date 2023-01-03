@@ -7,7 +7,7 @@ import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
 import './bloc_type.dart';
-import './counter/counter_bloc.dart';
+import 'counter/bloc.dart';
 
 // CORAL_CLI_IMPORT
 

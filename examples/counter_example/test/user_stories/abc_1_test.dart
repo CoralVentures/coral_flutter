@@ -1,7 +1,7 @@
 import 'package:coral_tester/coral_tester.dart';
-import 'package:counter_example/app/app_builder.dart';
+import 'package:counter_example/app/builder.dart';
 import 'package:counter_example/blocs/analytic_listeners.dart';
-import 'package:counter_example/blocs/counter/counter_bloc.dart';
+import 'package:counter_example/blocs/counter/bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

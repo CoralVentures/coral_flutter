@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:data_layer_example/data_providers/quotable/quotable_data_provider.dart';
-import 'package:data_layer_example/data_providers/quotable/quotable_models.dart';
+import 'package:data_layer_example/data_providers/quotable/data_provider.dart';
+import 'package:data_layer_example/data_providers/quotable/models.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';

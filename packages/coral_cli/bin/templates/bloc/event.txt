@@ -1,4 +1,4 @@
-part of 'EXAMPLESC_bloc.dart';
+part of 'bloc.dart';
 
 enum EXAMPLEPCEvents {
   initialize,

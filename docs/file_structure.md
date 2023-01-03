@@ -9,10 +9,13 @@ The counter example is our basic example using coral_flutter, and we will use it
 ```md
 lib/
   app/
-    app_builder.dart
+    builder.dart
+    router.dart
 ```
 
-The app directory contains our `appBuilder`, which we can use to build our `App`.  This is used from the `lib/main/main_x.dart` files. This is also used in our tests to ensure we are building our app the same way.
+`builder.dart` contains our `appBuilder`, which we can use to build our `App`.  This is used from the `lib/main/<environment>.dart` files. This is also used in our tests to ensure we are building our app the same way.
+
+`router.dart` sets up our page routes using [auto_route](https://pub.dev/packages/auto_route).
 
 ### blocs directory
 
@@ -20,10 +23,10 @@ The app directory contains our `appBuilder`, which we can use to build our `App`
 lib/
   blocs/
     counter/
-      counter_analytic_listener.dart
-      counter_bloc.dart
-      counter_event.dart
-      counter_state.dart
+      event_analytic_listener.dart
+      bloc.dart
+      event.dart
+      state.dart
     analytic_listeners.dart
     bloc_type.dart
     redux_remote_devtools.dart
@@ -31,9 +34,9 @@ lib/
 
 The blocs directory contains our `counter` bloc and some other files. Let's first focus on the bloc.
 
-The `counter_analtics_listener.dart` is where we define our analytic events to be sent off to Segment (or wherever). We will switch over all of our defined eventTypes.
+The `event_analtics_listener.dart` is where we define our analytic events to be sent off to Segment (or wherever). We will switch over all of our defined eventTypes.
 
-The `counter_bloc.dart` defines our bloc, the `counter_event.dart` file defines our events, and the `counter_state.dart` file defines our state.
+The `bloc.dart` defines our bloc, the `event.dart` file defines our bloc events, and the `state.dart` file defines our bloc's state.
 
 Aside from the counter bloc files, we also have the `analytics_listeners.dart` file. This is just the aggregation of all the analytics_listener files from all of our blocs. We use this list in our appBuilder as well as in our tests.
 
@@ -62,15 +65,15 @@ _Note: At the root of our directory, we also have a l10n.yaml file that helps se
 ```md
 lib/
   main/
-    main_configuration.dart
-    main_development_redux_devtools.dart
-    main_development.dart
-    main_production.dart
+    configuration.dart
+    development_redux_devtools.dart
+    development.dart
+    production.dart
 ```
 
-The `main_configuration.dart` file is where we will define all of our secrets for each development environment.
+The `configuration.dart` file is where we will define all of our secrets for each development environment.
 
-The `main_development.dart`, `main_development_redux_devtools.dart` and `main_production.dart` files are where we bootstrap our application for different environments.
+The `development.dart`, `development_redux_devtools.dart` and `production.dart` files are where we bootstrap our application for different environments.
 
 _Note: `.vscode/launch.json` has different builds for each of these files._
 
@@ -80,16 +83,17 @@ _Note: `.vscode/launch.json` has different builds for each of these files._
 lib/
   pages/
     home/
-      widget_connectors/
-        counter_test.dart
-        decrement_button.dart
-        increment_button.dart
-      home_page.dart
+      widgets/
+        connector/
+          counter_test.dart
+          decrement_button.dart
+          increment_button.dart
+      page.dart
 ```
 
-As you can see, we have a directory for our widget connectors (`widget_connectors`). We could also have a directory for our dumb widgets (`widgets_dumb`), we just didn't have any in this example.
+As you can see, we have a directory for our widget connectors (`widgets/connector/`). We could also have a directory for our dumb widgets (`widgets/dumb/`), we just didn't have any in this example.
 
-We also have the `home_page.dart` where we define out page and scaffold widgets.
+We also have the `page.dart` where we define out page and scaffold widgets.
 
 _Note: in significantly large applications, we have also had a directory called `flows` where each flow has a `pages` directory underneath it._
 

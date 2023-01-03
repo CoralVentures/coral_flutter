@@ -1,10 +1,10 @@
 import 'package:coral_tester/coral_tester.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_example/app/app_builder.dart';
+import 'package:todo_example/app/builder.dart';
 import 'package:todo_example/blocs/analytic_listeners.dart';
-import 'package:todo_example/blocs/todos/todos_bloc.dart';
-import 'package:todo_example/pages/home/widgets_dumb/todo_item.dart';
+import 'package:todo_example/blocs/todos/bloc.dart';
+import 'package:todo_example/pages/home/widgets/dumb/todo_item.dart';
 
 void main() {
   coralTestGroup('ABC-1', (userStoryId) {

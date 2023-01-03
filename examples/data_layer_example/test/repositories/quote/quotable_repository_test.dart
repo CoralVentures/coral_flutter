@@ -1,6 +1,6 @@
-import 'package:data_layer_example/data_providers/quotable/quotable_data_provider.dart';
-import 'package:data_layer_example/data_providers/quotable/quotable_models.dart';
-import 'package:data_layer_example/repositories/quote/quote_repository.dart';
+import 'package:data_layer_example/data_providers/quotable/data_provider.dart';
+import 'package:data_layer_example/data_providers/quotable/models.dart';
+import 'package:data_layer_example/repositories/quote/repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

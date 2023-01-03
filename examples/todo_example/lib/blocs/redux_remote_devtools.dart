@@ -8,7 +8,7 @@ import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
 import './bloc_type.dart';
 
-import './todos/todos_bloc.dart';
+import 'todos/bloc.dart';
 // CORAL_CLI_IMPORT
 
 part 'redux_remote_devtools.g.dart';

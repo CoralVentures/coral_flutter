@@ -6,10 +6,10 @@ import 'package:redux/redux.dart';
 import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
-import './app/app_bloc.dart';
 import './bloc_type.dart';
-import './create_todo/create_todo_bloc.dart';
-import './todos/todos_bloc.dart';
+import 'app/bloc.dart';
+import 'create_todo/bloc.dart';
+import 'todos/bloc.dart';
 
 // CORAL_CLI_IMPORT
 

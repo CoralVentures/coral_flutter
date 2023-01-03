@@ -1,4 +1,4 @@
-import 'package:biometrics_example/app/app_builder.dart';
+import 'package:biometrics_example/app/builder.dart';
 import 'package:coral_biometrics_repository/coral_biometrics_repository.dart';
 import 'package:coral_tester/coral_tester.dart';
 import 'package:mocktail/mocktail.dart';

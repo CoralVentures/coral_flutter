@@ -1,6 +1,6 @@
-import 'package:bottom_nav_example/app/app_builder.dart';
+import 'package:bottom_nav_example/app/builder.dart';
 import 'package:bottom_nav_example/blocs/analytic_listeners.dart';
-import 'package:bottom_nav_example/blocs/bottom_nav/bottom_nav_bloc.dart';
+import 'package:bottom_nav_example/blocs/bottom_nav/bloc.dart';
 import 'package:coral_tester/coral_tester.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -13,6 +13,14 @@ class CoralThemeData {
       brightness: theme.isDarkTheme ? Brightness.dark : Brightness.light,
       scaffoldBackgroundColor: theme.colors.background,
       iconTheme: IconThemeData(color: theme.colors.onBackground),
+      sliderTheme: SliderThemeData(
+        thumbColor: theme.colors.tertiary,
+        activeTrackColor: theme.colors.tertiary,
+        inactiveTrackColor: theme.colors.tertiaryContainer,
+        valueIndicatorColor: theme.colors.tertiaryContainer,
+        valueIndicatorTextStyle: theme.typographies.labelMedium
+            .copyWith(color: theme.colors.onTertiaryContainer),
+      ),
       textTheme: TextTheme(
         displayLarge: theme.typographies.displayLarge,
         displayMedium: theme.typographies.displayLarge,

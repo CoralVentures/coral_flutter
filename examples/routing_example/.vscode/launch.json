@@ -5,30 +5,30 @@
 			"name": "Launch development",
 			"request": "launch",
 			"type": "dart",
-			"program": "lib/main/main_development.dart",
+			"program": "lib/main/development.dart",
 			"args": [
 				"--target",
-				"lib/main/main_development.dart"
+				"lib/main/development.dart"
 			]
 		},
 		{
 			"name": "Launch development (Redux Devtools)",
 			"request": "launch",
 			"type": "dart",
-			"program": "lib/main/main_development_redux_devtools.dart",
+			"program": "lib/main/development_redux_devtools.dart",
 			"args": [
 				"--target",
-				"lib/main/main_development_redux_devtools.dart"
+				"lib/main/development_redux_devtools.dart"
 			]
 		},
 		{
 			"name": "Launch production",
 			"request": "launch",
 			"type": "dart",
-			"program": "lib/main/main_production.dart",
+			"program": "lib/main/production.dart",
 			"args": [
 				"--target",
-				"lib/main/main_production.dart"
+				"lib/main/production.dart"
 			]
 		},
 		{

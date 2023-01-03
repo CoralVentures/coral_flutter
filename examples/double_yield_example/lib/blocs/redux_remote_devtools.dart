@@ -7,7 +7,7 @@ import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
 import './bloc_type.dart';
-import './greetings/greetings_bloc.dart';
+import 'greetings/bloc.dart';
 // CORAL_CLI_IMPORT
 
 part 'redux_remote_devtools.g.dart';

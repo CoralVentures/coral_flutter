@@ -1,5 +1,5 @@
 import 'package:biometrics_example/blocs/analytic_listeners.dart';
-import 'package:biometrics_example/blocs/authentication/authentication_bloc.dart';
+import 'package:biometrics_example/blocs/authentication/bloc.dart';
 import 'package:coral_biometrics_repository/coral_biometrics_repository.dart';
 import 'package:coral_tester/coral_tester.dart';
 import 'package:flutter_test/flutter_test.dart';

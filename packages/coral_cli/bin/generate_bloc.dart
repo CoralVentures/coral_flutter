@@ -6,7 +6,7 @@ import 'package:dcli/dcli.dart' as dcli;
 import 'package:recase/recase.dart' as r;
 
 const templateDir = 'bin/templates/bloc';
-const fileNames = <String>['analytic_listener', 'bloc', 'event', 'state'];
+const fileNames = <String>['event_analytic_listener', 'bloc', 'event', 'state'];
 
 void main(List<String> args) {
   final applicationPath = args.first;
@@ -44,7 +44,7 @@ void main(List<String> args) {
   files.asMap().forEach((index, file) {
     final fileWithBlocName = addBlocNameToFile(file, blocName);
     final fileName = fileNames[index];
-    '$blocPath/${blocName.snakeCase}_$fileName.dart'.write(fileWithBlocName);
+    '$blocPath/$fileName.dart'.write(fileWithBlocName);
   });
 
   ///
@@ -56,7 +56,7 @@ void main(List<String> args) {
       .toParagraph()
       .replaceFirst(
         '// CORAL_CLI_IMPORT',
-        "import './${blocName.snakeCase}/${blocName.snakeCase}_analytic_listener.dart';\n// CORAL_CLI_IMPORT",
+        "import './${blocName.snakeCase}/event_analytic_listener.dart';\n// CORAL_CLI_IMPORT",
       )
       .replaceFirst(
         '// CORAL_CLI_LISTENER',
@@ -86,7 +86,7 @@ void main(List<String> args) {
       .toParagraph()
       .replaceFirst(
         '// CORAL_CLI_IMPORT',
-        "import './${blocName.snakeCase}/${blocName.snakeCase}_bloc.dart';\n// CORAL_CLI_IMPORT",
+        "import './${blocName.snakeCase}/bloc.dart';\n// CORAL_CLI_IMPORT",
       )
       .replaceFirst(
         '// CORAL_CLI_DB_THIS',

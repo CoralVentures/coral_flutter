@@ -1,6 +1,6 @@
 import 'package:coral_tester/coral_tester.dart';
-import 'package:data_layer_example/app/app_builder.dart';
-import 'package:data_layer_example/repositories/quote/quote_repository.dart';
+import 'package:data_layer_example/app/builder.dart';
+import 'package:data_layer_example/repositories/quote/repository.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockedApp extends CoralMockedApp {
