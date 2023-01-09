@@ -21,9 +21,9 @@ For 1), the directory structure should look like this:
 lib/
   repositories/
     authentication/
-      authentication_repository.dart
+      repository.dart
     foo_bar/
-      foo_bar_repository.dart
+      repository.dart
 ```
 
 For 2), you will need to create a new dart package. We recommend using the [very_good](https://pub.dev/packages/very_good_cli) and running a command like this:
@@ -66,15 +66,15 @@ lib/
     bloc_type.dart
     redux_remote_devtools.dart
     counter/
-      counter_analytic_listener.dart
-      counter_bloc.dart
-      counter_event.dart
-      counter_state.dart
+      event_analytic_listener.dart
+      bloc.dart
+      event.dart
+      state.dart
     foo_bar/
-      foo_bar_analytic_listener.dart
-      foo_bar_bloc.dart
-      foo_bar_event.dart
-      foo_bar_state.dart
+      event_analytic_listener.dart
+      bloc.dart
+      event.dart
+      state.dart
 ```
 
 ### Enums
@@ -154,8 +154,8 @@ class CounterEvent_Decrement extends CounterEvent {
 
 This will help us:
 
-- map our bloc events to state in `counter_bloc.dart`
-- map our bloc events to analytic events in `counter_analytic_listener.dart`
+- map our bloc events to state in `bloc.dart`
+- map our bloc events to analytic events in `event_analytic_listener.dart`
 
 ### Gotchas
 
